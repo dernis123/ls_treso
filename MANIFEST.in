@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include ls_treso *.css
+recursive-include ls_treso *.csv
+recursive-include ls_treso *.html
+recursive-include ls_treso *.ico
+recursive-include ls_treso *.js
+recursive-include ls_treso *.json
+recursive-include ls_treso *.md
+recursive-include ls_treso *.png
+recursive-include ls_treso *.py
+recursive-include ls_treso *.svg
+recursive-include ls_treso *.txt
+recursive-exclude ls_treso *.pyc
