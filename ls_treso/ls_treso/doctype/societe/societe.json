@@ -1,0 +1,148 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:raison_sociale",
+ "creation": "2022-11-22 14:54:35.949532",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "raison_sociale",
+  "ville",
+  "commune",
+  "telephone",
+  "email",
+  "site_web",
+  "adresse",
+  "logo",
+  "column_break_9",
+  "devise_de_base",
+  "devise_secondaire",
+  "base_comptable",
+  "format_impression",
+  "billetage",
+  "billetage_operation",
+  "billetage_encaissement",
+  "section_break_17"
+ ],
+ "fields": [
+  {
+   "fieldname": "raison_sociale",
+   "fieldtype": "Data",
+   "label": "Raison Sociale",
+   "unique": 1
+  },
+  {
+   "fieldname": "ville",
+   "fieldtype": "Data",
+   "label": "Ville"
+  },
+  {
+   "fieldname": "commune",
+   "fieldtype": "Data",
+   "label": "Commune"
+  },
+  {
+   "fieldname": "telephone",
+   "fieldtype": "Phone",
+   "label": "Telephone"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "site_web",
+   "fieldtype": "Data",
+   "label": "Site Web"
+  },
+  {
+   "fieldname": "adresse",
+   "fieldtype": "Data",
+   "label": "Adresse"
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Logo"
+  },
+  {
+   "fieldname": "devise_de_base",
+   "fieldtype": "Link",
+   "label": "Devise de Base",
+   "options": "Devise"
+  },
+  {
+   "fieldname": "devise_secondaire",
+   "fieldtype": "Link",
+   "label": "Devise Secondaire",
+   "options": "Devise"
+  },
+  {
+   "fieldname": "base_comptable",
+   "fieldtype": "Select",
+   "label": "Base Comptable",
+   "options": "Ligne 100\nLigne 1000\nSage X3"
+  },
+  {
+   "default": "0",
+   "fieldname": "billetage",
+   "fieldtype": "Check",
+   "label": "Billetage"
+  },
+  {
+   "default": "0",
+   "fieldname": "billetage_operation",
+   "fieldtype": "Check",
+   "label": "Billetage Operation"
+  },
+  {
+   "default": "0",
+   "fieldname": "billetage_encaissement",
+   "fieldtype": "Check",
+   "label": "Billetage Encaissement"
+  },
+  {
+   "fieldname": "format_impression",
+   "fieldtype": "Select",
+   "label": "Format Impression",
+   "options": "A4\nA5"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_17",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "image_field": "logo",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-11-23 08:28:29.959338",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Societe",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

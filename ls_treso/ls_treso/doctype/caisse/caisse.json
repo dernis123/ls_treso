@@ -1,0 +1,205 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:code_caisse",
+ "creation": "2022-11-23 10:30:35.620394",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "code_caisse",
+  "code_journal",
+  "designation",
+  "devise",
+  "column_break_4",
+  "compte_comptable",
+  "type_caisse",
+  "date_lancement",
+  "cours",
+  "section_break_7",
+  "solde_plancher",
+  "column_break_9",
+  "delta_plancher",
+  "column_break_11",
+  "solde_initial",
+  "date_solde",
+  "solde",
+  "initialisation_section",
+  "billetage",
+  "amended_from",
+  "section_break_18",
+  "column_break_18",
+  "column_break_19",
+  "total"
+ ],
+ "fields": [
+  {
+   "fieldname": "code_caisse",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Code Caisse",
+   "length": 5,
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "compte_comptable",
+   "fieldtype": "Link",
+   "label": "Compte Comptable",
+   "options": "Compte General"
+  },
+  {
+   "fieldname": "type_caisse",
+   "fieldtype": "Select",
+   "label": "Type Caisse",
+   "options": "Caisse\nBanque"
+  },
+  {
+   "fieldname": "devise",
+   "fieldtype": "Link",
+   "label": "Devise",
+   "options": "Devise"
+  },
+  {
+   "fieldname": "solde_plancher",
+   "fieldtype": "Float",
+   "label": "Solde Plancher"
+  },
+  {
+   "fieldname": "delta_plancher",
+   "fieldtype": "Float",
+   "label": "Delta Plancher"
+  },
+  {
+   "default": "0",
+   "fieldname": "solde_initial",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Solde Initial",
+   "reqd": 1
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Designation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "code_journal",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Code Journal",
+   "options": "Journal",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "solde",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Solde"
+  },
+  {
+   "fieldname": "initialisation_section",
+   "fieldtype": "Section Break",
+   "label": "Initialisation"
+  },
+  {
+   "fieldname": "billetage",
+   "fieldtype": "Table",
+   "label": "Billetage",
+   "options": "Billetage"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Caisse",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "options": "devise",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "date_lancement",
+   "fieldtype": "Date",
+   "label": "Date Lancement",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cours",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Cours"
+  },
+  {
+   "fieldname": "date_solde",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Date Solde"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-12-29 12:09:55.180666",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Caisse",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

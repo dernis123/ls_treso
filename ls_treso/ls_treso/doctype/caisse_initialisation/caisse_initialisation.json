@@ -1,0 +1,156 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{YY}{caisse}{MM}{###}",
+ "creation": "2022-12-12 15:07:27.790124",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "caisse",
+  "date_initialisation",
+  "devise",
+  "initialisation",
+  "column_break_4",
+  "libelle",
+  "date_fermeture",
+  "cours",
+  "section_break_9",
+  "solde_initial",
+  "column_break_11",
+  "solde_final",
+  "amended_from",
+  "billetage_section",
+  "billetage",
+  "total"
+ ],
+ "fields": [
+  {
+   "fieldname": "caisse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Caisse",
+   "options": "Caisse"
+  },
+  {
+   "fetch_from": "caisse.devise",
+   "fieldname": "devise",
+   "fieldtype": "Data",
+   "label": "Devise"
+  },
+  {
+   "fieldname": "solde_initial",
+   "fieldtype": "Currency",
+   "label": "Solde Initial",
+   "options": "devise",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cours",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Cours"
+  },
+  {
+   "fieldname": "solde_final",
+   "fieldtype": "Currency",
+   "label": "Solde Final",
+   "options": "devise",
+   "precision": "0",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Caisse Initialisation",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "caisse.designation",
+   "fieldname": "libelle",
+   "fieldtype": "Data",
+   "label": "D\u00e9signation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "date_initialisation",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Date Initialisation"
+  },
+  {
+   "fieldname": "date_fermeture",
+   "fieldtype": "Datetime",
+   "label": "Date Fermeture",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "billetage_section",
+   "fieldtype": "Tab Break",
+   "label": "Ferm\u00e9ture"
+  },
+  {
+   "fieldname": "billetage",
+   "fieldtype": "Table",
+   "label": "Billetage",
+   "options": "Billetage"
+  },
+  {
+   "default": "0",
+   "fieldname": "initialisation",
+   "fieldtype": "Check",
+   "label": "Initialisation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Float",
+   "label": "Total"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-02-18 09:33:59.209602",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Caisse Initialisation",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "caisse,date_initialisation,libelle",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

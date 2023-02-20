@@ -1,0 +1,160 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{YY}JUS{MM}{#####}",
+ "creation": "2022-12-19 11:23:41.917640",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "operation",
+  "column_break_2",
+  "caisse",
+  "section_break_2",
+  "date",
+  "designation",
+  "montant",
+  "entite",
+  "reference",
+  "column_break_6",
+  "remettant",
+  "devise",
+  "commentaire",
+  "section_break_11",
+  "details_operation_de_caisse",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "label": "Op\u00e9ration \u00e0 Justifier",
+   "options": "Operation de Caisse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "operation.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Designation",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "operation.montant",
+   "fieldname": "montant",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Montant",
+   "options": "devise",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "operation.entite",
+   "fieldname": "entite",
+   "fieldtype": "Data",
+   "label": "Entite"
+  },
+  {
+   "fetch_from": "operation.reference",
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "operation.remettant",
+   "fieldname": "remettant",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Remettant",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "operation.devise",
+   "fieldname": "devise",
+   "fieldtype": "Data",
+   "label": "Devise",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "commentaire",
+   "fieldtype": "Text",
+   "label": "Commentaire"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "details_operation_de_caisse",
+   "fieldtype": "Table",
+   "label": "Details Operation de Caisse",
+   "options": "Details Operation de Caisse"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Justification",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "operation.caisse",
+   "fieldname": "caisse",
+   "fieldtype": "Data",
+   "label": "Caisse",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-02-15 18:20:09.839629",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Justification",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

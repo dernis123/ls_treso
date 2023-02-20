@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-11-23 08:58:21.784006",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "nom",
+  "categorie",
+  "unite",
+  "photo"
+ ],
+ "fields": [
+  {
+   "fieldname": "nom",
+   "fieldtype": "Data",
+   "label": "Nom"
+  },
+  {
+   "fieldname": "categorie",
+   "fieldtype": "Select",
+   "label": "Categorie",
+   "options": "Billet\nPi\u00e8ce"
+  },
+  {
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
+  },
+  {
+   "fieldname": "unite",
+   "fieldtype": "Select",
+   "label": "Unite",
+   "options": "Unit\u00e9\nCentime"
+  }
+ ],
+ "image_field": "photo",
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-11-23 09:05:55.252891",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Billet",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

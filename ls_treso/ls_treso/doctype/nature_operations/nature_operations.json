@@ -1,0 +1,121 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:nature",
+ "creation": "2022-11-23 11:23:26.302451",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "type_operation",
+  "nature",
+  "compte_comptable",
+  "column_break_4",
+  "tiers",
+  "justifiable",
+  "famille",
+  "section_break_8",
+  "solde_initial",
+  "column_break_9",
+  "retour_caisse",
+  "column_break_10",
+  "echange"
+ ],
+ "fields": [
+  {
+   "fieldname": "type_operation",
+   "fieldtype": "Select",
+   "label": "Type Operation",
+   "options": "Encaissement\nD\u00e9caissement"
+  },
+  {
+   "fieldname": "nature",
+   "fieldtype": "Data",
+   "label": "Nature",
+   "unique": 1
+  },
+  {
+   "fieldname": "compte_comptable",
+   "fieldtype": "Link",
+   "label": "Compte Comptable",
+   "options": "Compte General"
+  },
+  {
+   "fieldname": "tiers",
+   "fieldtype": "Select",
+   "label": "Tiers",
+   "options": "Oui\nNon"
+  },
+  {
+   "fieldname": "justifiable",
+   "fieldtype": "Select",
+   "label": "Justifiable",
+   "options": "Oui\nNon"
+  },
+  {
+   "default": "0",
+   "fieldname": "echange",
+   "fieldtype": "Check",
+   "label": "Echange"
+  },
+  {
+   "default": "0",
+   "fieldname": "solde_initial",
+   "fieldtype": "Check",
+   "label": "Solde Initial"
+  },
+  {
+   "fieldname": "famille",
+   "fieldtype": "Link",
+   "label": "Famille",
+   "options": "Famille"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "retour_caisse",
+   "fieldtype": "Check",
+   "label": "Retour Caisse"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-02-09 11:44:11.337327",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Nature Operations",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

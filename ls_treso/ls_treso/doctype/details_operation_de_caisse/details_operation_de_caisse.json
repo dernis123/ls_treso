@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-12-05 10:56:54.214604",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "nature_operations",
+  "tiers",
+  "montant_devise",
+  "montant_devise_ref",
+  "imputation_analytique",
+  "imputation_analytique_2",
+  "imputation_analytique_3",
+  "imputation_analytique_4",
+  "imputation_analytique_5"
+ ],
+ "fields": [
+  {
+   "fieldname": "nature_operations",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Nature Operations",
+   "options": "Nature Operations",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tiers",
+   "fieldtype": "Link",
+   "label": "Tiers",
+   "options": "Tiers"
+  },
+  {
+   "fieldname": "montant_devise",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Montant Devise",
+   "options": "devise",
+   "reqd": 1
+  },
+  {
+   "fieldname": "montant_devise_ref",
+   "fieldtype": "Currency",
+   "label": "Montant Devise Ref",
+   "options": "devise_caisse",
+   "read_only": 1
+  },
+  {
+   "fieldname": "imputation_analytique",
+   "fieldtype": "Link",
+   "label": "Imputation Analytique",
+   "options": "Compte Analytique"
+  },
+  {
+   "fieldname": "imputation_analytique_2",
+   "fieldtype": "Link",
+   "label": "Imputation Analytique 2",
+   "options": "Compte Analytique"
+  },
+  {
+   "fieldname": "imputation_analytique_3",
+   "fieldtype": "Link",
+   "label": "Imputation Analytique 3",
+   "options": "Compte Analytique"
+  },
+  {
+   "fieldname": "imputation_analytique_4",
+   "fieldtype": "Link",
+   "label": "Imputation Analytique 4",
+   "options": "Compte Analytique"
+  },
+  {
+   "fieldname": "imputation_analytique_5",
+   "fieldtype": "Link",
+   "label": "Imputation Analytique 5",
+   "options": "Compte Analytique"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-02-09 11:10:08.035508",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Details Operation de Caisse",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

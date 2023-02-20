@@ -1,0 +1,198 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{YY}{caisse}{MM}{code_type}{DD}{###}",
+ "creation": "2022-12-05 10:00:51.959757",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "caisse",
+  "initialisation",
+  "designation",
+  "montant",
+  "montant_reference",
+  "entite",
+  "reference",
+  "a_justifier",
+  "column_break_6",
+  "devise_caisse",
+  "date",
+  "type_operation",
+  "devise",
+  "cours",
+  "remettant",
+  "commentaire",
+  "code_type",
+  "section_break_11",
+  "details_operation_de_caisse",
+  "amended_from",
+  "justifie"
+ ],
+ "fields": [
+  {
+   "fetch_from": "initialisation.date_initialisation",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Designation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "montant",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Montant",
+   "options": "devise",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "initialisation.devise",
+   "fieldname": "devise",
+   "fieldtype": "Data",
+   "label": "Devise",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remettant",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Remettant",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entite",
+   "fieldtype": "Data",
+   "label": "Entite"
+  },
+  {
+   "fieldname": "commentaire",
+   "fieldtype": "Text",
+   "label": "Commentaire"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "type_operation",
+   "fieldtype": "Select",
+   "label": "Type Operation",
+   "options": "Encaissement\nDecaissement"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "details_operation_de_caisse",
+   "fieldtype": "Table",
+   "label": "Details Operation de Caisse",
+   "options": "Details Operation de Caisse"
+  },
+  {
+   "default": "0",
+   "fieldname": "a_justifier",
+   "fieldtype": "Check",
+   "label": "A Justifier"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Operation de Caisse",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "default": "ENC",
+   "description": "ENC => Encaissement\nDEC => Decaissement",
+   "fieldname": "code_type",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Code Type"
+  },
+  {
+   "fetch_from": "initialisation.caisse",
+   "fieldname": "caisse",
+   "fieldtype": "Data",
+   "label": "Caisse",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "cours",
+   "fieldtype": "Float",
+   "label": "Cours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "initialisation",
+   "fieldtype": "Link",
+   "label": "No Initialisation",
+   "options": "Caisse Initialisation"
+  },
+  {
+   "fetch_from": "initialisation.devise",
+   "fieldname": "devise_caisse",
+   "fieldtype": "Data",
+   "label": "Devise Caisse",
+   "read_only": 1
+  },
+  {
+   "fieldname": "montant_reference",
+   "fieldtype": "Currency",
+   "label": "Montant Reference",
+   "options": "devise_caisse",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "justifie",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Justifie"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-02-18 12:16:11.855044",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Operation de Caisse",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "caisse,initialisation,designation,type_operation",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

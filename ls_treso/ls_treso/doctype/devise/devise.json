@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:nom",
+ "creation": "2022-11-22 15:09:44.883407",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "nom",
+  "designation",
+  "column_break_3",
+  "symbole",
+  "centime",
+  "section_break_6",
+  "billet",
+  "section_break_8",
+  "cours_devise"
+ ],
+ "fields": [
+  {
+   "fieldname": "nom",
+   "fieldtype": "Data",
+   "label": "Nom",
+   "unique": 1
+  },
+  {
+   "fieldname": "symbole",
+   "fieldtype": "Data",
+   "label": "Symbole"
+  },
+  {
+   "fieldname": "centime",
+   "fieldtype": "Data",
+   "label": "Centime"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "cours_devise",
+   "fieldtype": "Table",
+   "label": "Cours Devise",
+   "options": "Cours Devise"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Tab Break",
+   "label": "Cours de la Devise"
+  },
+  {
+   "fieldname": "billet",
+   "fieldtype": "Table",
+   "label": "Billets et Pi\u00e8ces",
+   "options": "Billet"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-11-23 09:03:29.700134",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Devise",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

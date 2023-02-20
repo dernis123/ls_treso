@@ -1,0 +1,74 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-12-05 11:23:41.566173",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "nom",
+  "unite",
+  "image",
+  "nombre_initial",
+  "valeur_initiale",
+  "nombre_final",
+  "valeur_finale"
+ ],
+ "fields": [
+  {
+   "fieldname": "nom",
+   "fieldtype": "Data",
+   "label": "Nom",
+   "read_only": 1
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Image",
+   "label": "Image",
+   "read_only": 1
+  },
+  {
+   "fieldname": "nombre_initial",
+   "fieldtype": "Int",
+   "label": "Nombre Initial",
+   "read_only": 1
+  },
+  {
+   "fieldname": "valeur_initiale",
+   "fieldtype": "Currency",
+   "label": "Valeur Initiale",
+   "options": "devise",
+   "read_only": 1
+  },
+  {
+   "fieldname": "nombre_final",
+   "fieldtype": "Int",
+   "label": "Nombre Final"
+  },
+  {
+   "fieldname": "valeur_finale",
+   "fieldtype": "Currency",
+   "label": "Valeur Finale",
+   "options": "devise",
+   "read_only": 1
+  },
+  {
+   "fieldname": "unite",
+   "fieldtype": "Data",
+   "label": "Unite"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-12-20 11:39:44.371345",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Billetage",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

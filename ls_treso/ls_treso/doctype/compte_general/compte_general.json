@@ -1,0 +1,71 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:compte",
+ "creation": "2022-11-23 10:12:02.651877",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "compte",
+  "designation",
+  "ventilable",
+  "collectif"
+ ],
+ "fields": [
+  {
+   "fieldname": "compte",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Compte",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Designation",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "ventilable",
+   "fieldtype": "Check",
+   "label": "Ventilable"
+  },
+  {
+   "default": "0",
+   "fieldname": "collectif",
+   "fieldtype": "Check",
+   "label": "Collectif"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-11-23 10:21:35.235323",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Compte General",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "designation"
+}
