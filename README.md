@@ -4,4 +4,4 @@ Un logiciel de gestion de caisse
 
 #### License
 
-MIT
+MIT# ls_treso
