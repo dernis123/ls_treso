@@ -11,6 +11,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 			//frm.refresh_field('date_initialisation');
 			//frm.refresh_field('devise');
 		}*/
+		//cur_frm.set_df_property('caisse', 'label', 'Text');
 		frm.add_custom_button(
 			__("Ouverture"),
 			function () {
@@ -148,10 +149,10 @@ frappe.ui.form.on('Caisse Initialisation', {
 								devise : values.devise_de,
 							},
 							callback: function(r){
-								console.log('ok');
+								frm.refresh();
 							}
 						});
-						console.log(values);
+						//console.log(values);
 						d.hide();
 					}
 				});
@@ -196,7 +197,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 					primary_action_label: __('Recalculer'),
 					primary_action(values) {
 						frm.call('recalcul');
-						console.log(values);
+						//console.log(values);
 						d.hide();
 					}
 				});
@@ -241,7 +242,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 					primary_action_label: __('Clôturer'),
 					primary_action(values) {
 						frm.call("cloture");
-						console.log(values);
+						//console.log(values);
 						d.hide();
 					}
 				});

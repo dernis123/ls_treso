@@ -141,30 +141,31 @@ def transfert(caisse_de, caisse_a, montant, devise,caisse_doc,type_operation):
 	)
 
 	if len(caisse_doc) > 0:
-		if caisse_doc[0].solde_final >= montant :
-			args = frappe._dict(
-				{
-					"doctype": "Operation de Caisse", 
-					"caisse": caisse_de,
-					"initialisation": caisse_doc[0].name,
-					"designation": 'Envoi de fond' if type_operation == 'Décaissement' else 'Reception de fond',
-					"type_operation": type_operation,
-					"date": caisse_doc[0].date_initialisation,					
-					"devise": devise,
-					"montant": montant,
-					"remettant": frappe.session.user,
-					"details_operation_de_caisse": [{
-						"nature_operations":  nature_doc[0].name,
-						"tiers": caisse_a,
-						"montant_devise": montant,
-						"montant_devise_ref": montant
-					}]
-				}
-			)
+		#if caisse_doc[0].solde_final >= montant :
+		args = frappe._dict(
+			{
+				"doctype": "Operation de Caisse", 
+				"caisse": caisse_de,
+				"initialisation": caisse_doc[0].name,
+				"designation": 'Envoi de fond' if type_operation == 'Decaissement' else 'Reception de fond',
+				"type_operation": type_operation,
+				"date": caisse_doc[0].date_initialisation,					
+				"devise": devise,
+				"montant": montant,
+				"montant_reference": montant,
+				"remettant": caisse_a,
+				"details_operation_de_caisse": [{
+					"nature_operations":  nature_doc[0].name,
+					#"tiers": caisse_a,
+					"montant_devise": montant,
+					"montant_devise_ref": montant
+				}]
+			}
+		)
 
-			doc = frappe.get_doc(args)
-			doc.insert()
-			doc.commit()
+		op_doc = frappe.get_doc(args)
+		#op_doc.insert()
+		op_doc.submit()
 
 @frappe.whitelist()
 def save_operation(caisse_de, caisse_a, date, montant, devise):
@@ -178,13 +179,22 @@ def save_operation(caisse_de, caisse_a, date, montant, devise):
 	)
 	#frappe.msgprint("1")
 	try:
-		type_operation = 'Décaissement' 
+		type_operation = 'Decaissement' 
 		transfert(caisse_de, caisse_a, montant, devise,caisse_doc,type_operation)
+
+		caisse_doc = frappe.db.sql(
+			"""
+			SELECT name, solde_final, DATE(date_initialisation) AS date_initialisation
+			FROM `tabCaisse Initialisation`
+			WHERE DATE(date_initialisation) = DATE(%s) AND caisse = %s AND docstatus = 0
+			""", (date,caisse_a),
+			as_dict = 1
+		)
 
 		type_operation = 'Encaissement'
 		transfert(caisse_a, caisse_de, montant, devise,caisse_doc,type_operation)
 	except Exception as e:
-		frappe.msgprint(e)
+		frappe.msgprint(str(e))
 		frappe.db.rollback()
 
 	

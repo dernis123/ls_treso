@@ -28,32 +28,32 @@ class OperationdeCaisse(Document):
 			frappe.throw("La date de saisie " + str(self.date) + " doit être conforme à la date d'initialisation " + date_split)
 	
 	def before_submit(self):
-		total = 0
+		total = 0.00
 		for details in self.details_operation_de_caisse :
-			total += details.montant_devise_ref
+			total += float(details.montant_devise_ref)
 
-		if total != self.montant_reference:
-			frappe.throw("Le montant saisie en entête de l'opération " + self.name + " est différent du total des montants en détails" )
+		if float(total) != float(self.montant_reference):
+			frappe.throw("Le montant saisie en entête de l'opération " + self.montant_reference + " est différent du total des montants en détails " + str(total) )
 
 		init_doc = frappe.get_doc("Caisse Initialisation", self.initialisation)
 		if self.type_operation != "Encaissement" :
-			if init_doc.solde_final < self.montant :
+			if float(init_doc.solde_final) < float(self.montant) :
 					frappe.throw("Le montant actuellement en caisse ne permet pas de faire cette opération.\n Il faut augmenter le solde!!!")
 
 	def on_submit(self):
 		init_doc = frappe.get_doc("Caisse Initialisation", self.initialisation)
 		if self.type_operation == "Encaissement" :
-			init_doc.solde_final += self.montant_reference
+			init_doc.solde_final += float(self.montant_reference)
 		else:
-			init_doc.solde_final -= self.montant_reference
+			init_doc.solde_final -= float(self.montant_reference)
 		init_doc.save()
 
 	def on_cancel(self):
 		init_doc = frappe.get_doc("Caisse Initialisation", self.initialisation)
 		if self.type_operation == "Encaissement" :
-			init_doc.solde_final -= self.montant
+			init_doc.solde_final -= float(self.montant_reference)
 		else:
-			init_doc.solde_final += self.montant
+			init_doc.solde_final += float(self.montant_reference)
 		init_doc.save()
 
 		

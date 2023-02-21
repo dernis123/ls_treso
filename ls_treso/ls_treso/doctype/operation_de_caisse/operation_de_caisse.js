@@ -19,6 +19,17 @@ frappe.ui.form.on('Operation de Caisse', {
 				}
 			};
 		});
+
+		if(frm.doc.type_operation == 'Encaissement') {
+			frm.set_value('code_type', 'ENC');
+			frm.set_value('remettant', frappe.session.user);
+			frm.set_df_property('remettant', 'label', 'Remettant');
+		}
+		else {
+			frm.set_value('code_type', 'DEC');
+			frm.set_value('remettant', '');
+			frm.set_df_property('remettant', 'label', 'Bénéficiaire');
+		}
 	},
 	
 	
@@ -26,10 +37,12 @@ frappe.ui.form.on('Operation de Caisse', {
 		if(frm.doc.type_operation == 'Encaissement') {
 			frm.set_value('code_type', 'ENC');
 			frm.set_value('remettant', frappe.session.user);
+			frm.set_df_property('remettant', 'label', 'Remettant');
 		}
 		else {
 			frm.set_value('code_type', 'DEC');
 			frm.set_value('remettant', '');
+			frm.set_df_property('remettant', 'label', 'Bénéficiaire');
 		}
 	},
 	devise: function(frm) {
