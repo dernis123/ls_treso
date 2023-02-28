@@ -1,0 +1,50 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2023-02-27 21:38:05.433788",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "date_debut",
+   "fieldtype": "Date",
+   "label": "Date de d\u00e9but",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "date_fin",
+   "fieldtype": "Date",
+   "label": "Date de fin",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "nature",
+   "fieldtype": "Link",
+   "label": "Nature",
+   "mandatory": 0,
+   "options": "Nature Operations",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2023-02-27 21:43:06.118547",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Mouvement de caisse Journal",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "select o.date as Date, \no.name as 'N \u00b0 Pi\u00e8ce', \no.remettant as 'B\u00e9n\u00e9ficiaire',\no.designation as 'D\u00e9signation',\no.montant as 'Montant',\no.devise as 'Devise'\nfrom `tabOperation de Caisse` o \nINNER JOIN `tabDetails Operation de Caisse` d on o.name = d.parent\nwhere o.date >= %(date_debut)s and o.date <= %(date_fin)s and d.nature_operations = %(nature)s\n",
+ "ref_doctype": "Operation de Caisse",
+ "report_name": "Mouvement de caisse Journal",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}
