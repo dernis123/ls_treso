@@ -31,7 +31,14 @@ frappe.ui.form.on('Operation de Caisse', {
 			frm.set_df_property('remettant', 'label', 'Bénéficiaire');
 		}
 	},
-	
+	refresh: function(frm){
+		frm.add_custom_button(__("Caisse Quotidienne"),
+			function () {
+				frappe.route_options = {"name": frm.doc.initialisation};
+				frappe.set_route('Form', 'Caisse Initialisation');
+			}
+		)
+	},
 	
 	type_operation: function(frm) {
 		if(frm.doc.type_operation == 'Encaissement') {

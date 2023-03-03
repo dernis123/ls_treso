@@ -58,18 +58,21 @@ class CaisseInitialisation(Document):
 			WHERE initialisation = %(name)s AND docstatus = 1
 		""" , {"name": self.name}, as_dict = 1
 		)[0].montant
-		if self.solde_final < mt :
-			frappe.throw("Vous avez une inconsistance dans les montants saisis, veuillez appeler l'administrateur!") 
-		
-		frappe.db.sql(
-		"""
-			UPDATE `tabCaisse Initialisation` SET solde_final = solde_initial + 
-				(SELECT SUM(CASE WHEN code_type = 'ENC' THEN montant else - montant END) AS montant
-				FROM `tabOperation de Caisse`
-				WHERE initialisation = %(name)s AND docstatus = 1)
-			WHERE name = %(name)s AND docstatus = 0
-		""" , {"name": self.name}, as_dict = 1
-		)
+		if mt == None:
+			frappe.throw("Il n'y a aucune opération sur cette journée!")
+		else:
+			if float(self.solde_final) < float(mt) :
+				frappe.throw("Vous avez une inconsistance dans les montants saisis, veuillez appeler l'administrateur!") 
+			else:
+				frappe.db.sql(
+				"""
+					UPDATE `tabCaisse Initialisation` SET solde_final = solde_initial + 
+						(SELECT SUM(CASE WHEN code_type = 'ENC' THEN montant else - montant END) AS montant
+						FROM `tabOperation de Caisse`
+						WHERE initialisation = %(name)s AND docstatus = 1)
+					WHERE name = %(name)s AND docstatus = 0
+				""" , {"name": self.name}, as_dict = 1
+				)
 
 	@frappe.whitelist()
 	def cloture(self):
@@ -169,20 +172,18 @@ def transfert(caisse_de, caisse_a, montant, devise,caisse_doc,type_operation):
 
 @frappe.whitelist()
 def save_operation(caisse_de, caisse_a, date, montant, devise):
-	caisse_doc = frappe.db.sql(
-		"""
-		SELECT name, solde_final, DATE(date_initialisation) AS date_initialisation
-		FROM `tabCaisse Initialisation`
-		WHERE DATE(date_initialisation) = DATE(%s) AND caisse = %s AND docstatus = 0
-		""", (date,caisse_de),
-		as_dict = 1
-	)
 	#frappe.msgprint("1")
 	try:
-		type_operation = 'Decaissement' 
-		transfert(caisse_de, caisse_a, montant, devise,caisse_doc,type_operation)
+		caisse_doc_de = frappe.db.sql(
+			"""
+			SELECT name, solde_final, DATE(date_initialisation) AS date_initialisation
+			FROM `tabCaisse Initialisation`
+			WHERE DATE(date_initialisation) = DATE(%s) AND caisse = %s AND docstatus = 0
+			""", (date,caisse_de),
+			as_dict = 1
+		)
 
-		caisse_doc = frappe.db.sql(
+		caisse_doc_a = frappe.db.sql(
 			"""
 			SELECT name, solde_final, DATE(date_initialisation) AS date_initialisation
 			FROM `tabCaisse Initialisation`
@@ -191,8 +192,17 @@ def save_operation(caisse_de, caisse_a, date, montant, devise):
 			as_dict = 1
 		)
 
-		type_operation = 'Encaissement'
-		transfert(caisse_a, caisse_de, montant, devise,caisse_doc,type_operation)
+		if len(caisse_doc_de) > 0 :
+			if len(caisse_doc_a) > 0 :
+				type_operation = 'Decaissement' 
+				transfert(caisse_de, caisse_a, montant, devise,caisse_doc_de,type_operation)
+
+				type_operation = 'Encaissement'
+				transfert(caisse_a, caisse_de, montant, devise,caisse_doc_a,type_operation)
+			else:
+				frappe.throw("Caisse Réceptrice non ouverte pour cette date")
+		else:
+			frappe.throw("Caisse Emétrice non ouverte pour cette date")
 	except Exception as e:
 		frappe.msgprint(str(e))
 		frappe.db.rollback()

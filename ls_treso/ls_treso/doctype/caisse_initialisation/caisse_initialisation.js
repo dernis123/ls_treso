@@ -196,7 +196,8 @@ frappe.ui.form.on('Caisse Initialisation', {
 					],
 					primary_action_label: __('Recalculer'),
 					primary_action(values) {
-						frm.call('recalcul');
+						cur_frm.call('recalcul');
+						cur_frm.refresh();
 						//console.log(values);
 						d.hide();
 					}
