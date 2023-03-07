@@ -34,8 +34,8 @@ frappe.ui.form.on('Operation de Caisse', {
 	refresh: function(frm){
 		frm.add_custom_button(__("Caisse Quotidienne"),
 			function () {
-				frappe.route_options = {"name": frm.doc.initialisation};
-				frappe.set_route('Form', 'Caisse Initialisation');
+				//frappe.route_options = {"name": frm.doc.initialisation};
+				frappe.set_route('Form', 'Caisse Initialisation',{"name": frm.doc.initialisation});
 			}
 		)
 	},

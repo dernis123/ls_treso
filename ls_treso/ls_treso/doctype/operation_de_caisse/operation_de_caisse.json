@@ -7,6 +7,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "societe",
   "caisse",
   "initialisation",
   "designation",
@@ -16,6 +17,7 @@
   "reference",
   "a_justifier",
   "column_break_6",
+  "site",
   "devise_caisse",
   "date",
   "type_operation",
@@ -27,7 +29,11 @@
   "section_break_11",
   "details_operation_de_caisse",
   "amended_from",
-  "justifie"
+  "justifie",
+  "compte",
+  "journal",
+  "comptabilisation_tab",
+  "comptabilisation"
  ],
  "fields": [
   {
@@ -151,7 +157,8 @@
    "fieldname": "devise_caisse",
    "fieldtype": "Data",
    "label": "Devise Caisse",
-   "read_only": 1
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fieldname": "montant_reference",
@@ -166,12 +173,54 @@
    "fieldtype": "Check",
    "hidden": 1,
    "label": "Justifie"
+  },
+  {
+   "fetch_from": "initialisation.compte",
+   "fieldname": "compte",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Compte"
+  },
+  {
+   "fetch_from": "initialisation.journal",
+   "fieldname": "journal",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Journal"
+  },
+  {
+   "fetch_from": "initialisation.societe",
+   "fieldname": "societe",
+   "fieldtype": "Link",
+   "label": "Societe",
+   "options": "Societe",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "initialisation.site",
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Branch",
+   "read_only": 1
+  },
+  {
+   "fieldname": "comptabilisation_tab",
+   "fieldtype": "Tab Break",
+   "label": "Comptabilisation"
+  },
+  {
+   "fieldname": "comptabilisation",
+   "fieldtype": "Table",
+   "options": "Comptabilisation",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-03-03 15:27:21.987679",
+ "modified": "2023-03-07 14:11:21.645594",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Operation de Caisse",
@@ -188,6 +237,46 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Treso  Admin",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Caissier",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Caisse Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

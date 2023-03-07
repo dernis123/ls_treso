@@ -32,7 +32,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-05 09:09:39.251613",
+ "modified": "2023-03-03 18:26:24.068818",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Compte Analytique",
@@ -48,6 +48,19 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Treso  Admin",
+   "select": 1,
    "share": 1,
    "write": 1
   }

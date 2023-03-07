@@ -7,11 +7,13 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "societe",
   "code_caisse",
   "code_journal",
   "designation",
   "devise",
   "column_break_4",
+  "site",
   "compte_comptable",
   "type_caisse",
   "date_lancement",
@@ -174,12 +176,26 @@
    "fieldtype": "Date",
    "hidden": 1,
    "label": "Date Solde"
+  },
+  {
+   "fieldname": "societe",
+   "fieldtype": "Link",
+   "label": "Societe",
+   "options": "Societe",
+   "reqd": 1
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Branch",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-12-29 12:09:55.180666",
+ "modified": "2023-03-04 08:15:56.948481",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Caisse",
@@ -196,6 +212,46 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Treso  Admin",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Caissier",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Caisse Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

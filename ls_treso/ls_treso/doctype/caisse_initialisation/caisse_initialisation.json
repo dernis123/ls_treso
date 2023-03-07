@@ -7,11 +7,13 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "societe",
   "caisse",
   "date_initialisation",
   "devise",
   "initialisation",
   "column_break_4",
+  "site",
   "libelle",
   "date_fermeture",
   "cours",
@@ -22,7 +24,9 @@
   "amended_from",
   "billetage_section",
   "billetage",
-  "total"
+  "total",
+  "compte",
+  "journal"
  ],
  "fields": [
   {
@@ -124,12 +128,42 @@
    "fieldname": "total",
    "fieldtype": "Float",
    "label": "Total"
+  },
+  {
+   "fetch_from": "caisse.compte_comptable",
+   "fieldname": "compte",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Compte"
+  },
+  {
+   "fetch_from": "caisse.code_journal",
+   "fieldname": "journal",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Journal"
+  },
+  {
+   "fetch_from": "caisse.societe",
+   "fieldname": "societe",
+   "fieldtype": "Link",
+   "label": "Societe",
+   "options": "Societe",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "caisse.site",
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Branch",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-02-18 09:33:59.209602",
+ "modified": "2023-03-04 08:15:31.977816",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Caisse Initialisation",
@@ -146,6 +180,46 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Treso  Admin",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Caissier",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Caisse Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

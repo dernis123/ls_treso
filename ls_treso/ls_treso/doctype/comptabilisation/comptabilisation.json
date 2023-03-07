@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-03-07 14:07:27.060449",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "compte",
+  "cours",
+  "montant",
+  "type",
+  "tiers",
+  "compte_analytique",
+  "compte_analytique_2",
+  "compte_analytique_3",
+  "compte_analytique_4",
+  "compte_analytique_5",
+  "sens"
+ ],
+ "fields": [
+  {
+   "fieldname": "compte",
+   "fieldtype": "Link",
+   "label": "Compte",
+   "options": "Compte General"
+  },
+  {
+   "fieldname": "cours",
+   "fieldtype": "Float",
+   "label": "Cours"
+  },
+  {
+   "fieldname": "montant",
+   "fieldtype": "Currency",
+   "label": "Montant"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "label": "Type"
+  },
+  {
+   "fieldname": "tiers",
+   "fieldtype": "Link",
+   "label": "Tiers",
+   "options": "Tiers"
+  },
+  {
+   "fieldname": "compte_analytique",
+   "fieldtype": "Link",
+   "label": "Compte Analytique",
+   "options": "Compte Analytique"
+  },
+  {
+   "fieldname": "compte_analytique_2",
+   "fieldtype": "Link",
+   "label": "Compte Analytique 2",
+   "options": "Compte Analytique 2"
+  },
+  {
+   "fieldname": "compte_analytique_3",
+   "fieldtype": "Link",
+   "label": "Compte Analytique 3",
+   "options": "Compte Analytique 3"
+  },
+  {
+   "fieldname": "compte_analytique_4",
+   "fieldtype": "Link",
+   "label": "Compte Analytique 4",
+   "options": "Compte Analytique 4"
+  },
+  {
+   "fieldname": "compte_analytique_5",
+   "fieldtype": "Link",
+   "label": "Compte Analytique 5",
+   "options": "Compte Analytique 5"
+  },
+  {
+   "fieldname": "sens",
+   "fieldtype": "Select",
+   "label": "Sens",
+   "options": "Debit\nCredit"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-03-07 14:23:56.742910",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Comptabilisation",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

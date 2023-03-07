@@ -23,7 +23,8 @@
   "billetage",
   "billetage_operation",
   "billetage_encaissement",
-  "section_break_17"
+  "comptabilite_tab",
+  "compte__arrondi"
  ],
  "fields": [
   {
@@ -115,14 +116,21 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "section_break_17",
-   "fieldtype": "Section Break"
+   "fieldname": "comptabilite_tab",
+   "fieldtype": "Tab Break",
+   "label": "Comptabilite"
+  },
+  {
+   "fieldname": "compte__arrondi",
+   "fieldtype": "Link",
+   "label": "Compte  Arrondi",
+   "options": "Compte General"
   }
  ],
  "image_field": "logo",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-23 08:28:29.959338",
+ "modified": "2023-03-07 15:27:28.175099",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Societe",
@@ -138,6 +146,19 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Treso  Admin",
+   "select": 1,
    "share": 1,
    "write": 1
   }
