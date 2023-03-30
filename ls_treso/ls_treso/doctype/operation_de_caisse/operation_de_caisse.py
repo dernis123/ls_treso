@@ -179,7 +179,7 @@ class OperationdeCaisse(Document):
 				}
 			)
 
-		frappe.msgprint(str(row))				
+		#frappe.msgprint(str(row))				
 
 		return frappe._dict(row)
 	
@@ -252,7 +252,7 @@ class OperationdeCaisse(Document):
 			accounts.append(journal_entry)
 		
 		journal_entry.set("accounts", accounts)
-		frappe.msgprint(str(accounts))
+		#frappe.msgprint(str(accounts))
 		if len(currencies) > 1:
 			multi_currency = 1
 		journal_entry.multi_currency = multi_currency

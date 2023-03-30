@@ -15,6 +15,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 		frm.add_custom_button(
 			__("Ouverture"),
 			function () {
+				if(frm.is_new()) return;
 				let d = new frappe.ui.Dialog({
 					title: 'Ouverture de Caisse',
 					fields: [
