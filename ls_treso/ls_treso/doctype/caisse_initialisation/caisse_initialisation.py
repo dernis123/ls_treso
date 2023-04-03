@@ -6,6 +6,31 @@ from frappe.model.document import Document
 
 class CaisseInitialisation(Document):
 
+	def before_save(self):
+		delta = 0
+		solde = 0
+		self.status = "Vert"
+		solde_final = 0
+
+		if  self.solde_plancher != None :
+			solde = float(self.solde_plancher)
+		
+		if self.delta_plancher != None :
+			delta = float(self.delta_plancher)
+		
+		if self.solde_final != None:
+			solde_final = float(self.solde_final)
+
+		if solde != 0.0 and  delta != 0.0 :
+			min =  solde * (100 -  delta)
+
+			if solde_final >= solde :
+				self.status = "Vert"
+			elif solde_final >= min and solde_final < solde :
+				self.status = "Jaune"
+			else:
+				self.status = "Rouge"
+
 	def validate(self):
 		nb = frappe.db.count('Caisse Initialisation', {"docstatus": 0, "caisse": self.caisse, "name": ["!=", self.name]})
 		#test = frappe.db.get_list('Caisse Initialisation', filters = {"docstatus": 0, "caisse": self.caisse}, fields=["name"])

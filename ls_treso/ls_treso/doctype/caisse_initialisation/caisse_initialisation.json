@@ -9,12 +9,13 @@
  "field_order": [
   "societe",
   "caisse",
+  "libelle",
   "date_initialisation",
-  "devise",
   "initialisation",
   "column_break_4",
   "site",
-  "libelle",
+  "status",
+  "devise",
   "date_fermeture",
   "cours",
   "section_break_9",
@@ -26,7 +27,9 @@
   "billetage",
   "total",
   "compte",
-  "journal"
+  "journal",
+  "solde_plancher",
+  "delta_plancher"
  ],
  "fields": [
   {
@@ -158,12 +161,32 @@
    "label": "Site",
    "options": "Branch",
    "read_only": 1
+  },
+  {
+   "default": "Vert",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Vert\nJaune\nRouge",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "caisse.solde_plancher",
+   "fieldname": "solde_plancher",
+   "fieldtype": "Data",
+   "label": "Solde Plancher"
+  },
+  {
+   "fetch_from": "caisse.delta_plancher",
+   "fieldname": "delta_plancher",
+   "fieldtype": "Data",
+   "label": "Delta Plancher"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-03-04 08:15:31.977816",
+ "modified": "2023-04-03 11:29:25.922563",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Caisse Initialisation",
@@ -226,5 +249,18 @@
  "search_fields": "caisse,date_initialisation,libelle",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [
+  {
+   "color": "Green",
+   "title": "Vert"
+  },
+  {
+   "color": "Yellow",
+   "title": "Jaune"
+  },
+  {
+   "color": "Red",
+   "title": "Rouge"
+  }
+ ]
 }

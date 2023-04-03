@@ -93,6 +93,18 @@ frappe.ui.form.on('Details Operation de Caisse', {
         //frm.refresh_field('total');
         frm.refresh();
     },
+	nature_operations(frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+		var df = frappe.meta.get_docfield("Details Operation de Caisse","imputation_analytique", frm.doc.name);
+        if(row.is_justifiable == "Oui") df.reqd = 1;
+		else df.reqd = 0;
+		df = frappe.meta.get_docfield("Details Operation de Caisse","tiers", frm.doc.name);
+        if(row.is_tiers == "Oui") df.reqd = 1;
+		else df.reqd = 0;
+        frm.refresh_field('details_operation_de_caisse');
+        //frm.refresh_field('total');
+        //frm.refresh();
+    },
 	details_operation_de_caisse_add:(frm, cdt, cdn) =>{
 		var total = 0;
 		var row = locals[cdt][cdn];
