@@ -360,7 +360,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 						let mt = 0;
 						if (to == 'CDF') mt = flt(cur_dialog.get_value('montant_de') * r.message[0].cours,0)
 						else mt = flt(cur_dialog.get_value('montant_de') * r.message[0].cours,2)
-						cur_dialog.set_value('montant_a',mt);
+						cur_dialog.set_value('montant_a',cur_frm.events.roundnum(to, mt));
 					}
 					else{
 						cur_dialog.set_value('montant_a',0);
@@ -368,6 +368,12 @@ frappe.ui.form.on('Caisse Initialisation', {
                 }
 			}
 		});
+	},
+	roundnum: function(devise,num){
+		var amount = 0;
+		if(devise == "CDF") amount = Math.round(num / 50)*50;
+		else amount = Math.round(num);
+		return amount;
 	},
 
 	devise: function(caisse) {
