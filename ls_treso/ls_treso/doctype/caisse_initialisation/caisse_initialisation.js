@@ -146,7 +146,8 @@ frappe.ui.form.on('Caisse Initialisation', {
 								caisse_de : values.caisse_de,
 								caisse_a : values.caisse_a,
 								date : values.date_de,
-								montant : values.montant_de,
+								montant_de : values.montant_de,
+								montant_a : values.montant_a,
 								devise : values.devise_de,
 							},
 							callback: function(r){

@@ -196,7 +196,7 @@ def transfert(caisse_de, caisse_a, montant, devise,caisse_doc,type_operation):
 		op_doc.submit()
 
 @frappe.whitelist()
-def save_operation(caisse_de, caisse_a, date, montant, devise):
+def save_operation(caisse_de, caisse_a, date, montant_de, montant_a, devise):
 	#frappe.msgprint("1")
 	try:
 		caisse_doc_de = frappe.db.sql(
@@ -220,10 +220,10 @@ def save_operation(caisse_de, caisse_a, date, montant, devise):
 		if len(caisse_doc_de) > 0 :
 			if len(caisse_doc_a) > 0 :
 				type_operation = 'Decaissement' 
-				transfert(caisse_de, caisse_a, montant, devise,caisse_doc_de,type_operation)
+				transfert(caisse_de, caisse_a, montant_de, devise,caisse_doc_de,type_operation)
 
 				type_operation = 'Encaissement'
-				transfert(caisse_a, caisse_de, montant, devise,caisse_doc_a,type_operation)
+				transfert(caisse_a, caisse_de, montant_a, devise,caisse_doc_a,type_operation)
 			else:
 				frappe.throw("Caisse Réceptrice non ouverte pour cette date")
 		else:
