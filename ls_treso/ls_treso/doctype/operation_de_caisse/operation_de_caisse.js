@@ -93,18 +93,30 @@ frappe.ui.form.on('Details Operation de Caisse', {
         //frm.refresh_field('total');
         frm.refresh();
     },
-	nature_operations(frm, cdt, cdn) {
+	/*nature_operations(frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
 		var df = frappe.meta.get_docfield("Details Operation de Caisse","imputation_analytique", frm.doc.name);
-        if(row.is_justifiable == "Oui") df.reqd = 1;
-		else df.reqd = 0;
+        if(row.is_justifiable == "Oui") {
+			df.reqd = 1;
+			frm.set_field_property('imputation_analytique', 'reqd', 1);
+		}
+		else {
+			df.reqd = 0;
+			frm.set_field_property('imputation_analytique', 'reqd', 0);
+		}
 		df = frappe.meta.get_docfield("Details Operation de Caisse","tiers", frm.doc.name);
-        if(row.is_tiers == "Oui") df.reqd = 1;
-		else df.reqd = 0;
+        if(row.is_tiers == "Oui") {
+			df.reqd = 1;
+			frm.set_field_property('tiers', 'reqd', 1);
+		}
+		else {
+			df.reqd = 0;
+			frm.set_field_property('tiers', 'reqd', 0);
+		}
         frm.refresh_field('details_operation_de_caisse');
         //frm.refresh_field('total');
         //frm.refresh();
-    },
+    },*/
 	details_operation_de_caisse_add:(frm, cdt, cdn) =>{
 		var total = 0;
 		var row = locals[cdt][cdn];
@@ -128,3 +140,12 @@ frappe.ui.form.on('Details Operation de Caisse', {
 		}
 	},
 });
+
+/*frappe.ui.form.on("Details Operation de Caisse", "validate", function(frm, cdt, cdn) {
+    var child_doc = locals[cdt][cdn];
+    if(child_doc.is_tiers == "Oui" && child_doc.tiers == "") {
+        //frappe.model.set_value(cdt, cdn, "[Docfield]", "");
+        frappe.throw(__("[Docfield] is required."));
+    }
+});*/
+

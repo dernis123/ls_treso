@@ -17,6 +17,7 @@ class OperationdeCaisse(Document):
 
 	def validate(self):
 		self.date = frappe.utils.getdate(self.date)
+		self.validate_nature()
 		
 	def before_save(self):
 		if len(self.details_operation_de_caisse) == 0:
@@ -310,6 +311,18 @@ class OperationdeCaisse(Document):
 			compte__arrondi = frappe.db.get_value("Societe",self.societe,"compte__arrondi")
 			accounting_entry = self.create_row2('Decaissement',compte__arrondi,cours,payable_amount)
 			self.append('comptabilisation', accounting_entry)
+
+	def validate_nature(self):
+		for d in self.get("details_operation_de_caisse"):
+			justifiable = frappe.db.get_value("Nature Operations", d.nature_operations, "justifiable")
+			if justifiable == "Oui":
+				if not (d.imputation_analytique):
+					frappe.throw(_("Ligne {0}: Veuillez renseigner la nature analytique").format(d.idx))
+
+			tiers = frappe.db.get_value("Nature Operations", d.nature_operations, "tiers")
+			if tiers == "Oui":
+				if not (d.tiers):
+					frappe.throw(_("Ligne {0}: Veuillez renseigner le tiers").format(d.idx))
 	
 
 		
