@@ -253,6 +253,29 @@ frappe.ui.form.on('Caisse Initialisation', {
 			},
 			__("Utilitaires")
 		);
+
+		frm.add_custom_button(__("Encaissement"), function() {
+			var local_docname = frappe.model.make_new_doc_and_get_name('Encaissement');
+			frappe.route_options = {
+				'caisse': cur_frm.doc.caisse,
+				'date_initialisation': cur_frm.doc.date,
+				'devise': cur_frm.doc.devise,
+				'initialisation': cur_frm.doc.name,
+			};
+			if(frappe.has_route_options()){
+				frappe.set_route("Form", "Encaissement", local_docname);
+			}
+		}, __("Opérations de Caisse"));
+		frm.add_custom_button(__("Decaissement"), function() {
+			var local_docname = frappe.model.make_new_doc_and_get_name('Decaissement');
+			frappe.route_options = {
+				'caisse': cur_frm.doc.caisse,
+				'date_initialisation': cur_frm.doc.date,
+				'devise': cur_frm.doc.devise,
+				'initialisation': cur_frm.doc.name,
+			};
+			frappe.set_route("Form", "Decaissement", local_docname);
+		}, __("Opérations de Caisse"));
 	},
 	init_billetage: function(frm) {
         frappe.call({

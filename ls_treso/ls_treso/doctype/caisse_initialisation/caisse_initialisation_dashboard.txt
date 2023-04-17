@@ -1,0 +1,32 @@
+from frappe import _
+
+
+def get_data():
+	return {
+		"heatmap": False,
+		"heatmap_message": _("This is based on the Time Sheets created against this project"),
+		"fieldname": "initialisation",
+		"transactions": [
+			{
+				"label": _("Opérations"),
+				"items": [
+					{
+						"type": "doctype",
+						"name": "Operation de Caisse",
+						"label": _("Encaissement"),
+						"description": _("List des Encaissements"),
+						"route": "List/Operation de Caisse",
+						"filters": [["operation_type", "=", "Encaissement"]]
+					},
+					{
+						"type": "doctype",
+						"name": "Operation de Caisse",
+						"label": _("Decaissement"),
+						"description": _("Décaissement"),
+						"route": "List/Operation de Caisse",
+						"filters": [["operation_type", "=", "Decaissement"]]
+					}
+				],
+			},
+		],
+	}

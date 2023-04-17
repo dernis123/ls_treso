@@ -1,13 +1,13 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:code_operation",
- "creation": "2022-12-05 10:00:51.959757",
+ "autoname": "format:{YY}{caisse}{MM}ENC{DD}{###}",
+ "creation": "2023-04-12 09:50:21.323274",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "code_operation",
   "societe",
   "caisse",
   "initialisation",
@@ -29,22 +29,37 @@
   "code_type",
   "section_break_11",
   "details_operation_de_caisse",
-  "amended_from",
   "justifie",
   "compte",
   "journal",
   "comptabilisation_tab",
-  "comptabilisation"
+  "comptabilisation",
+  "amended_from"
  ],
  "fields": [
   {
-   "fetch_from": "initialisation.date_initialisation",
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Date",
+   "fetch_from": "initialisation.societe",
+   "fieldname": "societe",
+   "fieldtype": "Link",
+   "label": "Societe",
+   "options": "Societe",
    "read_only": 1,
    "reqd": 1
+  },
+  {
+   "fetch_from": "initialisation.caisse",
+   "fieldname": "caisse",
+   "fieldtype": "Data",
+   "label": "Caisse",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "initialisation",
+   "fieldtype": "Link",
+   "label": "No Initialisation",
+   "options": "Caisse Initialisation",
+   "read_only": 1
   },
   {
    "fieldname": "designation",
@@ -62,18 +77,11 @@
    "reqd": 1
   },
   {
-   "fetch_from": "initialisation.devise",
-   "fieldname": "devise",
-   "fieldtype": "Data",
-   "label": "Devise",
-   "reqd": 1
-  },
-  {
-   "fieldname": "remettant",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Remettant",
-   "reqd": 1
+   "fieldname": "montant_reference",
+   "fieldtype": "Currency",
+   "label": "Montant Reference",
+   "options": "devise_caisse",
+   "read_only": 1
   },
   {
    "fieldname": "entite",
@@ -81,34 +89,9 @@
    "label": "Entite"
   },
   {
-   "fieldname": "commentaire",
-   "fieldtype": "Text",
-   "label": "Commentaire"
-  },
-  {
    "fieldname": "reference",
    "fieldtype": "Data",
    "label": "Reference"
-  },
-  {
-   "fieldname": "type_operation",
-   "fieldtype": "Select",
-   "label": "Type Operation",
-   "options": "Encaissement\nDecaissement"
-  },
-  {
-   "fieldname": "column_break_6",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_11",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "details_operation_de_caisse",
-   "fieldtype": "Table",
-   "label": "Details Operation de Caisse",
-   "options": "Details Operation de Caisse"
   },
   {
    "default": "0",
@@ -117,41 +100,16 @@
    "label": "A Justifier"
   },
   {
-   "fieldname": "amended_from",
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "initialisation.site",
+   "fieldname": "site",
    "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Operation de Caisse",
-   "print_hide": 1,
+   "label": "Site",
+   "options": "Branch",
    "read_only": 1
-  },
-  {
-   "default": "ENC",
-   "description": "ENC => Encaissement\nDEC => Decaissement",
-   "fieldname": "code_type",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Code Type"
-  },
-  {
-   "fetch_from": "initialisation.caisse",
-   "fieldname": "caisse",
-   "fieldtype": "Data",
-   "label": "Caisse",
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
-   "fieldname": "cours",
-   "fieldtype": "Float",
-   "label": "Cours",
-   "read_only": 1
-  },
-  {
-   "fieldname": "initialisation",
-   "fieldtype": "Link",
-   "label": "No Initialisation",
-   "options": "Caisse Initialisation"
   },
   {
    "fetch_from": "initialisation.devise",
@@ -162,10 +120,71 @@
    "reqd": 1
   },
   {
-   "fieldname": "montant_reference",
-   "fieldtype": "Currency",
-   "label": "Montant Reference",
-   "options": "devise_caisse",
+   "fetch_from": "initialisation.date_initialisation",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Encaissement",
+   "fieldname": "type_operation",
+   "fieldtype": "Data",
+   "label": "Type Operation",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "initialisation.devise",
+   "fieldname": "devise",
+   "fieldtype": "Data",
+   "label": "Devise",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cours",
+   "fieldtype": "Float",
+   "label": "Cours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remettant",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Remettant",
+   "reqd": 1
+  },
+  {
+   "fieldname": "commentaire",
+   "fieldtype": "Text",
+   "label": "Commentaire"
+  },
+  {
+   "default": "ENC",
+   "description": "ENC => Encaissement\nDEC => Decaissement",
+   "fieldname": "code_type",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Code Type"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "details_operation_de_caisse",
+   "fieldtype": "Table",
+   "label": "Details Operation de Caisse",
+   "options": "Details Operation Virtual"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Encaissement",
+   "print_hide": 1,
    "read_only": 1
   },
   {
@@ -190,23 +209,6 @@
    "label": "Journal"
   },
   {
-   "fetch_from": "initialisation.societe",
-   "fieldname": "societe",
-   "fieldtype": "Link",
-   "label": "Societe",
-   "options": "Societe",
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
-   "fetch_from": "initialisation.site",
-   "fieldname": "site",
-   "fieldtype": "Link",
-   "label": "Site",
-   "options": "Branch",
-   "read_only": 1
-  },
-  {
    "fieldname": "comptabilisation_tab",
    "fieldtype": "Tab Break",
    "label": "Comptabilisation"
@@ -218,21 +220,24 @@
    "read_only": 1
   },
   {
-   "fieldname": "code_operation",
-   "fieldtype": "Data",
-   "label": "Code Operation",
-   "reqd": 1,
-   "unique": 1
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Encaissement",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
+ "is_virtual": 1,
  "links": [],
- "modified": "2023-04-17 09:54:46.297590",
+ "modified": "2023-04-17 17:31:04.382900",
  "modified_by": "Administrator",
  "module": "Ls Treso",
- "name": "Operation de Caisse",
- "naming_rule": "By fieldname",
+ "name": "Encaissement",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

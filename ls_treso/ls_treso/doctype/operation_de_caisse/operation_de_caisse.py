@@ -6,6 +6,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import getdate
 from frappe.utils import flt
+import json
 
 import erpnext
 from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
@@ -323,7 +324,60 @@ class OperationdeCaisse(Document):
 			if tiers == "Oui":
 				if not (d.tiers):
 					frappe.throw(_("Ligne {0}: Veuillez renseigner le tiers").format(d.idx))
-	
 
-		
+@frappe.whitelist()
+def insert_operation(doc, type= 1):
+	aDict = json.loads(doc)
+	arg = frappe._dict({
+		'doctype': 'Operation de Caisse',
+		'code_operation': aDict['name'],
+		'initialisation': aDict['initialisation'],
+		'type_operation': aDict['type_operation'],
+		'designation': aDict['designation'],
+		'montant': aDict['montant'],
+		'montant_reference': aDict['montant_reference'],
+		'devise': aDict['devise'],
+		'cours': aDict['cours'],
+		'remettant': aDict['remettant'],
+		'a_justifier' : aDict['a_justifier'],
+	})
+
+	if aDict.get('entite'):
+		arg.update({'entite': aDict['entite']})
+
+	if aDict.get('reference'):
+		arg.update({'reference': aDict['reference']})
+
+	if aDict.get('commentaire'):
+		arg.update({'commentaire': aDict['commentaire']})
+
+	details = []
+	for d in aDict['details_operation_de_caisse']:
+		arg_sub = frappe._dict({
+			'nature_operations': d['nature_operations'],
+			'montant_devise': d['montant_devise'],
+			'montant_devise_ref': d['montant_devise'],
+		})
+		if d.get('tiers'):
+			arg_sub.update({'tiers': d['tiers']})
+		if d.get('imputation_analytique'):
+			arg_sub.update({'imputation_analytique': d['imputation_analytique']})
+		if d.get('imputation_analytique_2'):
+			arg_sub.update({'imputation_analytique_2': d['imputation_analytique_2']})
+		if d.get('imputation_analytique_3'):
+			arg_sub.update({'imputation_analytique_3': d['imputation_analytique_3']})
+		if d.get('imputation_analytique_4'):
+			arg_sub.update({'imputation_analytique_4': d['imputation_analytique_4']})
+		if d.get('imputation_analytique_5'):
+			arg_sub.update({'imputation_analytique_5': d['imputation_analytique_5']})
+
+		details.append(arg_sub)
+
+	arg.update({'details_operation_de_caisse': details})
+	#frappe.throw(str(arg))
+	if type == 1 :
+		frappe.get_doc(arg).insert()
+	else :
+		frappe.get_doc(arg).save()
+	frappe.db.commit()
 

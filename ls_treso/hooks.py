@@ -192,3 +192,13 @@ fixtures = [
     {"dt": "Server Script", "filters": [["disabled", "=", 0]]},
     "Print Format",
 ]
+
+website_route_rules = [
+    {"from_route": "/decaissement", "to_route": "Operation de Caisse"},
+    {"from_route": "/encaissement", "to_route": "Operation de Caisse"},
+]
+
+
+
+
+

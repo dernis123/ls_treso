@@ -30,14 +30,17 @@ frappe.ui.form.on('Operation de Caisse', {
 			frm.set_value('remettant', '');
 			frm.set_df_property('remettant', 'label', 'Bénéficiaire');
 		}
+		if(!frm.is_new() && frm.is_dirty()){
+			frm.save();
+		}
 	},
 	refresh: function(frm){
-		frm.add_custom_button(__("Caisse Quotidienne"),
+		/*frm.add_custom_button(__("Caisse Quotidienne"),
 			function () {
 				//frappe.route_options = {"name": frm.doc.initialisation};
 				frappe.set_route('Form', 'Caisse Initialisation',{"name": frm.doc.initialisation});
 			}
-		)
+		)*/
 	},
 	
 	type_operation: function(frm) {
@@ -93,30 +96,6 @@ frappe.ui.form.on('Details Operation de Caisse', {
         //frm.refresh_field('total');
         frm.refresh();
     },
-	/*nature_operations(frm, cdt, cdn) {
-		var row = locals[cdt][cdn];
-		var df = frappe.meta.get_docfield("Details Operation de Caisse","imputation_analytique", frm.doc.name);
-        if(row.is_justifiable == "Oui") {
-			df.reqd = 1;
-			frm.set_field_property('imputation_analytique', 'reqd', 1);
-		}
-		else {
-			df.reqd = 0;
-			frm.set_field_property('imputation_analytique', 'reqd', 0);
-		}
-		df = frappe.meta.get_docfield("Details Operation de Caisse","tiers", frm.doc.name);
-        if(row.is_tiers == "Oui") {
-			df.reqd = 1;
-			frm.set_field_property('tiers', 'reqd', 1);
-		}
-		else {
-			df.reqd = 0;
-			frm.set_field_property('tiers', 'reqd', 0);
-		}
-        frm.refresh_field('details_operation_de_caisse');
-        //frm.refresh_field('total');
-        //frm.refresh();
-    },*/
 	details_operation_de_caisse_add:(frm, cdt, cdn) =>{
 		var total = 0;
 		var row = locals[cdt][cdn];
@@ -140,12 +119,4 @@ frappe.ui.form.on('Details Operation de Caisse', {
 		}
 	},
 });
-
-/*frappe.ui.form.on("Details Operation de Caisse", "validate", function(frm, cdt, cdn) {
-    var child_doc = locals[cdt][cdn];
-    if(child_doc.is_tiers == "Oui" && child_doc.tiers == "") {
-        //frappe.model.set_value(cdt, cdn, "[Docfield]", "");
-        frappe.throw(__("[Docfield] is required."));
-    }
-});*/
 
