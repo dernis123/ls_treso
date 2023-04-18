@@ -53,14 +53,16 @@ class CaisseInitialisation(Document):
 			operation = frappe.get_doc("Operation de Caisse", o.name)
 			operation.submit()
 
-		if len(self.billetage) == 0:
-			frappe.throw("Veuillez saisir le billetage")
+		billetage = frappe.db.get_value('Societe', self.societe , 'billetage')
+		if billetage == 1 :
+			if len(self.billetage) == 0:
+				frappe.throw("Veuillez saisir le billetage")
 
-		total = 0
-		for b in self.billetage:
-			total += b.valeur_finale
-		if self.solde_final != total:
-			frappe.throw("Le solde physique de la caisse est différent du solde final. Veuillez recompter!") 
+			total = 0
+			for b in self.billetage:
+				total += b.valeur_finale
+			if self.solde_final != total:
+				frappe.throw("Le solde physique de la caisse est différent du solde final. Veuillez recompter!") 
 
 	def on_cancel(self):
 		nb = frappe.db.count('Caisse Initialisation', 

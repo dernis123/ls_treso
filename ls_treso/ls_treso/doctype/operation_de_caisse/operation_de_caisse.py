@@ -18,7 +18,7 @@ class OperationdeCaisse(Document):
 
 	def validate(self):
 		self.date = frappe.utils.getdate(self.date)
-		self.validate_nature()
+		#self.validate_nature()
 		
 	def before_save(self):
 		if len(self.details_operation_de_caisse) == 0:

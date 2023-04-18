@@ -97,13 +97,15 @@
    "default": "0",
    "fieldname": "billetage_operation",
    "fieldtype": "Check",
-   "label": "Billetage Operation"
+   "label": "Billetage Operation",
+   "read_only_depends_on": "eval:doc.billetage == 0"
   },
   {
    "default": "0",
    "fieldname": "billetage_encaissement",
    "fieldtype": "Check",
-   "label": "Billetage Encaissement"
+   "label": "Billetage Encaissement",
+   "read_only_depends_on": "eval:doc.billetage == 0"
   },
   {
    "fieldname": "format_impression",
@@ -130,7 +132,7 @@
  "image_field": "logo",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-03-07 15:27:28.175099",
+ "modified": "2023-04-18 09:13:08.462532",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Societe",

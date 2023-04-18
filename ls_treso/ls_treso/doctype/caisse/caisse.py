@@ -3,6 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe.utils import getdate
 
 class Caisse(Document):
 
@@ -37,6 +38,7 @@ class Caisse(Document):
 			{
 				"doctype": "Caisse Initialisation",
 				"caisse": self.name,
+				"initialisation": 1,
 				"date_initialisation": self.date_lancement,
 				"date_fermeture": self.date_lancement,
 				"devise": self.devise,
@@ -73,10 +75,17 @@ class Caisse(Document):
 		})
 		operation_sub.append(sub_args)
 
+		year = str(getdate(self.date_lancement).year)
+		month = str(getdate(self.date_lancement).month)
+		if len(month) == 1:
+			month = '0' + month
+		code = year[2:] + self.name + month + 'ENC' + '00000'
+
 		args = frappe._dict(
 			{
 				"doctype": "Operation de Caisse",
 				"caisse": self.name,
+				"code_operation": code,
 				"initialisation": caisse_init.name,
 				"designation": "Solde Initial",
 				"date": self.date_lancement,

@@ -174,19 +174,21 @@
    "fetch_from": "caisse.solde_plancher",
    "fieldname": "solde_plancher",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Solde Plancher"
   },
   {
    "fetch_from": "caisse.delta_plancher",
    "fieldname": "delta_plancher",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Delta Plancher"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-04-03 11:29:25.922563",
+ "modified": "2023-04-18 11:00:52.597796",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Caisse Initialisation",
