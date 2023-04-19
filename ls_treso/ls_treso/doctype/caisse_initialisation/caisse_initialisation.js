@@ -276,6 +276,10 @@ frappe.ui.form.on('Caisse Initialisation', {
 			};
 			frappe.set_route("Form", "Decaissement", local_docname);
 		}, __("Opérations de Caisse"));
+		frm.add_custom_button(__("Liste des Opérations"), function() {
+			frappe.route_options = {'caisse': cur_frm.doc.caisse};
+			frappe.set_route("List", "Operation de Caisse");
+		}, __("Opérations de Caisse"));
 	},
 	init_billetage: function(frm) {
         frappe.call({

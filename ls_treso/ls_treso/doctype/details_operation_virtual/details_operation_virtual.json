@@ -1,7 +1,7 @@
 {
  "actions": [],
  "autoname": "hash",
- "creation": "2023-04-16 09:46:09.252125",
+ "creation": "2023-04-19 12:00:06.953390",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -106,7 +106,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-04-16 09:46:16.809085",
+ "modified": "2023-04-19 12:00:06.953390",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Details Operation Virtual",

@@ -102,13 +102,13 @@ frappe.ui.form.on('Encaissement', {
 		frm.doc.details_operation_de_caisse.forEach(e => {
 			frappe.db.get_value("Nature Operations", e.nature_operations, "justifiable", (r) => {
 				if(r.justifiable == 'Oui'){
-					if(!e.imputation_analytique) frappe.throw(_("Ligne {0}: Veuillez renseigner la nature analytique").format(e.idx))
+					if(!e.imputation_analytique) frappe.throw("Ligne " + e.idx +  ": Veuillez renseigner la nature analytique");
 				}
 			});
 			
 			frappe.db.get_value("Nature Operations", e.nature_operations, "tiers", (r) => {
 				if(r.tiers == 'Oui'){
-					if(!e.tiers) frappe.throw(_("Ligne {0}: Veuillez renseigner le tiers").format(e.idx))
+					if(!e.tiers) frappe.throw("Ligne " + e.idx +  ": Veuillez renseigner le tiers");
 				}
 			});
 		});
@@ -117,20 +117,20 @@ frappe.ui.form.on('Encaissement', {
 		frm.doc.details_operation_de_caisse.forEach(e => {
 			frappe.db.get_value("Nature Operations", e.nature_operations, "justifiable", (r) => {
 				if(r.justifiable == 'Oui'){
-					if(!e.imputation_analytique) frappe.throw(_("Ligne {0}: Veuillez renseigner la nature analytique").format(e.idx))
+					if(!e.imputation_analytique) frappe.throw("Ligne " + e.idx +  ": Veuillez renseigner la nature analytique");
 				}
 			});
 			
 			frappe.db.get_value("Nature Operations", e.nature_operations, "tiers", (r) => {
 				if(r.tiers == 'Oui'){
-					if(!e.tiers) frappe.throw(_("Ligne {0}: Veuillez renseigner le tiers").format(e.idx))
+					if(!e.tiers) frappe.throw("Ligne " + e.idx +  ": Veuillez renseigner le tiers");
 				}
 			});
 		});
 	},
 });
 
-frappe.ui.form.on('Details Operation de Caisse', {
+frappe.ui.form.on('Details Operation Virtual', {
 	
     montant_devise(frm, cdt, cdn) {
 		var row = locals[cdt][cdn];

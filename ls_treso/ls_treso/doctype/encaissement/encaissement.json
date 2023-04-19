@@ -179,15 +179,6 @@
    "options": "Details Operation Virtual"
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Encaissement",
-   "print_hide": 1,
-   "read_only": 1
-  },
-  {
    "default": "0",
    "fieldname": "justifie",
    "fieldtype": "Check",
@@ -231,9 +222,8 @@
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "is_virtual": 1,
  "links": [],
- "modified": "2023-04-18 18:32:18.644870",
+ "modified": "2023-04-19 11:53:12.394702",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Encaissement",
@@ -289,7 +279,6 @@
    "role": "Caisse Manager",
    "select": 1,
    "share": 1,
-   "submit": 1,
    "write": 1
   }
  ],

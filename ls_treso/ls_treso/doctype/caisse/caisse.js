@@ -55,11 +55,13 @@ frappe.ui.form.on('Caisse', {
 		});
 	},
 	refresh: function(frm) {
-        if (cur_frm.doc.__unsaved != 1) {
-            if(frm.doc.total != frm.doc.solde_initial) $('.primary-action').prop('disabled', true);
-            else $('.primary-action').prop('disabled', false);
-        }
-        else $('.primary-action').prop('disabled', false);
+		if(frm.type_caisse == "Caisse"){
+			if (cur_frm.doc.__unsaved != 1) {
+				if(frm.doc.total != frm.doc.solde_initial) $('.primary-action').prop('disabled', true);
+				else $('.primary-action').prop('disabled', false);
+			}
+			else $('.primary-action').prop('disabled', false);
+		}
 	}
 });
 

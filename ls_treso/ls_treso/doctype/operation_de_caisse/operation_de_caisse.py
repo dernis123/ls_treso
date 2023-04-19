@@ -45,10 +45,11 @@ class OperationdeCaisse(Document):
 		if float(total) != float(self.montant_reference):
 			frappe.throw("Le montant saisie en entête de l'opération " + str(self.montant_reference) + " est différent du total des montants en détails " + str(total) )
 
-		init_doc = frappe.get_doc("Caisse Initialisation", self.initialisation)
-		if self.type_operation != "Encaissement" :
-			if float(init_doc.solde_final) < float(self.montant) :
-					frappe.throw("Le montant actuellement en caisse ne permet pas de faire cette opération.\n Il faut augmenter le solde!!!")
+		if self.type_caisse == 'Caisse' :
+			init_doc = frappe.get_doc("Caisse Initialisation", self.initialisation)
+			if self.type_operation != "Encaissement" :
+				if float(init_doc.solde_final) < float(self.montant) :
+						frappe.throw("Le montant actuellement en caisse ne permet pas de faire cette opération.\n Il faut augmenter le solde!!!")
 
 		self.generate_journal_entry()
 

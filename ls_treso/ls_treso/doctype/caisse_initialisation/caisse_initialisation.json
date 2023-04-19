@@ -29,7 +29,8 @@
   "compte",
   "journal",
   "solde_plancher",
-  "delta_plancher"
+  "delta_plancher",
+  "type_caisse"
  ],
  "fields": [
   {
@@ -130,7 +131,8 @@
   {
    "fieldname": "total",
    "fieldtype": "Float",
-   "label": "Total"
+   "label": "Total",
+   "read_only": 1
   },
   {
    "fetch_from": "caisse.compte_comptable",
@@ -183,12 +185,19 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Delta Plancher"
+  },
+  {
+   "fetch_from": "caisse.type_caisse",
+   "fieldname": "type_caisse",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Type Caisse"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-04-18 11:00:52.597796",
+ "modified": "2023-04-19 16:05:45.645172",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Caisse Initialisation",
