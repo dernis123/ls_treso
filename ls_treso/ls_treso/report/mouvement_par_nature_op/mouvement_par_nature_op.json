@@ -32,7 +32,7 @@
  ],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2023-02-27 21:50:50.389173",
+ "modified": "2023-04-23 13:04:51.137154",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Mouvement par Nature OP",
@@ -45,6 +45,15 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "Treso  Admin"
+  },
+  {
+   "role": "Caissier"
+  },
+  {
+   "role": "Caisse Manager"
   }
  ]
 }

@@ -32,7 +32,7 @@
  ],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2023-02-27 22:23:58.820702",
+ "modified": "2023-04-23 13:05:54.941248",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Livre de Caisse",
@@ -45,6 +45,15 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "Treso  Admin"
+  },
+  {
+   "role": "Caisse Manager"
+  },
+  {
+   "role": "Caissier"
   }
  ]
 }
