@@ -67,7 +67,7 @@
    "fieldname": "devise",
    "fieldtype": "Link",
    "label": "Devise",
-   "options": "Currency",
+   "options": "Devise",
    "reqd": 1
   },
   {
@@ -161,7 +161,7 @@
    "fieldname": "devise_caisse",
    "fieldtype": "Link",
    "label": "Devise Caisse",
-   "options": "Currency",
+   "options": "Devise",
    "read_only": 1,
    "reqd": 1
   },
@@ -238,7 +238,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-04-19 16:30:02.660690",
+ "modified": "2023-04-24 11:58:27.237350",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Operation de Caisse",
