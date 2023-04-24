@@ -68,6 +68,7 @@ class Caisse(Document):
 			"montant_devise": self.solde,
 			"montant_devise_ref":self.solde,
 			"devise": self.devise,
+			"devise_caisse": self.devise,
 			"cours": self.cours,
 			"montant_devise_ref": self.solde,
 			"parrenttype": "Operation de Caisse",
