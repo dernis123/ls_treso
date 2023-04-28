@@ -16,7 +16,8 @@
   "compte_analytique_3",
   "compte_analytique_4",
   "compte_analytique_5",
-  "sens"
+  "sens",
+  "nature"
  ],
  "fields": [
   {
@@ -81,12 +82,19 @@
    "fieldtype": "Select",
    "label": "Sens",
    "options": "Debit\nCredit"
+  },
+  {
+   "fieldname": "nature",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Nature",
+   "options": "Nature Operations"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-03-07 14:23:56.742910",
+ "modified": "2023-04-28 15:32:21.060084",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Comptabilisation",

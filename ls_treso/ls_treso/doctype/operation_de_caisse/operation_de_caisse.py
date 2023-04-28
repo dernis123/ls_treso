@@ -14,6 +14,8 @@ from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
 )
 from ls_treso.ls_treso.doctype.devise.devise import get_cours
 
+from ls_treso.ls_treso.doctype.decaissement.decaissement import get_decaissement_route
+
 class OperationdeCaisse(Document):
 
 	def validate(self):

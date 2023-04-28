@@ -48,9 +48,9 @@ class CaisseInitialisation(Document):
 			frappe.throw("Une date ultérieure à la date choisie existe déjà. Veuillez choisir une date plus récente")
 	
 	def before_submit(self):
-		operations = frappe.db.get_list("Operation de Caisse", fields = ["name"], filters = {"docstatus": 0})
+		operations = frappe.db.get_list("Encaissement", fields = ["name"], filters = {"docstatus": 0})
 		for o in operations:
-			operation = frappe.get_doc("Operation de Caisse", o.name)
+			operation = frappe.get_doc("Encaissement", o.name)
 			operation.submit()
 
 		billetage = frappe.db.get_value('Societe', self.societe , 'billetage')
@@ -80,9 +80,16 @@ class CaisseInitialisation(Document):
 			frappe.throw("Vous ne pouvez pas recalculer une journée déjà fermée!") 
 		mt = frappe.db.sql(
 		"""
-			SELECT SUM(CASE WHEN code_type = 'ENC' THEN montant else - montant END) AS montant
-			FROM `tabOperation de Caisse`
-			WHERE initialisation = %(name)s AND docstatus = 1
+			SELECT SUM(montant) AS montant
+			FROM(
+				SELECT SUM(montant) AS montant
+				FROM `tabEncaissement`
+				WHERE initialisation =  %(name)s AND docstatus = 1
+				UNION
+				SELECT -SUM(montant) AS montant
+				FROM `tabDecaissement`
+				WHERE initialisation =  %(name)s AND docstatus = 1
+			) AS t
 		""" , {"name": self.name}, as_dict = 1
 		)[0].montant
 		if mt == None:
@@ -91,19 +98,17 @@ class CaisseInitialisation(Document):
 			if float(self.solde_final) < float(mt) :
 				frappe.throw("Vous avez une inconsistance dans les montants saisis, veuillez appeler l'administrateur!") 
 			else:
+				#frappe.msgprint(str(mt))
 				frappe.db.sql(
 				"""
-					UPDATE `tabCaisse Initialisation` SET solde_final = solde_initial + 
-						(SELECT SUM(CASE WHEN code_type = 'ENC' THEN montant else - montant END) AS montant
-						FROM `tabOperation de Caisse`
-						WHERE initialisation = %(name)s AND docstatus = 1)
+					UPDATE `tabCaisse Initialisation` SET solde_final = solde_initial + %(mt)s
 					WHERE name = %(name)s AND docstatus = 0
-				""" , {"name": self.name}, as_dict = 1
+				""" , {"name": self.name, "mt": float(mt)}, as_dict = 1
 				)
 
 	@frappe.whitelist()
 	def cloture(self):
-		operations = frappe.db.get_list('Operation de Caisse',
+		operations = frappe.db.get_list('Encaissement',
 			filters={
 				'docstatus': 0,
 				'initialisation': self.name
@@ -113,7 +118,20 @@ class CaisseInitialisation(Document):
 		)
 
 		for o in operations:
-			op_doc = frappe.get_doc('Operation de Caisse', o.name)
+			op_doc = frappe.get_doc('Encaissement', o.name)
+			op_doc.submit()
+
+		operations = frappe.db.get_list('Decaissement',
+			filters={
+				'docstatus': 0,
+				'initialisation': self.name
+			},
+			fields=['name'],
+			order_by='name',
+		)
+
+		for o in operations:
+			op_doc = frappe.get_doc('Decaissement', o.name)
 			op_doc.submit()
 
 @frappe.whitelist()
@@ -174,11 +192,10 @@ def transfert(caisse_de, caisse_a, montant, devise,caisse_doc,type_operation):
 		#if caisse_doc[0].solde_final >= montant :
 		args = frappe._dict(
 			{
-				"doctype": "Operation de Caisse", 
+				"doctype": type_operation, 
 				"caisse": caisse_de,
 				"initialisation": caisse_doc[0].name,
 				"designation": 'Envoi de fond' if type_operation == 'Decaissement' else 'Reception de fond',
-				"type_operation": type_operation,
 				"date": caisse_doc[0].date_initialisation,					
 				"devise": devise,
 				"montant": montant,

@@ -58,6 +58,52 @@ frappe.ui.form.on('Caisse Initialisation', {
 		);
 
 		frm.add_custom_button(
+			__("Recalcul"),
+			function () {
+				let d = new frappe.ui.Dialog({
+					title: 'Recalculer les montants déjà validés!',
+					fields: [
+						{
+							label: 'Numero',
+							fieldname: 'initialisation',
+							fieldtype: 'Data',
+							read_only: 1,
+							default: cur_frm.docname,
+						},
+						{
+							label: 'Caisse',
+							fieldname: 'caisse',
+							fieldtype: 'Link',
+							options: "Caisse",
+							read_only: 1,
+							default: cur_frm.doc.caisse,
+						},
+						{
+							fieldname: "column_break_01",
+							fieldtype: "Column Break"
+						},
+						{
+							label: 'Date',
+							fieldname: 'date',
+							fieldtype: 'Date',
+							read_only: 1,
+							default: cur_frm.doc.date_initialisation,
+						},
+					],
+					primary_action_label: __('Recalculer'),
+					primary_action(values) {
+						cur_frm.call('recalcul').then(cur_frm.refresh_field("solde_final"));
+						cur_frm.refresh();
+						//console.log(values);
+						d.hide();
+					}
+				});
+				d.show();
+			},
+			__("Utilitaires")
+		);
+
+		frm.add_custom_button(
 			__("Transfert"),
 			function () {
 				let d = new frappe.ui.Dialog({
@@ -162,53 +208,6 @@ frappe.ui.form.on('Caisse Initialisation', {
 			},
 			__("Utilitaires")
 		);
-
-		frm.add_custom_button(
-			__("Recalcul"),
-			function () {
-				let d = new frappe.ui.Dialog({
-					title: 'Recalculer les montants déjà validés!',
-					fields: [
-						{
-							label: 'Numero',
-							fieldname: 'initialisation',
-							fieldtype: 'Data',
-							read_only: 1,
-							default: cur_frm.docname,
-						},
-						{
-							label: 'Caisse',
-							fieldname: 'caisse',
-							fieldtype: 'Link',
-							options: "Caisse",
-							read_only: 1,
-							default: cur_frm.doc.caisse,
-						},
-						{
-							fieldname: "column_break_01",
-							fieldtype: "Column Break"
-						},
-						{
-							label: 'Date',
-							fieldname: 'date',
-							fieldtype: 'Date',
-							read_only: 1,
-							default: cur_frm.doc.date_initialisation,
-						},
-					],
-					primary_action_label: __('Recalculer'),
-					primary_action(values) {
-						cur_frm.call('recalcul');
-						cur_frm.refresh();
-						//console.log(values);
-						d.hide();
-					}
-				});
-				d.show();
-			},
-			__("Utilitaires")
-		);
-
 		frm.add_custom_button(
 			__("Clôture"),
 			function () {
@@ -263,7 +262,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 				'initialisation': cur_frm.doc.name,
 			};
 			if(frappe.has_route_options()){
-				frappe.set_route("Form", "Encaissement", local_docname);
+				frappe.set_route("List", "Encaissement");
 			}
 		}, __("Opérations de Caisse"));
 		frm.add_custom_button(__("Decaissement"), function() {
@@ -274,12 +273,12 @@ frappe.ui.form.on('Caisse Initialisation', {
 				'devise': cur_frm.doc.devise,
 				'initialisation': cur_frm.doc.name,
 			};
-			frappe.set_route("Form", "Decaissement", local_docname);
+			frappe.set_route("List", "Decaissement");
 		}, __("Opérations de Caisse"));
-		frm.add_custom_button(__("Liste des Opérations"), function() {
+		/*frm.add_custom_button(__("Liste des Opérations"), function() {
 			frappe.route_options = {'caisse': cur_frm.doc.caisse};
 			frappe.set_route("List", "Operation de Caisse");
-		}, __("Opérations de Caisse"));
+		}, __("Opérations de Caisse"));*/
 	},
 	init_billetage: function(frm) {
         frappe.call({
@@ -386,8 +385,8 @@ frappe.ui.form.on('Caisse Initialisation', {
 				if (r.message) {
                     if(r.message.length > 0) {
 						let mt = 0;
-						if (to == 'CDF') mt = flt(cur_dialog.get_value('montant_de') * r.message[0].cours,0)
-						else mt = flt(cur_dialog.get_value('montant_de') * r.message[0].cours,2)
+						if (to == 'CDF') mt = flt(cur_dialog.get_value('montant_de') * r.message[0].cours,0);
+						else mt = flt(cur_dialog.get_value('montant_de') * r.message[0].cours,2);
 						cur_dialog.set_value('montant_a',cur_frm.events.roundnum(to, mt));
 					}
 					else{

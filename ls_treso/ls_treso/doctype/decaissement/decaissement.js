@@ -20,18 +20,10 @@ frappe.ui.form.on('Decaissement', {
 			};
 		});
 
-		if(frappe.has_route_options()){
-			frm.set_value('caisse', frappe.route_options.caisse);
-			frm.set_value('date', frappe.route_options.date_initialisation);
-			frm.set_value('devise_caisse', frappe.route_options.devise);
-			frm.set_value('devise', frappe.route_options.devise);
-			frm.set_value('initialisation', frappe.route_options.initialisation);
-		}
-
 		frm.set_value('type_operation', 'Decaissement');
 	},
 	refresh(frm) {
-		// Clear the existing breadcrumbs. Set custom breadcrumbs will not do this automatically
+		/*// Clear the existing breadcrumbs. Set custom breadcrumbs will not do this automatically
 		frappe.breadcrumbs.clear();
 		
 		// Now add breadcrumb for the 'parent' document
@@ -44,7 +36,7 @@ frappe.ui.form.on('Decaissement', {
 		frappe.breadcrumbs.set_custom_breadcrumbs({
 			label: frm.doc.name,
 			route: '/app/operation-de-caisse/' + frm.doc.name,
-		});
+		});*/
 
 		
 
@@ -73,20 +65,11 @@ frappe.ui.form.on('Decaissement', {
 	montant: function(frm) {
 		if(frm.doc.cours) frm.set_value('montant_reference', frm.doc.montant / frm.doc.cours);
 	},
-	after_insert: function(frm){
+	/*after_insert: function(frm){
 		if(! frm.is_new()) return;
-		frappe.call({
-			method: "ls_treso.ls_treso.doctype.operation_de_caisse.operation_de_caisse.insert_operation",
-			args: {
-				doc: frm.doc,
-				type: 1,
-			},
-			callback: function (r) {
-				frappe.set_route("Form", "Operation de Caisse", frm.doc.name);
-			}
-		});
+		frappe.set_route("Form", "Operation de Caisse", frm.doc.name);
 	},
-	after_save: function(frm){
+	/*after_save: function(frm){
 		if(frm.is_new()) return;
 		frappe.call({
 			method: "ls_treso.ls_treso.doctype.operation_de_caisse.operation_de_caisse.insert_operation",
@@ -129,10 +112,10 @@ frappe.ui.form.on('Decaissement', {
 				}
 			});
 		});
-	},
+	},*/
 });
 
-frappe.ui.form.on('Details Operation Virtual', {
+frappe.ui.form.on('Details Operation de Caisse', {
 	
     montant_devise(frm, cdt, cdn) {
 		var row = locals[cdt][cdn];

@@ -1,0 +1,35 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-04-27 18:35:05.441271",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2023-04-27 18:35:05.441271",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Livres de Caisse",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Encaissement",
+ "report_name": "Livres de Caisse",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Treso  Admin"
+  },
+  {
+   "role": "Caissier"
+  },
+  {
+   "role": "Caisse Manager"
+  }
+ ]
+}

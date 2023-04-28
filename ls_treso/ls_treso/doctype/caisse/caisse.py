@@ -8,11 +8,12 @@ from frappe.utils import getdate
 class Caisse(Document):
 
 	def before_save(self):
-		self.solde = self.solde_initial
+		self.solde = 0
 
 	def before_submit(self):
-		self.solde = self.solde_initial
-		self.date_solde = self.date_lancement
+		pass
+		#self.solde = self.solde_initial
+		#self.date_solde = self.date_lancement
 	
 	def on_submit(self):
 		if self.solde_initial == 0:
@@ -65,13 +66,12 @@ class Caisse(Document):
 		sub_args = frappe._dict({
 			"doctype": "Details Operation de Caisse",
 			"nature_operations": init,
-			"montant_devise": self.solde,
-			"montant_devise_ref":self.solde,
+			"montant_devise": self.solde_initial,
+			"montant_devise_ref":self.solde_initial,
 			"devise": self.devise,
 			"devise_caisse": self.devise,
 			"cours": self.cours,
-			"montant_devise_ref": self.solde,
-			"parrenttype": "Operation de Caisse",
+			"parrenttype": "Encaissement",
 			"parentfield": "details_operation_de_caisse",
 		})
 		operation_sub.append(sub_args)
@@ -84,7 +84,7 @@ class Caisse(Document):
 
 		args = frappe._dict(
 			{
-				"doctype": "Operation de Caisse",
+				"doctype": "Encaissement",
 				"caisse": self.name,
 				"code_operation": code,
 				"initialisation": caisse_init.name,
@@ -93,8 +93,8 @@ class Caisse(Document):
 				"devise": self.devise,
 				"cours": self.cours,
 				"remettant": frappe.session.user,
-				"montant": self.solde,
-				"montant_reference": self.solde,
+				"montant": self.solde_initial,
+				"montant_reference": self.solde_initial,
 				"details_operation_de_caisse": operation_sub,
 			}
 		)

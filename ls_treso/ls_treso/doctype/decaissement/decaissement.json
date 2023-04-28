@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:{YY}{caisse}{MM}DEC{DD}{###}",
- "creation": "2023-04-12 09:52:05.725055",
+ "creation": "2023-04-25 14:50:33.269390",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -17,7 +17,7 @@
   "entite",
   "reference",
   "a_justifier",
-  "column_break_6",
+  "column_break_10",
   "site",
   "devise_caisse",
   "date",
@@ -26,21 +26,22 @@
   "cours",
   "remettant",
   "commentaire",
-  "code_type",
-  "section_break_11",
+  "section_break_20",
   "details_operation_de_caisse",
   "justifie",
   "compte",
   "journal",
   "comptabilisation_tab",
   "comptabilisation",
-  "amended_from"
+  "amended_from",
+  "type_caisse"
  ],
  "fields": [
   {
    "fetch_from": "initialisation.societe",
    "fieldname": "societe",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Societe",
    "options": "Societe",
    "read_only": 1,
@@ -49,8 +50,10 @@
   {
    "fetch_from": "initialisation.caisse",
    "fieldname": "caisse",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Caisse",
+   "options": "Caisse",
    "read_only": 1,
    "reqd": 1
   },
@@ -58,8 +61,7 @@
    "fieldname": "initialisation",
    "fieldtype": "Link",
    "label": "No Initialisation",
-   "options": "Caisse Initialisation",
-   "read_only": 1
+   "options": "Caisse Initialisation"
   },
   {
    "fieldname": "designation",
@@ -100,16 +102,13 @@
    "label": "A Justifier"
   },
   {
-   "fieldname": "column_break_6",
-   "fieldtype": "Column Break"
-  },
-  {
    "fetch_from": "initialisation.site",
    "fieldname": "site",
    "fieldtype": "Link",
    "label": "Site",
    "options": "Branch",
-   "read_only": 1
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fetch_from": "initialisation.devise",
@@ -124,7 +123,6 @@
    "fetch_from": "initialisation.date_initialisation",
    "fieldname": "date",
    "fieldtype": "Date",
-   "in_list_view": 1,
    "label": "Date",
    "read_only": 1,
    "reqd": 1
@@ -153,32 +151,20 @@
   {
    "fieldname": "remettant",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Beneficiaire",
    "reqd": 1
   },
   {
    "fieldname": "commentaire",
    "fieldtype": "Text",
-   "label": "Commentaire"
-  },
-  {
-   "default": "ENC",
-   "description": "ENC => Encaissement\nDEC => Decaissement",
-   "fieldname": "code_type",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Code Type"
-  },
-  {
-   "fieldname": "section_break_11",
-   "fieldtype": "Section Break"
+   "label": "Commentaire",
+   "max_height": "100px"
   },
   {
    "fieldname": "details_operation_de_caisse",
    "fieldtype": "Table",
    "label": "Details Operation de Caisse",
-   "options": "Details Operation Virtual"
+   "options": "Details Operation de Caisse"
   },
   {
    "default": "0",
@@ -207,12 +193,6 @@
    "label": "Comptabilisation"
   },
   {
-   "fieldname": "comptabilisation",
-   "fieldtype": "Table",
-   "options": "Comptabilisation",
-   "read_only": 1
-  },
-  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -220,12 +200,33 @@
    "options": "Decaissement",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_20",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "initialisation.type_caisse",
+   "fieldname": "type_caisse",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Type Caisse"
+  },
+  {
+   "fieldname": "comptabilisation",
+   "fieldtype": "Table",
+   "options": "Comptabilisation",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-04-24 11:59:54.006077",
+ "modified": "2023-04-26 19:37:22.482538",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Decaissement",
@@ -253,8 +254,8 @@
    "read": 1,
    "report": 1,
    "role": "Treso  Admin",
-   "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
@@ -266,7 +267,6 @@
    "read": 1,
    "report": 1,
    "role": "Caissier",
-   "select": 1,
    "share": 1,
    "write": 1
   },
@@ -279,12 +279,11 @@
    "read": 1,
    "report": 1,
    "role": "Caisse Manager",
-   "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],
- "search_fields": "caisse,initialisation,designation,type_operation",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

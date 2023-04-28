@@ -41,6 +41,8 @@ frappe.ui.form.on('Operation de Caisse', {
 				frappe.set_route('Form', 'Caisse Initialisation',{"name": frm.doc.initialisation});
 			}
 		)*/
+
+		
 	},
 	
 	type_operation: function(frm) {

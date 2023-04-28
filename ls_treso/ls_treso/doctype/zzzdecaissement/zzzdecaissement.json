@@ -1,8 +1,8 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{YY}{caisse}{MM}ENC{DD}{###}",
- "creation": "2023-04-12 09:50:21.323274",
+ "autoname": "format:{YY}{caisse}{MM}DEC{DD}{###}",
+ "creation": "2023-04-12 09:52:05.725055",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -34,8 +34,7 @@
   "journal",
   "comptabilisation_tab",
   "comptabilisation",
-  "amended_from",
-  "type_caisse"
+  "amended_from"
  ],
  "fields": [
   {
@@ -131,7 +130,7 @@
    "reqd": 1
   },
   {
-   "default": "Encaissement",
+   "default": "Decaissement",
    "fieldname": "type_operation",
    "fieldtype": "Data",
    "label": "Type Operation",
@@ -155,7 +154,7 @@
    "fieldname": "remettant",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Remettant",
+   "label": "Beneficiaire",
    "reqd": 1
   },
   {
@@ -179,7 +178,7 @@
    "fieldname": "details_operation_de_caisse",
    "fieldtype": "Table",
    "label": "Details Operation de Caisse",
-   "options": "Details Operation de Caisse"
+   "options": "Details Operation Virtual"
   },
   {
    "default": "0",
@@ -218,25 +217,18 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Encaissement",
+   "options": "zzzDecaissement",
    "print_hide": 1,
    "read_only": 1
-  },
-  {
-   "fetch_from": "initialisation.type_caisse",
-   "fieldname": "type_caisse",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Type Caisse"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-04-26 19:52:34.554266",
+ "modified": "2023-04-25 15:16:06.734894",
  "modified_by": "Administrator",
  "module": "Ls Treso",
- "name": "Encaissement",
+ "name": "zzzDecaissement",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
@@ -263,6 +255,7 @@
    "role": "Treso  Admin",
    "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
@@ -276,6 +269,7 @@
    "role": "Caissier",
    "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
@@ -289,6 +283,7 @@
    "role": "Caisse Manager",
    "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

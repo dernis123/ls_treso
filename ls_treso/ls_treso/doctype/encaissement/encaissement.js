@@ -21,31 +21,6 @@ frappe.ui.form.on('Encaissement', {
 
 		frm.set_value('type_operation', 'Encaissement');
 	},
-	refresh(frm) {
-		// Clear the existing breadcrumbs. Set custom breadcrumbs will not do this automatically
-		frappe.breadcrumbs.clear();
-		
-		// Now add breadcrumb for the 'parent' document
-		frappe.breadcrumbs.set_custom_breadcrumbs({
-			label: 'Opérations de Caisse', //the name of the field in Doc 2 that points to Doc 1
-			route: '/app/operation-de-caisse/',
-		});
-
-		// Finally add the breadcrumb for this document  
-		frappe.breadcrumbs.set_custom_breadcrumbs({
-			label: frm.doc.name,
-			route: '/app/operation-de-caisse/' + frm.doc.name,
-		});
-
-		if(frappe.has_route_options()){
-			frm.set_value('caisse', frappe.route_options.caisse);
-			frm.set_value('date', frappe.route_options.date_initialisation);
-			frm.set_value('devise_caisse', frappe.route_options.devise);
-			frm.set_value('devise', frappe.route_options.devise);
-			frm.set_value('initialisation', frappe.route_options.initialisation);
-		}
-
-	},
 	devise: function(frm) {
 		frappe.call({
 			method: "ls_treso.ls_treso.doctype.devise.devise.get_cours",
@@ -70,67 +45,9 @@ frappe.ui.form.on('Encaissement', {
 	montant: function(frm) {
 		if(frm.doc.cours) frm.set_value('montant_reference', frm.doc.montant / frm.doc.cours);
 	},
-
-	after_insert: function(frm){
-		if(! frm.is_new()) return;
-		frappe.call({
-			method: "ls_treso.ls_treso.doctype.operation_de_caisse.operation_de_caisse.insert_operation",
-			args: {
-				doc: frm.doc,
-				type: 1,
-			},
-			callback: function (r) {
-				frappe.set_route("Form", "Operation de Caisse", frm.doc.name);
-			}
-		});
-	},
-	after_save: function(frm){
-		if(frm.is_new()) return;
-		frappe.call({
-			method: "ls_treso.ls_treso.doctype.operation_de_caisse.operation_de_caisse.insert_operation",
-			args: {
-				doc: frm.doc,
-				type: 2,
-			},
-			callback: function (r) {
-				frappe.set_route("Form", "Operation de Caisse", frm.doc.name);
-			}
-		});
-	},
-
-	before_insert: function(frm){
-		frm.doc.details_operation_de_caisse.forEach(e => {
-			frappe.db.get_value("Nature Operations", e.nature_operations, "justifiable", (r) => {
-				if(r.justifiable == 'Oui'){
-					if(!e.imputation_analytique) frappe.throw("Ligne " + e.idx +  ": Veuillez renseigner la nature analytique");
-				}
-			});
-			
-			frappe.db.get_value("Nature Operations", e.nature_operations, "tiers", (r) => {
-				if(r.tiers == 'Oui'){
-					if(!e.tiers) frappe.throw("Ligne " + e.idx +  ": Veuillez renseigner le tiers");
-				}
-			});
-		});
-	},
-	before_save: function(frm){
-		frm.doc.details_operation_de_caisse.forEach(e => {
-			frappe.db.get_value("Nature Operations", e.nature_operations, "justifiable", (r) => {
-				if(r.justifiable == 'Oui'){
-					if(!e.imputation_analytique) frappe.throw("Ligne " + e.idx +  ": Veuillez renseigner la nature analytique");
-				}
-			});
-			
-			frappe.db.get_value("Nature Operations", e.nature_operations, "tiers", (r) => {
-				if(r.tiers == 'Oui'){
-					if(!e.tiers) frappe.throw("Ligne " + e.idx +  ": Veuillez renseigner le tiers");
-				}
-			});
-		});
-	},
 });
 
-frappe.ui.form.on('Details Operation Virtual', {
+frappe.ui.form.on('Details Operation de Caisse', {
 	
     montant_devise(frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
