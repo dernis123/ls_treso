@@ -6,7 +6,7 @@ frappe.ui.form.on('Operation de Caisse', {
 		frm.set_query("initialisation", function() {
 			return {
 				"filters": {
-					//"caisse": frm.doc.caisse || 'N/A',
+					//"caisse": frm.doc.caisse || 'N/A', 
 					"docstatus": 0
 				}
 			};
@@ -16,6 +16,42 @@ frappe.ui.form.on('Operation de Caisse', {
 			return {
 				"filters": {
 					"type_operation": frm.doc.type_operation || 'N/A',
+				}
+			};
+		});
+
+		frm.set_query("imputation_analytique","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Section 1',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_2","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Section 2',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_3","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Section 3',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_4","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Section 4',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_5","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Section 5',
 				}
 			};
 		});

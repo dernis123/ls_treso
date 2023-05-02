@@ -246,7 +246,7 @@ class Encaissement(Document):
 	def generate_journal_entry(self):
 		company_currency = frappe.db.get_value("Societe",self.societe,"devise_de_base") 
 		caisse_account = frappe.db.get_value("Caisse",self.caisse,"compte_comptable")
-		cours = flt(get_cours(self.devise, company_currency)[0].cours)
+		cours = get_cours(self.devise, company_currency)[0].cours
 		payable_amount = 0
 
 		amount = flt(self.montant_reference, 2)

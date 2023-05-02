@@ -23,6 +23,7 @@ frappe.query_reports["Livres de Caisse"] = {
 			label: __("Caisse"),
 			fieldtype: "Link",
 			options: "Caisse",
+			reqd: 1
 		},
 	]
 };

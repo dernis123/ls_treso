@@ -31,6 +31,25 @@ def get_data(filters):
 
 	data = frappe.db.sql(
         """
+		select MAX(o.date) AS date, 
+		NULL AS name,
+		NULL AS remettant,
+		'OPENING' AS designation,
+		SUM(case when n.type_operation = 'Encaissement' THEN o.montant ELSE 0 END) as 'recette',
+		SUM(case when n.type_operation <> 'Encaissement' THEN o.montant ELSE 0 END) as 'depense', 
+		SUM(case when n.type_operation = 'Encaissement' THEN o.montant ELSE -o.montant END) as 'solde',
+		MIN(o.devise) AS devise
+		from (
+			SELECT *
+			FROM tabEncaissement
+			UNION
+			SELECT *
+			FROM tabDecaissement
+			) o 
+		INNER JOIN `tabDetails Operation de Caisse` d on o.name = d.parent
+		INNER JOIN `tabNature Operations` n on d.nature_operations = n.name
+		where o.date < %(date_debut)s and (o.caisse LIKE %(caisse)s )
+		UNION
         select o.date, 
 		o.name,
 		o.remettant,
@@ -48,11 +67,20 @@ def get_data(filters):
 			) o 
 		INNER JOIN `tabDetails Operation de Caisse` d on o.name = d.parent
 		INNER JOIN `tabNature Operations` n on d.nature_operations = n.name
-		where (o.date >= %(date_debut)s or o.date = '' or o.date IS NULL) 
-		and (o.date <= %(date_fin)s  or o.date = '' or o.date IS NULL) 
-		and (o.caisse LIKE %(caisse)s )
+		where o.date >= %(date_debut)s  and o.date <= %(date_fin)s  and (o.caisse LIKE %(caisse)s )
         """,{"date_debut": filters.date_debut, "date_fin": filters.date_fin, "caisse": filters.caisse if filters.caisse !=  None else "%"}, as_dict = 1
     )
+	data2 = []
+	montant = 0
+	recette = 0
+	depense = 0
+	for d in data:
+		recette = recette + d.recette
+		depense = depense + d.depense
+		montant = montant + d.solde
+		d.solde = montant
+	
+	data.append({'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant})
 
 	return data
 

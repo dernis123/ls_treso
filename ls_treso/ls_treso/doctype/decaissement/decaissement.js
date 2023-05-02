@@ -20,6 +20,42 @@ frappe.ui.form.on('Decaissement', {
 			};
 		});
 
+		frm.set_query("imputation_analytique","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Section 1',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_2","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Section 2',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_3","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Section 3',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_4","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Section 4',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_5","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Section 5',
+				}
+			};
+		});
+
 		frm.set_value('type_operation', 'Decaissement');
 	},
 	refresh(frm) {

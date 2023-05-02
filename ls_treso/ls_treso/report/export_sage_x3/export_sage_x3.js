@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["Export EBP"] = {
+frappe.query_reports["Export Sage X3"] = {
 	"filters": [
 		{
 			fieldname:"societe",
@@ -23,7 +23,7 @@ frappe.query_reports["Export EBP"] = {
 			label: __("Date Début"),
 			fieldtype: "Date",
 			default: frappe.datetime.month_start(),
-			reqd: 1
+			reqd: 0
 		},
 		{
 			fieldname:"date_fin",

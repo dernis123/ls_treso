@@ -35,7 +35,8 @@
   "comptabilisation_tab",
   "comptabilisation",
   "amended_from",
-  "type_caisse"
+  "type_caisse",
+  "cours_societe"
  ],
  "fields": [
   {
@@ -228,12 +229,18 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Type Caisse"
+  },
+  {
+   "fieldname": "cours_societe",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Cours Societe"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-04-26 19:52:34.554266",
+ "modified": "2023-05-02 12:37:49.464574",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Encaissement",

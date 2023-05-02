@@ -20,18 +20,19 @@ def get_columns(filters):
 		{ "label": _("N° Pièce"), "fieldtype": "Data",	"fieldname": "name", "width": 100, },
 		{ "label": _("Date Pièce"), "fieldtype": "Date",	"fieldname": "date", "width": 100, },
 		{ "label": _("Libellé"), "fieldtype": "Data", "fieldname": "designation", "width": 100, },
-		{ "label": _("Débit"), "fieldtype": "Currency", "fieldname": "debit", "options": "devise_caisse", "width": 100, },
-		{ "label": _("Crédit"), "fieldtype": "Currency", "fieldname": "credit", "options": "devise_caisse", "width": 100, },
-		{ "label": _("Montant seul (+/-)"), "fieldtype": "Currency", "fieldname": "montant_seul", "options": "devise_caisse", "width": 100, },
-		{ "label": _("Montant (associé au sens)"), "fieldtype": "Currency", "fieldname": "montant", "options": "devise_caisse", "width": 100, },
+		{ "label": _("Débit"), "fieldtype": "Currency", "fieldname": "debit_2", "options": "company_currency", "width": 100, },
+		{ "label": _("Crédit"), "fieldtype": "Currency", "fieldname": "credit_2", "options": "company_currency", "width": 100, },
+		{ "label": _("Montant seul (+/-)"), "fieldtype": "Currency", "fieldname": "montant_seul_2", "options": "company_currency", "width": 100, },
+		{ "label": _("Montant (associé au sens)"), "fieldtype": "Currency", "fieldname": "montant_2", "options": "company_currency", "width": 100, },
 		{ "label": _("Sens"), "fieldtype": "Data", "fieldname": "sens_2", "width": 100, },
 		{ "label": _("Status"), "fieldtype": "Data", "fieldname": "status", "width": 100, },
-		{ "label": _("Devise Caisse"), "fieldtype": "Link", "fieldname": "devise_caisse", "options": "Devise", "width": 100, "hidden": 1, },
+		{ "label": _("Devise Societe"), "fieldtype": "Link", "fieldname": "company_currency", "options": "Devise", "width": 100, "hidden": 1, },
+
 		{ "label": _("Devise"), "fieldtype": "Link", "fieldname": "devise", "options": "Devise", "width": 100, "hidden": 0, },
-		{ "label": _("Débit devise"), "fieldtype": "Currency", "fieldname": "debit_2", "options": "devise", "width": 100, },
-		{ "label": _("Crédit devise"), "fieldtype": "Currency", "fieldname": "credit_2", "options": "devise", "width": 100, },
-		{ "label": _("Montant devise seul (+/-)"), "fieldtype": "Currency", "fieldname": "montant_seul_2", "options": "devise", "width": 100, },
-		{ "label": _("Montant Devise (associé au sens)"), "fieldtype": "Currency", "fieldname": "montant_2", "options": "devise", "width": 100, },
+		{ "label": _("Débit devise"), "fieldtype": "Currency", "fieldname": "debit", "options": "devise", "width": 100, },
+		{ "label": _("Crédit devise"), "fieldtype": "Currency", "fieldname": "credit", "options": "devise", "width": 100, },
+		{ "label": _("Montant devise seul (+/-)"), "fieldtype": "Currency", "fieldname": "montant_seul", "options": "devise", "width": 100, },
+		{ "label": _("Montant Devise (associé au sens)"), "fieldtype": "Currency", "fieldname": "montant", "options": "devise", "width": 100, },
 		{ "label": _("Sens"), "fieldtype": "Data", "fieldname": "sens_2", "width": 100, },
 		{ "label": _("Status"), "fieldtype": "Data", "fieldname": "status", "width": 100, },
 		
@@ -48,6 +49,7 @@ def get_columns(filters):
 def get_data(filters):
 
 	#frappe.msgprint(str(filters))
+	company_currency = frappe.db.get_value("Societe",filters.societe,"devise_de_base") 
 
 	data = frappe.db.sql(
         """
@@ -73,7 +75,8 @@ def get_data(filters):
 		CASE WHEN d.sens = 'Debit' THEN 'D' else 'C' END AS sens_2,
 		CASE WHEN d.sens = 'Debit' THEN d.montant / o.cours else NULL END AS debit_2,
 		CASE WHEN d.sens = 'Credit' THEN d.montant / o.cours else NULL END AS credit_2,
-		CASE WHEN d.sens = 'Debit' THEN d.montant / o.cours else -d.montant / o.cours END AS montant_seul_2
+		CASE WHEN d.sens = 'Debit' THEN d.montant / o.cours else -d.montant / o.cours END AS montant_seul_2,
+		%(currency)s as company_currency 
 		FROM (
 			SELECT *
 			FROM tabEncaissement
@@ -82,8 +85,8 @@ def get_data(filters):
 			FROM tabDecaissement
 			) o 
 		INNER JOIN `tabComptabilisation` d on o.name = d.parent
-		WHERE o.date >= %(date_debut)s AND o.date <= %(date_fin)s
-        """,{"date_debut": filters.date_debut, "date_fin": filters.date_fin, }, as_dict = 1
+		WHERE o.date >= %(date_debut)s AND o.date <= %(date_fin)s AND o.caisse LIKE %(caisse)s
+        """,{"date_debut": filters.date_debut, "date_fin": filters.date_fin, "currency":company_currency,"caisse": filters.caisse if filters.caisse else '%' }, as_dict = 1
     )
 
 	return data

@@ -9,7 +9,9 @@
  "field_order": [
   "compte",
   "designation",
-  "categorie"
+  "categorie",
+  "section",
+  "type"
  ],
  "fields": [
   {
@@ -28,11 +30,24 @@
    "fieldtype": "Select",
    "label": "Categorie",
    "options": "EBP\nAUTRES"
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Link",
+   "label": "Section",
+   "options": "Section Analytique"
+  },
+  {
+   "fetch_from": "section.type",
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Type"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-03-03 18:26:24.068818",
+ "modified": "2023-05-02 18:44:18.706557",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Compte Analytique",

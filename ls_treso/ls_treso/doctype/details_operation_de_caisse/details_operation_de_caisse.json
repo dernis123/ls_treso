@@ -61,25 +61,25 @@
    "fieldname": "imputation_analytique_2",
    "fieldtype": "Link",
    "label": "Imputation Analytique 2",
-   "options": "Compte Analytique 2"
+   "options": "Compte Analytique"
   },
   {
    "fieldname": "imputation_analytique_3",
    "fieldtype": "Link",
    "label": "Imputation Analytique 3",
-   "options": "Compte Analytique 3"
+   "options": "Compte Analytique"
   },
   {
    "fieldname": "imputation_analytique_4",
    "fieldtype": "Link",
    "label": "Imputation Analytique 4",
-   "options": "Compte Analytique 4"
+   "options": "Compte Analytique"
   },
   {
    "fieldname": "imputation_analytique_5",
    "fieldtype": "Link",
    "label": "Imputation Analytique 5",
-   "options": "Compte Analytique 5"
+   "options": "Compte Analytique"
   },
   {
    "fieldname": "type_tiers",
@@ -105,7 +105,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-04-04 21:17:46.203641",
+ "modified": "2023-05-02 18:31:38.994358",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Details Operation de Caisse",
