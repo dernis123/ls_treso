@@ -7,6 +7,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "societe",
   "type_operation",
   "nature",
   "compte_comptable",
@@ -91,11 +92,17 @@
    "fieldname": "retour_caisse",
    "fieldtype": "Check",
    "label": "Retour Caisse"
+  },
+  {
+   "fieldname": "societe",
+   "fieldtype": "Link",
+   "label": "Societe",
+   "options": "Societe"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-03-03 18:28:08.166320",
+ "modified": "2023-05-03 09:29:21.973995",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Nature Operations",

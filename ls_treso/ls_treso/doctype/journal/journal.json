@@ -10,6 +10,7 @@
   "code",
   "libelle",
   "compte_general",
+  "societe",
   "column_break_5",
   "premier_numero",
   "prefixe",
@@ -63,11 +64,18 @@
   {
    "fieldname": "column_break_5",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "societe",
+   "fieldtype": "Link",
+   "label": "Societe",
+   "options": "Societe",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-03-03 18:27:11.734266",
+ "modified": "2023-05-03 09:59:54.853895",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Journal",

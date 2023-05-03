@@ -11,7 +11,8 @@
   "designation",
   "categorie",
   "section",
-  "type"
+  "type",
+  "societe"
  ],
  "fields": [
   {
@@ -43,11 +44,17 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Type"
+  },
+  {
+   "fieldname": "societe",
+   "fieldtype": "Long Text",
+   "label": "Societe",
+   "options": "Societe"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-05-02 18:44:18.706557",
+ "modified": "2023-05-03 09:24:24.189474",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Compte Analytique",

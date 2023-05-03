@@ -11,7 +11,8 @@
   "designation",
   "ventilable",
   "collectif",
-  "controle"
+  "controle",
+  "societe"
  ],
  "fields": [
   {
@@ -46,11 +47,17 @@
    "fieldname": "controle",
    "fieldtype": "Data",
    "label": "Controle (Sage X3)"
+  },
+  {
+   "fieldname": "societe",
+   "fieldtype": "Link",
+   "label": "Societe",
+   "options": "Societe"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-04-29 11:54:52.089039",
+ "modified": "2023-05-03 09:24:01.463334",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Compte General",

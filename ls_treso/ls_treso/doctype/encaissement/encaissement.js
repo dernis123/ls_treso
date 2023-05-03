@@ -58,6 +58,7 @@ frappe.ui.form.on('Encaissement', {
 		frm.set_value('type_operation', 'Encaissement');
 	},
 	devise: function(frm) {
+		if(!frm.doc.devise_caisse) return;
 		frappe.call({
 			method: "ls_treso.ls_treso.doctype.devise.devise.get_cours",
 			args: {

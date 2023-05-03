@@ -75,9 +75,9 @@ def get_data(filters):
 	recette = 0
 	depense = 0
 	for d in data:
-		recette = recette + d.recette
-		depense = depense + d.depense
-		montant = montant + d.solde
+		recette = recette + d.recette if d.recette else 0
+		depense = depense + d.depense if d.depense else 0
+		montant = montant + d.solde if d.solde else 0
 		d.solde = montant
 	
 	data.append({'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant})

@@ -10,6 +10,7 @@
   "code",
   "intitule",
   "collectif",
+  "societe",
   "column_break_4",
   "type",
   "email",
@@ -82,11 +83,17 @@
    "fieldname": "autre_info",
    "fieldtype": "Text",
    "label": "Autre Info"
+  },
+  {
+   "fieldname": "societe",
+   "fieldtype": "Link",
+   "label": "Societe",
+   "options": "Societe"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-03-03 18:24:05.567251",
+ "modified": "2023-05-03 09:25:18.209825",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Tiers",

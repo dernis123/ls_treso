@@ -7,7 +7,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "nom"
+  "nom",
+  "societe"
  ],
  "fields": [
   {
@@ -17,11 +18,17 @@
    "label": "Nom",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "societe",
+   "fieldtype": "Link",
+   "label": "Societe",
+   "options": "Societe"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-03-03 18:24:50.914942",
+ "modified": "2023-05-03 09:32:02.902064",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Famille",

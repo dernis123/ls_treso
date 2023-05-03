@@ -78,6 +78,7 @@ frappe.ui.form.on('Decaissement', {
 
 	},
 	devise: function(frm) {
+		if(!frm.doc.devise_caisse) return;
 		frappe.call({
 			method: "ls_treso.ls_treso.doctype.devise.devise.get_cours",
 			args: {

@@ -55,6 +55,20 @@ frappe.ui.form.on('Caisse', {
 		});
 	},
 	refresh: function(frm) {
+		frm.set_query("code_journal", function() {
+			return {
+				"filters": {
+					"societe": frm.doc.societe || 'N/A',
+				}
+			};
+		});
+		frm.set_query("compte_comptable", function() {
+			return {
+				"filters": {
+					"societe": ["IN",[frm.doc.societe, '']],
+				}
+			};
+		});
 		if(frm.type_caisse == "Caisse"){
 			if (cur_frm.doc.__unsaved != 1) {
 				if(frm.doc.total != frm.doc.solde_initial) $('.primary-action').prop('disabled', true);
@@ -62,7 +76,17 @@ frappe.ui.form.on('Caisse', {
 			}
 			else $('.primary-action').prop('disabled', false);
 		}
-	}
+	},
+	/*societe: function(frm) {
+		let filters = {};
+		if (frm.doc.societe) filters= {"societe": frm.doc.societe};
+		else filters= {"societe": ""};
+		frm.set_query("compte_comptable", function() {
+			return {
+				"filters": filters
+			};
+		});
+	},*/
 });
 
 frappe.ui.form.on('Billetage', {
