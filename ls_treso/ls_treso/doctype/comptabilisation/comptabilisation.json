@@ -53,7 +53,7 @@
    "fieldname": "compte_analytique",
    "fieldtype": "Link",
    "label": "Compte Analytique",
-   "options": "Section Analytique"
+   "options": "Compte Analytique"
   },
   {
    "fieldname": "compte_analytique_2",
@@ -108,7 +108,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-05-09 12:20:18.236824",
+ "modified": "2023-05-02 12:57:10.800017",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Comptabilisation",

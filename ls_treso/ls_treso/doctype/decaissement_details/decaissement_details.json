@@ -62,7 +62,7 @@
    "fieldtype": "Link",
    "label": "Imputation Analytique",
    "mandatory_depends_on": "//eval:doc.is_justifiable== 'Oui'",
-   "options": "Section Analytique"
+   "options": "Compte Analytique"
   },
   {
    "fieldname": "imputation_analytique_2",
@@ -106,7 +106,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-05-09 12:20:17.860718",
+ "modified": "2023-04-25 14:47:46.148151",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Decaissement Details",

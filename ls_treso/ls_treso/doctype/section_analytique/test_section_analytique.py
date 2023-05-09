@@ -1,4 +1,4 @@
-# Copyright (c) 2022, Kossivi Amouzou and Contributors
+# Copyright (c) 2023, Kossivi Amouzou and Contributors
 # See license.txt
 
 # import frappe
