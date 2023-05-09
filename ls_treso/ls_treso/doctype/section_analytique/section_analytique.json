@@ -47,14 +47,14 @@
   },
   {
    "fieldname": "societe",
-   "fieldtype": "Long Text",
+   "fieldtype": "Link",
    "label": "Societe",
    "options": "Societe"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-05-09 14:15:44.410215",
+ "modified": "2023-05-09 15:42:12.475798",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Section Analytique",
