@@ -25,7 +25,7 @@
   {
    "fieldname": "compte",
    "fieldtype": "Data",
-   "label": "Compte",
+   "label": "Code",
    "unique": 1
   },
   {
@@ -42,7 +42,7 @@
   {
    "fieldname": "section",
    "fieldtype": "Link",
-   "label": "Section",
+   "label": "Axe",
    "options": "Axe Analytique"
   },
   {
@@ -54,7 +54,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-05-09 15:42:12.475798",
+ "modified": "2023-05-11 15:02:26.641176",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Section Analytique",
