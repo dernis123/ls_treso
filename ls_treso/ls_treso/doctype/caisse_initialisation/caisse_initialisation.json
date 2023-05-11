@@ -70,7 +70,6 @@
    "fieldtype": "Currency",
    "label": "Solde Final",
    "options": "devise",
-   "precision": "0",
    "read_only": 1
   },
   {
@@ -198,7 +197,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-04-24 11:57:38.822208",
+ "modified": "2023-05-11 17:22:29.572103",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Caisse Initialisation",
