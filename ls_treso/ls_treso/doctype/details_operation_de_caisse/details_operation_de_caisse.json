@@ -17,7 +17,12 @@
   "imputation_analytique_4",
   "imputation_analytique_5",
   "is_justifiable",
-  "is_tiers"
+  "is_tiers",
+  "label",
+  "label_2",
+  "label_3",
+  "label_4",
+  "label_5"
  ],
  "fields": [
   {
@@ -100,12 +105,47 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Is Tiers"
+  },
+  {
+   "fetch_from": "imputation_analytique.designation",
+   "fieldname": "label",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Label"
+  },
+  {
+   "fetch_from": "imputation_analytique_2.designation",
+   "fieldname": "label_2",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Label 2"
+  },
+  {
+   "fetch_from": "imputation_analytique_3.designation",
+   "fieldname": "label_3",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Label 3"
+  },
+  {
+   "fetch_from": "imputation_analytique_4.designation",
+   "fieldname": "label_4",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Label 4"
+  },
+  {
+   "fetch_from": "imputation_analytique_5.designation",
+   "fieldname": "label_5",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Label 5"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-05-11 15:00:17.811310",
+ "modified": "2023-05-12 12:35:38.543828",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Details Operation de Caisse",
