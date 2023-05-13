@@ -59,20 +59,39 @@ frappe.ui.form.on('Decaissement', {
 		frm.set_value('type_operation', 'Decaissement');
 	},
 	refresh(frm) {
-		/*// Clear the existing breadcrumbs. Set custom breadcrumbs will not do this automatically
-		frappe.breadcrumbs.clear();
-		
-		// Now add breadcrumb for the 'parent' document
-		frappe.breadcrumbs.set_custom_breadcrumbs({
-			label: 'Opérations de Caisse', //the name of the field in Doc 2 that points to Doc 1
-			route: '/app/operation-de-caisse/',
-		});
-
-		// Finally add the breadcrumb for this document  
-		frappe.breadcrumbs.set_custom_breadcrumbs({
-			label: frm.doc.name,
-			route: '/app/operation-de-caisse/' + frm.doc.name,
-		});*/
+		if(frm.doc.docstatus === 1){
+			frm.page.btn_primary.hide();
+			frm.page.btn_secondary.hide();
+			frm.page.clear_primary_action();
+			var span;
+			var a;
+			var li;
+			span = document.querySelector('[data-label="New%20Decaissement"]');
+			if(span){
+				a = span.parentElement;
+				li = a.parentElement;
+				li.style.display = "None";
+			}
+			span = document.querySelector('[data-label="Duplicate"]');
+			if(span){
+				a = span.parentElement;
+				li = a.parentElement;
+				li.style.display = "None";
+			}
+			span = document.querySelector('[data-label="Rename"]');
+			if(span){
+				a = span.parentElement;
+				li = a.parentElement;
+				li.style.display = "None";
+			}
+		}
+		if(frappe.has_route_options()){
+			if(frappe.route_options.state === 1){
+				frm.page.btn_primary.hide();
+				frm.page.btn_secondary.hide();
+				frm.page.clear_primary_action();
+			}
+		}
 
 		
 
