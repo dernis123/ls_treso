@@ -51,27 +51,27 @@ class Decaissement(Document):
 		init_doc = frappe.get_doc("Caisse Initialisation", self.initialisation)
 		init_doc.solde_final -= float(self.montant_reference)
 		init_doc.save()
-		frappe.db.sql(
-			"""
-				UPDATE tabCaisse c 
-				INNER JOIN tabDecaissement e ON c.name = e.caisse
-				SET c.solde = c.solde - e.montant, c.date_solde = e.date
-				WHERE c.name = %(caisse)s AND e.name = %(name)s
-			""",{"caisse": self.caisse, "name": self.name}, as_dict = 1
-		)
+		#frappe.db.sql(
+		#	"""
+		#		UPDATE tabCaisse c 
+		#		INNER JOIN tabDecaissement e ON c.name = e.caisse
+		#		SET c.solde = c.solde - e.montant, c.date_solde = e.date
+		#		WHERE c.name = %(caisse)s AND e.name = %(name)s
+		#	""",{"caisse": self.caisse, "name": self.name}, as_dict = 1
+		#)
 
 	def on_cancel(self):
 		init_doc = frappe.get_doc("Caisse Initialisation", self.initialisation)
 		init_doc.solde_final += float(self.montant_reference)
 		init_doc.save()
-		frappe.db.sql(
-			"""
-				UPDATE tabCaisse c 
-				INNER JOIN tabDecaissement e ON c.name = e.caisse
-				SET c.solde = c.solde + e.montant, c.date_solde = e.date
-				WHERE c.name = %(caisse)s AND e.name = %(name)s
-			""",{"caisse": self.caisse, "name": self.name}, as_dict = 1
-		)
+		#frappe.db.sql(
+		#	"""
+		#		UPDATE tabCaisse c 
+		#		INNER JOIN tabDecaissement e ON c.name = e.caisse
+		#		SET c.solde = c.solde + e.montant, c.date_solde = e.date
+		#		WHERE c.name = %(caisse)s AND e.name = %(name)s
+		#	""",{"caisse": self.caisse, "name": self.name}, as_dict = 1
+		#)
 		self.comptabilisation.clear()
 
 	def create_row(self, type, account, cours, amount, type_tiers=None, tiers=None, cc1=None, cc2=None, cc3=None, cc4=None, cc5=None):

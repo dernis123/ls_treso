@@ -3,6 +3,8 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe.utils import now
+
 
 class CaisseInitialisation(Document):
 
@@ -64,6 +66,14 @@ class CaisseInitialisation(Document):
 			if self.solde_final != total:
 				frappe.throw("Le solde physique de la caisse est différent du solde final. Veuillez recompter!") 
 
+		frappe.db.sql(
+			"""
+				UPDATE tabCaisse c 
+				SET c.solde = %(solde)s, c.date_solde = %(date)s
+				WHERE c.name = %(caisse)s
+			""",{"caisse": self.caisse, "name": self.name, "solde": self.solde_final, "date": now()}, as_dict = 1
+		)
+
 	def on_cancel(self):
 		nb = frappe.db.count('Caisse Initialisation', 
 				{
@@ -73,6 +83,14 @@ class CaisseInitialisation(Document):
 			)
 		if nb > 0 :
 			frappe.throw("Vous ne pouvez annuler cette journée de caisse alors que des dates plus récentes existes. prière d'annuler d'abord les entrées plus récentes!")
+		
+		frappe.db.sql(
+			"""
+				UPDATE tabCaisse c 
+				SET c.solde = c.solde - %(solde)s, c.date_solde = (SELECT MAX(date_initialisation) as Date FROM `tabCaisse Initialisation` WHERE docstatus = 1 and caisse = %(caisse)s)
+				WHERE c.name = %(caisse)s
+			""",{"caisse": self.caisse, "name": self.name, "solde": self.solde_final}, as_dict = 1
+		)
 
 	@frappe.whitelist()
 	def recalcul(self):

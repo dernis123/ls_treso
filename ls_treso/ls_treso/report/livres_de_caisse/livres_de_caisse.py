@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 from operator import itemgetter
-import json 
+from frappe.utils import getdate
 
 def execute(filters=None):
 	filters = frappe._dict(filters or {})
@@ -41,7 +41,7 @@ def get_data(filters):
 		SUM(case when n.type_operation = 'Encaissement' THEN o.montant ELSE 0 END) as 'recette',
 		SUM(case when n.type_operation <> 'Encaissement' THEN o.montant ELSE 0 END) as 'depense', 
 		SUM(case when n.type_operation = 'Encaissement' THEN o.montant ELSE -o.montant END) as 'solde',
-		MIN(o.devise) AS devise,
+		CASE WHEN MIN(o.devise) IS NULL THEN (SELECT devise FROM tabCaisse WHERE name = %(caisse)s) ELSE MIN(o.devise) END AS devise,
 		'' as creation, 'i' AS line
 		from (
 			SELECT c.*
@@ -86,34 +86,40 @@ def get_data(filters):
 	date = ''
 	data2 = []
 	date_final = ''
+	last_line = ''
+	devise = ''
 	for d in data:
+		if d['line'] == 'i':
+			data2.append(d)
+			date = d['date']
+			last_line = 'i'
+		else :
+			if last_line == 'i' :
+				data2.append(d)
+			else:
+				if(date != d['date']):
+					#creation lines
+					data2.append({'date' : date,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise })
+					data2.append({'date' : d['date'],'name' : 'Report', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'i', 'devise' : devise })
+					data2.append(d)
+				else:
+					data2.append(d)
+			date = d['date']
+			last_line = 'd'
+
 		recette += d.recette if d.recette else 0
 		depense += d.depense if d.depense else 0
 		montant += d.solde if d.solde else 0
 		d.solde = montant
 		date_final = d.date
-
-		if d['line'] == 'i':
-			if(date != d['date']):
-				data2.append(d)
-				date = d['date']
-		elif d['line'] == 'd':
-			if(date != d['date']):
-				#creation lines
-				data2.append(d)
-				data2.append({'name' : 'Solde Final au ' + str(date), 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f'})
-				data2.append({'name' : ' ', 'recette': ' ', 'depense' : ' ', 'solde' : ' ', 'line': 'b'})
-				data2.append({'name' : 'Report au ' + str(d['date']), 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'i'})
-				date = d['date']
-		else:
-			data2.append(d)
+		devise = d.devise
 		
 
-	data.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f'})
-	#data2.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f'})	
+	#data.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise})
+	data2.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise})	
 
 	
 	
 
-	return data
+	return data2
 

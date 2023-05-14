@@ -1,0 +1,35 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-05-14 14:53:10.690635",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2023-05-14 14:53:10.690635",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Solde de Caisse",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Caisse",
+ "report_name": "Solde de Caisse",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Treso  Admin"
+  },
+  {
+   "role": "Caissier"
+  },
+  {
+   "role": "Caisse Manager"
+  }
+ ]
+}
