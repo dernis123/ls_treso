@@ -59,41 +59,48 @@ frappe.ui.form.on('Decaissement', {
 		frm.set_value('type_operation', 'Decaissement');
 	},
 	refresh(frm) {
-		if(frm.doc.docstatus === 1){
+		/*if(frm.doc.docstatus === 1){
 			frm.page.btn_primary.hide();
 			frm.page.btn_secondary.hide();
 			frm.page.clear_primary_action();
-			var span;
-			var a;
-			var li;
-			span = document.querySelector('[data-label="New%20Decaissement"]');
-			if(span){
-				a = span.parentElement;
-				li = a.parentElement;
-				li.style.display = "None";
-			}
-			span = document.querySelector('[data-label="Duplicate"]');
-			if(span){
-				a = span.parentElement;
-				li = a.parentElement;
-				li.style.display = "None";
-			}
-			span = document.querySelector('[data-label="Rename"]');
-			if(span){
-				a = span.parentElement;
-				li = a.parentElement;
-				li.style.display = "None";
-			}
+			
 		}
-		if(frappe.has_route_options()){
-			if(frappe.route_options.state === 1){
+		frappe.db.get_doc("Caisse Initialisation", cur_frm.doc.initialisation).then(d => {
+			if(d.docstatus === 1){
 				frm.page.btn_primary.hide();
 				frm.page.btn_secondary.hide();
 				frm.page.clear_primary_action();
-			}
-		}
 
-		
+				var span;
+				var a;
+				var li;
+				span = document.querySelector('[data-label="New%20Decaissement"]');
+				if(span){
+					a = span.parentElement;
+					li = a.parentElement;
+					li.style.display = "None";
+				}
+				span = document.querySelector('[data-label="Duplicate"]');
+				if(span){
+					a = span.parentElement;
+					li = a.parentElement;
+					li.style.display = "None";
+				}
+				span = document.querySelector('[data-label="Rename"]');
+				if(span){
+					a = span.parentElement;
+					li = a.parentElement;
+					li.style.display = "None";
+				}
+			}
+			if(d.docstatus === 0){
+				if(frm.is_new()){
+					if(frm.doc.initialisation == ""){
+						frm.set_value('initialisation', d.name);
+					}
+				}
+			}
+		});*/
 
 	},
 	devise: function(frm) {

@@ -1,6 +1,12 @@
 frappe.listview_settings['Encaissement'] = {
-    onload: function(listview) {
-        listview.page.btn_primary.hide();
-        listview.page.btn_secondary.hide();
+    refresh: function(listview) {
+        frappe.route_options = {
+            'caisse': frappe.route_options.caisse,
+            'date_initialisation': frappe.route_options.date_initialisation,
+            'devise': frappe.route_options.devise,
+            'initialisation': frappe.route_options.initialisation,
+            'state': frappe.route_options.state,
+        };
+        console.log(frappe.route_options);
     }
 };

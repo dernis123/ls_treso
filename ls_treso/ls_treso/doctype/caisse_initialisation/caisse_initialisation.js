@@ -264,7 +264,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 				'date_initialisation': cur_frm.doc.date,
 				'devise': cur_frm.doc.devise,
 				'initialisation': cur_frm.doc.name,
-				'state': cur_frm.doc.docstatus,
+				//'state': cur_frm.doc.docstatus,
 			};
 			frappe.set_route("List", "Decaissement");
 		}, __("Opérations de Caisse"));

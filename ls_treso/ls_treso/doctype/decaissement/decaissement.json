@@ -35,7 +35,8 @@
   "comptabilisation",
   "amended_from",
   "type_caisse",
-  "cours_societe"
+  "cours_societe",
+  "state"
  ],
  "fields": [
   {
@@ -227,12 +228,19 @@
    "fieldname": "cours_societe",
    "fieldtype": "Float",
    "label": "Cours Societe"
+  },
+  {
+   "fetch_from": "initialisation.status",
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "state"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-05-02 12:38:18.447111",
+ "modified": "2023-05-14 21:07:30.584741",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Decaissement",

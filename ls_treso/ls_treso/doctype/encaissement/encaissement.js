@@ -58,39 +58,36 @@ frappe.ui.form.on('Encaissement', {
 		frm.set_value('type_operation', 'Encaissement');
 	},
 	refresh: function(frm){
-		if(frm.doc.docstatus === 1){
-			frm.page.btn_primary.hide();
-			frm.page.btn_secondary.hide();
-			frm.page.clear_primary_action();
-			var span;
-			var a;
-			var li;
-			span = document.querySelector('[data-label="New%20Encaissement"]');
-			if(span){
-				a = span.parentElement;
-				li = a.parentElement;
-				li.style.display = "None";
-			}
-			span = document.querySelector('[data-label="Duplicate"]');
-			if(span){
-				a = span.parentElement;
-				li = a.parentElement;
-				li.style.display = "None";
-			}
-			span = document.querySelector('[data-label="Rename"]');
-			if(span){
-				a = span.parentElement;
-				li = a.parentElement;
-				li.style.display = "None";
-			}
-		}
+		/*
 		if(frappe.has_route_options()){
 			if(frappe.route_options.state === 1){
 				frm.page.btn_primary.hide();
 				frm.page.btn_secondary.hide();
 				frm.page.clear_primary_action();
+
+				var span;
+				var a;
+				var li;
+				span = document.querySelector('[data-label="New%20Encaissement"]');
+				if(span){
+					a = span.parentElement;
+					li = a.parentElement;
+					li.style.display = "None";
+				}
+				span = document.querySelector('[data-label="Duplicate"]');
+				if(span){
+					a = span.parentElement;
+					li = a.parentElement;
+					li.style.display = "None";
+				}
+				span = document.querySelector('[data-label="Rename"]');
+				if(span){
+					a = span.parentElement;
+					li = a.parentElement;
+					li.style.display = "None";
+				}
 			}
-		}
+		}*/
 	},
 	devise: function(frm) {
 		if(!frm.doc.devise_caisse) return;
