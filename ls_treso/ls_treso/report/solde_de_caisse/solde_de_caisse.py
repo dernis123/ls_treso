@@ -29,8 +29,8 @@ def get_data(filters):
         """
         SELECT name, designation, date_solde, solde, devise
 		FROM `tabCaisse`
-		WHERE name = %(name)s
-        """,{ "name": filters.name }, as_dict = 1
+		WHERE name LIKE %(name)s
+        """,{ "name": filters.name if filters.name !=  None else "%" }, as_dict = 1
     )
 
 	return data
