@@ -14,6 +14,7 @@ def execute(filters=None):
 def get_columns(filters):
 	columns = [
 		{ "label": _("N° Pièce"), "fieldtype": "Data",	"fieldname": "name", "width": 100, },
+		{ "label": _("Caisse"), "fieldtype": "Link", "fieldname": "caisse", "options": "Caisse", "width": 100, },
 		{ "label": _("Bénéficiaire"), "fieldtype": "Data", "fieldname": "remettant", "width": 100, },
 		{ "label": _("Désignation"), "fieldtype": "Data", "fieldname": "designation", "width": 100, },
 		{ "label": _("Montant"), "fieldtype": "Currency", "fieldname": "montant", "options": "devise", "width": 100, },
@@ -32,7 +33,7 @@ def get_data(filters):
 		o.remettant,
 		o.designation,
 		o.montant,
-		o.devise
+		o.devise, o.caisse
 		FROM (
 			SELECT *
 			FROM tabEncaissement

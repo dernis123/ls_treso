@@ -16,6 +16,7 @@ def execute(filters=None):
 def get_columns(filters):
 	columns = [
 		{ "label": _("Date"), "fieldtype": "Date",	"fieldname": "date", "width": 100, },
+		{ "label": _("Caisse"), "fieldtype": "Link", "fieldname": "caisse", "options": "Caisse", "width": 100, },
 		{ "label": _("N° Pièce"), "fieldtype": "Data",	"fieldname": "name", "width": 100, },
 		{ "label": _("Bénéficiaire"), "fieldtype": "Data", "fieldname": "remettant", "width": 100, },
 		{ "label": _("Désignation"), "fieldtype": "Data", "fieldname": "designation", "width": 100, },
@@ -42,7 +43,7 @@ def get_data(filters):
 		SUM(case when n.type_operation <> 'Encaissement' THEN o.montant ELSE 0 END) as 'depense', 
 		SUM(case when n.type_operation = 'Encaissement' THEN o.montant ELSE -o.montant END) as 'solde',
 		CASE WHEN MIN(o.devise) IS NULL THEN (SELECT devise FROM tabCaisse WHERE name = %(caisse)s) ELSE MIN(o.devise) END AS devise,
-		'' as creation, 'i' AS line
+		'' as creation, 'i' AS line, MAX(o.caisse) as caisse
 		from (
 			SELECT c.*
 			FROM tabEncaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
@@ -64,7 +65,7 @@ def get_data(filters):
 		case when n.type_operation <> 'Encaissement' THEN o.montant ELSE 0 END as 'depense', 
 		case when n.type_operation = 'Encaissement' THEN o.montant ELSE -o.montant END as 'solde',
 		o.devise,
-		o.creation, 'd' AS line
+		o.creation, 'd' AS line, o.caisse
 		from (
 			SELECT c.*
 			FROM tabEncaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
@@ -88,6 +89,7 @@ def get_data(filters):
 	date_final = ''
 	last_line = ''
 	devise = ''
+	caisse = ''
 	for d in data:
 		if d['line'] == 'i':
 			data2.append(d)
@@ -99,8 +101,8 @@ def get_data(filters):
 			else:
 				if(date != d['date']):
 					#creation lines
-					data2.append({'date' : date,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise })
-					data2.append({'date' : d['date'],'name' : 'Report', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'i', 'devise' : devise })
+					data2.append({'date' : date,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise, 'caisse' : caisse })
+					data2.append({'date' : d['date'],'name' : 'Report', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'i', 'devise' : devise, 'caisse' : caisse })
 					data2.append(d)
 				else:
 					data2.append(d)
@@ -113,10 +115,11 @@ def get_data(filters):
 		d.solde = montant
 		date_final = d.date
 		devise = d.devise
+		caisse = d.caisse
 		
 
 	#data.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise})
-	data2.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise})	
+	data2.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise, 'caisse' : caisse})	
 
 	
 	
