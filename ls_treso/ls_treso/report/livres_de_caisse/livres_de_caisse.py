@@ -46,7 +46,7 @@ def get_data(filters):
 		from (
 			SELECT c.*
 			FROM tabEncaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
-			WHERE i.docstatus = 1
+			WHERE i.docstatus = 1 
 			UNION
 			SELECT c.*
 			FROM tabDecaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
@@ -68,16 +68,16 @@ def get_data(filters):
 		from (
 			SELECT c.*
 			FROM tabEncaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
-			WHERE i.docstatus = 1
+			WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END
 			UNION
 			SELECT c.*
 			FROM tabDecaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
-			WHERE i.docstatus = 1
+			WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END
 			) o 
 		INNER JOIN `tabDetails Operation de Caisse` d on o.name = d.parent
 		INNER JOIN `tabNature Operations` n on d.nature_operations = n.name
 		where o.date >= %(date_debut)s  and o.date <= %(date_fin)s  and (o.caisse LIKE %(caisse)s )
-        """,{"date_debut": filters.date_debut, "date_fin": filters.date_fin, "caisse": filters.caisse if filters.caisse !=  None else "%"}, as_dict = 1
+""",{"date_debut": filters.date_debut, "date_fin": filters.date_fin, "caisse": filters.caisse if filters.caisse !=  None else "%", "valide" : filters.valide}, as_dict = 1
     )
 	data = sorted(data, key=itemgetter('date', 'creation'))
 	montant = 0

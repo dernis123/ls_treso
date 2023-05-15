@@ -25,5 +25,10 @@ frappe.query_reports["Livres de Caisse"] = {
 			options: "Caisse",
 			reqd: 1
 		},
+		{
+			fieldname: "valide",
+			label: __("Validées"),
+			fieldtype: "Check",
+		},
 	]
 };

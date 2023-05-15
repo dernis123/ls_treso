@@ -14,8 +14,8 @@ def execute(filters=None):
 def get_columns(filters):
 	columns = [
 		{ "label": _("Caisse"), "fieldtype": "Data",	"fieldname": "name", "width": 100, },
-		{ "label": _("Désignation"), "fieldtype": "Data", "fieldname": "designation", "width": 100, },
-		{ "label": _("Solde"), "fieldtype": "Currency", "fieldname": "solde", "options": "devise", "width": 100, },
+		{ "label": _("Désignation"), "fieldtype": "Data", "fieldname": "designation", "width": 300, },
+		{ "label": _("Solde"), "fieldtype": "Currency", "fieldname": "solde", "options": "devise", "width": 200, },
 		{ "label": _("Devise"), "fieldtype": "Data", "fieldname": "devise", "width": 100, "hidden": 1, },
 	]
 	return columns
