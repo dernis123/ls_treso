@@ -167,6 +167,7 @@ def get_solde_final(caisse, date):
 				WHERE caisse = %s AND date_initialisation < %s
 				GROUP BY caisse
 			) d INNER JOIN `tabCaisse Initialisation` i ON i.date_initialisation = d.date_initialisation AND i.caisse = d.caisse
+			WHERE i.docstatus = 1
 		""", (caisse,date)
 	)
 	if len(init) > 0:

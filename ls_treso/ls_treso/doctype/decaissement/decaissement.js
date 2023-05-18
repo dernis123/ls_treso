@@ -214,3 +214,25 @@ frappe.ui.form.on('Details Operation de Caisse', {
 		}
 	},
 });
+
+frappe.ui.form.on("Decaissement","refresh", function(frm, cdt, cdn) { 
+	var df_axe_1 = frappe.meta.get_docfield("Details Operation de Caisse","imputation_analytique", cur_frm.doc.name);
+	frappe.db.get_value("Axe Analytique", {"type": "Axe 1"}, "name").then(r=>{
+		df_axe_1.label = r.message.name;
+		div = document.querySelector('[data-fieldname="imputation_analytique"]');
+		div.children[1].innerText = r.message.name;
+	});
+	/*df = frappe.meta.get_docfield("Details Operation de Caisse","imputation_analytique_2", cur_frm.doc.name);
+    df.read_only = 1;
+	df = frappe.meta.get_docfield("Details Operation de Caisse","imputation_analytique_3", cur_frm.doc.name);
+    df.read_only = 1;
+    var df = frappe.meta.get_docfield("Details Operation de Caisse","imputation_analytique_4", cur_frm.doc.name);
+    df.read_only = 1;
+	df = frappe.meta.get_docfield("Details Operation de Caisse","imputation_analytique_5", cur_frm.doc.name);
+    df.read_only = 1;
+	//df.hidden = 1;
+	df = frappe.meta.get_docfield("Details Operation de Caisse","reste", cur_frm.doc.name);
+    df.read_only = 1;
+	//df.hidden = 1; */
+
+});
