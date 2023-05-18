@@ -251,7 +251,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 				'date_initialisation': cur_frm.doc.date,
 				'devise': cur_frm.doc.devise,
 				'initialisation': cur_frm.doc.name,
-				'state': cur_frm.doc.docstatus,
+				//'state': cur_frm.doc.docstatus,
 			};
 			if(frappe.has_route_options()){
 				frappe.set_route("List", "Encaissement");

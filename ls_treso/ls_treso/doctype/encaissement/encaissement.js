@@ -88,6 +88,12 @@ frappe.ui.form.on('Encaissement', {
 				}
 			}
 		}*/
+		if (!frm.customFlag){
+			var grid = frm.get_field('details_operation_de_caisse');
+			// Add a new empty row to the grid
+			grid.grid.add_new_row();
+			frm.customFlag = true;
+		}
 	},
 	devise: function(frm) {
 		if(!frm.doc.devise_caisse) return;
