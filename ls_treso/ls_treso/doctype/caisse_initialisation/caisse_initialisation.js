@@ -37,7 +37,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 					],
 					primary_action_label: __('Ouvrir'),
 					primary_action(values) {
-						console.log(values);
+						//console.log(values);
 						frm.events.get_billetage(frm,values);
 						//if(frappe.has_route_options()) frm.events.get_billetage(frm,values);
 						d.hide();
@@ -361,6 +361,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 							}
 							frm.refresh_field('billetage');
 							frm.dirty();
+							frm.save();
 						}
 					});
 
