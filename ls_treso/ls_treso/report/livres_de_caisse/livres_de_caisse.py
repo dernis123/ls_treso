@@ -35,27 +35,38 @@ def get_data(filters):
 
 	data = frappe.db.sql(
         """
-		select CASE WHEN MAX(o.date) IS NULL THEN '' ELSE MAX(o.date) END AS date, 
+		select CASE WHEN MAX(w.date) IS NULL THEN '' ELSE MAX(w.date) END AS date, 
 		NULL AS name,
 		NULL AS remettant,
 		'OPENING' AS designation,
-		SUM(case when n.type_operation = 'Encaissement' THEN o.montant ELSE 0 END) as 'recette',
-		SUM(case when n.type_operation <> 'Encaissement' THEN o.montant ELSE 0 END) as 'depense', 
-		SUM(case when n.type_operation = 'Encaissement' THEN o.montant ELSE -o.montant END) as 'solde',
-		CASE WHEN MIN(o.devise) IS NULL THEN (SELECT devise FROM tabCaisse WHERE name = %(caisse)s) ELSE MIN(o.devise) END AS devise,
-		'' as creation, 'i' AS line, MAX(o.caisse) as caisse
+		SUM(w.recette) as 'recette',
+		SUM(w.depense) as 'depense', 
+		SUM(w.solde) as 'solde',
+		CASE WHEN MIN(w.devise) IS NULL THEN (SELECT devise FROM tabCaisse WHERE name = 'CA00') ELSE MIN(w.devise) END AS devise,
+		'' as creation, 'i' AS line, MAX(w.caisse) as caisse
 		from (
-			SELECT c.*
-			FROM tabEncaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
-			WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END
-			UNION
-			SELECT c.*
-			FROM tabDecaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
-			WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END
-			) o 
-		INNER JOIN `tabDetails Operation de Caisse` d on o.name = d.parent
-		INNER JOIN `tabNature Operations` n on d.nature_operations = n.name
-		where o.date < %(date_debut)s and (o.caisse LIKE %(caisse)s )
+			select DISTINCT o.date, 
+			o.name,
+			o.remettant,
+			o.designation,
+			case when n.type_operation = 'Encaissement' THEN o.montant ELSE 0 END as 'recette',
+			case when n.type_operation <> 'Encaissement' THEN o.montant ELSE 0 END as 'depense', 
+			case when n.type_operation = 'Encaissement' THEN o.montant ELSE -o.montant END as 'solde',
+			o.devise,
+			o.creation, 'd' AS line, o.caisse
+			from (
+				SELECT c.*
+				FROM tabEncaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
+				WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END
+				UNION
+				SELECT c.*
+				FROM tabDecaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
+				WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END
+				) o 
+			INNER JOIN `tabDetails Operation de Caisse` d on o.name = d.parent
+			INNER JOIN `tabNature Operations` n on d.nature_operations = n.name
+			where o.date < %(date_debut)s and (o.caisse LIKE %(caisse)s )
+			) w 
 		UNION
         select o.date, 
 		o.name,
