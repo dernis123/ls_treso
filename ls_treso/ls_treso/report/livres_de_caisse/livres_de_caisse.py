@@ -57,11 +57,11 @@ def get_data(filters):
 			from (
 				SELECT c.*
 				FROM tabEncaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
-				WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END
+				WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END AND  c.docstatus = 1
 				UNION
 				SELECT c.*
 				FROM tabDecaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
-				WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END
+				WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END AND  c.docstatus = 1
 				) o 
 			INNER JOIN `tabDetails Operation de Caisse` d on o.name = d.parent
 			INNER JOIN `tabNature Operations` n on d.nature_operations = n.name
@@ -80,11 +80,11 @@ def get_data(filters):
 		from (
 			SELECT c.*
 			FROM tabEncaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
-			WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END
+			WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END AND  c.docstatus = 1
 			UNION
 			SELECT c.*
 			FROM tabDecaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
-			WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END
+			WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END AND  c.docstatus = 1
 			) o 
 		INNER JOIN `tabDetails Operation de Caisse` d on o.name = d.parent
 		INNER JOIN `tabNature Operations` n on d.nature_operations = n.name
