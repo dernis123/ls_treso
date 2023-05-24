@@ -83,7 +83,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 					],
 					primary_action_label: __('Recalculer'),
 					primary_action(values) {
-						cur_frm.call('recalcul').then(cur_frm.refresh_field("solde_final"));
+						cur_frm.call('recalcul');
 						cur_frm.refresh();
 						//console.log(values);
 						d.hide();
@@ -268,7 +268,7 @@ frappe.ui.form.on('Caisse Initialisation', {
 			};
 			frappe.set_route("List", "Decaissement");
 		}, __("Opérations de Caisse"));
-		if(frm.doc.docstatus === 1){
+		if(frm.doc.docstatus === 1 || frm.doc.docstatus === 2){
 			frm.remove_custom_button("Ouverture", "Utilitaires");
 			frm.remove_custom_button("Recalcul", "Utilitaires");
 			frm.remove_custom_button("Transfert", "Utilitaires");

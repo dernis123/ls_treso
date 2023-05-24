@@ -3,7 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils import now
+from frappe.utils import now, getdate 
 
 
 class CaisseInitialisation(Document):
@@ -33,6 +33,11 @@ class CaisseInitialisation(Document):
 			else:
 				self.status = "Rouge"
 
+	def before_insert(self):
+		frappe.throw(self.docstatus)
+		
+
+
 	def validate(self):
 		nb = frappe.db.count('Caisse Initialisation', {"docstatus": 0, "caisse": self.caisse, "name": ["!=", self.name]})
 		#test = frappe.db.get_list('Caisse Initialisation', filters = {"docstatus": 0, "caisse": self.caisse}, fields=["name"])
@@ -48,12 +53,26 @@ class CaisseInitialisation(Document):
 			)
 		if nb > 0 :
 			frappe.throw("Une date ultérieure à la date choisie existe déjà. Veuillez choisir une date plus récente")
+
+		#nb = frappe.db.sql(
+		#	"""
+		#	SELECT count(*) nb
+		#	FROM `tabCaisse Initialisation`
+		#	WHERE DATE(date_initialisation) = DATE(%s) AND caisse = %s 
+		#	""", (self.date_initialisation,self.caisse),
+		#	as_dict = 1
+		#)[0].nb
+		#if nb > 0:
+		#	msg = ("Vous avez déjà initialisé la caisse <b>{}</b> pour la date du <b>{}</b>.").format(	self.caisse, getdate(self.date_initialisation))
+		#	frappe.throw(msg)
 	
 	def before_submit(self):
 		operations = frappe.db.get_list("Encaissement", fields = ["name"], filters = {"docstatus": 0})
 		for o in operations:
 			operation = frappe.get_doc("Encaissement", o.name)
 			operation.submit()
+
+		self.recalcul2()
 
 		billetage = frappe.db.get_value('Societe', self.societe , 'billetage')
 		if billetage == 1 :
@@ -65,7 +84,7 @@ class CaisseInitialisation(Document):
 				total += b.valeur_finale
 			if self.solde_final != total:
 				frappe.throw("Le solde physique de la caisse est différent du solde final. Veuillez recompter!") 
-
+		
 		frappe.db.sql(
 			"""
 				UPDATE tabCaisse c 
@@ -84,6 +103,8 @@ class CaisseInitialisation(Document):
 		if nb > 0 :
 			frappe.throw("Vous ne pouvez annuler cette journée de caisse alors que des dates plus récentes existes. prière d'annuler d'abord les entrées plus récentes!")
 		
+		self.solde_final = float(self.solde_initial)
+
 		frappe.db.sql(
 			"""
 				UPDATE tabCaisse c 
@@ -91,6 +112,29 @@ class CaisseInitialisation(Document):
 				WHERE c.name = %(caisse)s
 			""",{"caisse": self.caisse, "name": self.name, "solde": self.solde_final}, as_dict = 1
 		)
+
+	def recalcul2(self):
+		mt = frappe.db.sql(
+		"""
+			SELECT SUM(montant) AS montant
+			FROM(
+				SELECT SUM(montant) AS montant
+				FROM `tabEncaissement`
+				WHERE initialisation =  %(name)s AND docstatus = 1
+				UNION
+				SELECT -SUM(montant) AS montant
+				FROM `tabDecaissement`
+				WHERE initialisation =  %(name)s AND docstatus = 1
+			) AS t
+		""" , {"name": self.name}, as_dict = 1
+		)[0].montant
+		if mt == None:
+			frappe.throw("Il n'y a aucune opération valide sur cette journée!")
+		else:
+			if float(mt) < 0.0 and float(self.solde_initial) < float(abs(mt)) :
+				frappe.throw("Vous avez une inconsistance dans les montants saisis, veuillez appeler l'administrateur!") 
+			else:
+				self.solde_final = float(self.solde_initial) + float(mt)
 
 	@frappe.whitelist()
 	def recalcul(self):
@@ -111,18 +155,19 @@ class CaisseInitialisation(Document):
 		""" , {"name": self.name}, as_dict = 1
 		)[0].montant
 		if mt == None:
-			frappe.throw("Il n'y a aucune opération sur cette journée!")
+			frappe.throw("Il n'y a aucune opération valide sur cette journée!")
 		else:
-			if float(self.solde_final) < float(mt) :
+			if float(mt) < 0.0 and float(self.solde_initial) < float(abs(mt)) :
 				frappe.throw("Vous avez une inconsistance dans les montants saisis, veuillez appeler l'administrateur!") 
 			else:
-				#frappe.msgprint(str(mt))
-				frappe.db.sql(
-				"""
-					UPDATE `tabCaisse Initialisation` SET solde_final = solde_initial + %(mt)s
-					WHERE name = %(name)s AND docstatus = 0
-				""" , {"name": self.name, "mt": float(mt)}, as_dict = 1
-				)
+				self.solde_final = float(self.solde_initial) + float(mt)
+				self.save()
+				#frappe.db.sql(
+				#"""
+				#	UPDATE `tabCaisse Initialisation` SET solde_final = solde_initial + %(mt)s
+				#	WHERE name = %(name)s AND docstatus = 0
+				#""" , {"name": self.name, "mt": float(mt)}, as_dict = 1
+				#)
 
 	@frappe.whitelist()
 	def cloture(self):

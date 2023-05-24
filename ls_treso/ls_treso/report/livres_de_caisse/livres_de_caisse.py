@@ -133,6 +133,8 @@ def get_data(filters):
 	data2.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise, 'caisse' : caisse})	
 
 	
+
+	
 	
 
 	return data2
