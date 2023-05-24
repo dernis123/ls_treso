@@ -32,9 +32,6 @@ class CaisseInitialisation(Document):
 				self.status = "Jaune"
 			else:
 				self.status = "Rouge"
-
-	def before_insert(self):
-		frappe.throw(self.docstatus)
 		
 
 
