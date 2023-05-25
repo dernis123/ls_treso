@@ -128,7 +128,7 @@ class CaisseInitialisation(Document):
 		if mt == None:
 			frappe.throw("Il n'y a aucune opération valide sur cette journée!")
 		else:
-			if float(mt) < 0.0 and float(self.solde_initial) < float(abs(mt)) :
+			if self.type_caisse == 'Caisse' and float(mt) < 0.0 and float(self.solde_initial) < float(abs(mt)) :
 				frappe.throw("Vous avez une inconsistance dans les montants saisis, veuillez appeler l'administrateur!") 
 			else:
 				self.solde_final = float(self.solde_initial) + float(mt)
@@ -154,7 +154,7 @@ class CaisseInitialisation(Document):
 		if mt == None:
 			frappe.throw("Il n'y a aucune opération valide sur cette journée!")
 		else:
-			if float(mt) < 0.0 and float(self.solde_initial) < float(abs(mt)) :
+			if self.type_caisse == 'Caisse' and float(mt) < 0.0 and float(self.solde_initial) < float(abs(mt)) :
 				frappe.throw("Vous avez une inconsistance dans les montants saisis, veuillez appeler l'administrateur!") 
 			else:
 				self.solde_final = float(self.solde_initial) + float(mt)
