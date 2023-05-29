@@ -126,7 +126,8 @@ class CaisseInitialisation(Document):
 		""" , {"name": self.name}, as_dict = 1
 		)[0].montant
 		if mt == None:
-			frappe.throw("Il n'y a aucune opération valide sur cette journée!")
+			#frappe.throw("Il n'y a aucune opération valide sur cette journée!")
+			self.solde_final = self.solde_initial
 		else:
 			if self.type_caisse == 'Caisse' and float(mt) < 0.0 and float(self.solde_initial) < float(abs(mt)) :
 				frappe.throw("Vous avez une inconsistance dans les montants saisis, veuillez appeler l'administrateur!") 
