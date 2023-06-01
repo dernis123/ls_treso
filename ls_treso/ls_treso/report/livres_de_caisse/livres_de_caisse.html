@@ -15,8 +15,11 @@
     .h-100 {
         height: 100%;
     }
-    .h-30 {
+    .minh-30 {
         height: 30px;
+    }
+    .minh-30 {
+        min-height: 30px;
     }
     .mh-100 {
         max-height: 100%;
@@ -64,7 +67,13 @@
         align-items: center;
         justify-content: center;
     }
-    .rigth_center_align {
+    .rigth_top_align {
+        height: 100%;
+        display: flex;
+        /*align-items: center;*/
+        justify-content: right;
+    }
+    .right_center_align {
         height: 100%;
         display: flex;
         align-items: center;
@@ -116,6 +125,10 @@
         padding: 5px;
         width: 100%;
     }
+    .overflow{
+        word-wrap: break-word;
+        height: auto
+    }
 
 </style>
 
@@ -131,96 +144,96 @@
 {% for(var i=0, l=data.length; i<l; i++) { %}
     {% if(data[i].line == 'i') { %}
         <div class="row-no-margin border parent align-items-center bg_green {% if (data[i].line == 'i'&& i > 0) { %} page_break_before{% } %}">
-            <div class="col-sm-1 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
                 <small class="mid_center_align"><b>Date</b></small>
             </div>
-            <div class="col-sm-2 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
+            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
                 <small class="mid_center_align"><b>N° Pièce</b></small>
             </div>
-            <div class="col-sm-2 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
+            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
                 <small class="mid_center_align"><b>Bénéficiaire</b></small>
             </div>
-            <div class="col-sm-2 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
+            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
                 <small class="mid_center_align"><b>Référence</b></small>
             </div>
-            <div class="col-sm-2 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
+            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
                 <small class="mid_center_align"><b>Désignation</b></small>
             </div>
-            <div class="col-sm-1 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
                 <small class="mid_center_align"><b>Recettes</b></small>
             </div>
-            <div class="col-sm-1 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
                 <small class="mid_center_align"><b>Dépenses</b></small>
             </div>
-            <div class="col-sm-1 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
                 <small class="mid_center_align"><b>Solde</b></small>
             </div>
         </div>
     {% } %}
     <div class="row-no-margin border parent align-items-center {% if (data[i].line == 'f') { %}bg_gray {% } %} {% if (data[i].line == 'i'&& i > 0) { %}bg_gray {% } %}">
         {% if(data[i].line == 'i') { %}
-            <div class="col-sm-3 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+            <div class="col-sm-3 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
                 <small class="left_center_align margin_left_right"><b>Caisse  {{ filters.designation }}</b></small>
             </div>
-            <div class="col-sm-6 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+            <div class="col-sm-6 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
                 <small class="mid_center_align margin_left_right"><b>Report solde au {%= frappe.datetime.str_to_user(data[i].date) %}</b></small>
             </div>
-            <div class="col-sm-1 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
-                <small class="rigth_center_align margin_left_right"><b>{%= data[i].devise %}</b></small>
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+                <small class="right_center_align margin_left_right"><b>{%= data[i].devise %}</b></small>
             </div>
-            <div class="col-sm-2 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
-                <small class="rigth_center_align margin_left_right"><b>{%= data[i].solde %}</b></small>
+            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+                <small class="right_center_align margin_left_right"><b>{%= data[i].solde %}</b></small>
             </div>
         {% } else if (data[i].line == 'f') { %}
-            <div class="col-sm-3 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+            <div class="col-sm-3 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
                 <small class="left_center_align margin_left_right"><b></b></small>
             </div>
-            <div class="col-sm-6 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+            <div class="col-sm-6 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
                 <small class="mid_center_align margin_left_right"><b>solde au {%= frappe.datetime.str_to_user(data[i].date) %}</b></small>
             </div>
-            <div class="col-sm-1 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
-                <small class="rigth_center_align margin_left_right"><b></b></small>
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+                <small class="right_center_align margin_left_right"><b></b></small>
             </div>
-            <div class="col-sm-2 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
-                <small class="rigth_center_align margin_left_right"><b>{%= data[i].solde %}</b></small>
+            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+                <small class="right_center_align margin_left_right"><b>{%= data[i].solde %}</b></small>
             </div>
         {% } else { %}
-            <div class="col-sm-1 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
-                <small class="left_center_align margin_left_right">{%= frappe.datetime.str_to_user(data[i].date) %}</small>
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex border-left overflow">
+                <small class=" margin_left_right">{%= frappe.datetime.str_to_user(data[i].date) %}</small>
             </div>
-            <div class="col-sm-2 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
-                <small class="left_center_align margin_left_right">{%= data[i].name %}</small>
+            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex border-left overflow">
+                <small class="margin_left_right">{%= data[i].name %}</small>
             </div>
-            <div class="col-sm-2 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
-                <small class="left_center_align margin_left_right">{%= data[i].remettant %}</small>
+            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex border-left overflow">
+                <small class="margin_left_right">{%= data[i].remettant %}</small>
             </div>
-            <div class="col-sm-2 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
-                <small class="left_center_align margin_left_right">{%= data[i].reference %}</small>
+            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex border-left overflow">
+                <small class="margin_left_right">{%= data[i].reference %}</small>
             </div>
-            <div class="col-sm-2 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
-                <small class="left_center_align margin_left_right">{%= data[i].designation %}</small>
+            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex border-left overflow"> 
+                <small class="margin_left_right">{%= data[i].designation %}</small>
             </div>
-            <div class="col-sm-1 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
-                <small class="rigth_center_align margin_left_right">{%= data[i].recette %}</small>
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex border-left overflow">
+                <small class="rigth_top_align margin_left_right">{%= data[i].recette %}</small>
             </div>
-            <div class="col-sm-1 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
-                <small class="rigth_center_align margin_left_right">{%= data[i].depense %}</small>
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex border-left overflow">
+                <small class="rigth_top_align margin_left_right">{%= data[i].depense %}</small>
             </div>
-            <div class="col-sm-1 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle border-left">
-                <small class="rigth_center_align margin_left_right">{%= data[i].solde %}</small>
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex border-left overflow">
+                <small class="rigth_top_align margin_left_right">{%= data[i].solde %}</small>
             </div>
         {% } %}
     </div>
     {% if(data[i].line == 'f') { %}
             <div class="row-no-margin parent align-items-center signature">
-                <div class="col-sm-4 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+                <div class="col-sm-4 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
                     <small class="left_center_align"><b>Visa du Caissier</b></small>
                 </div>
-                <div class="col-sm-4 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle ">
+                <div class="col-sm-4 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle ">
                     <small class="mid_center_align"><b>Visa du Responsable Budget et Trésorerie</b></small>
                 </div>
-                <div class="col-sm-4 nopadding h-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle ">
-                    <small class="rigth_center_align"><b>Visa du Chef Service</b></small>
+                <div class="col-sm-4 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle ">
+                    <small class="right_center_align"><b>Visa du Chef Service</b></small>
                 </div>
             </div>
     {% } %}
