@@ -188,13 +188,19 @@
             <div class="col-sm-3 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
                 <small class="left_center_align margin_left_right"><b></b></small>
             </div>
-            <div class="col-sm-6 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+            <div class="col-sm-5 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
                 <small class="mid_center_align margin_left_right"><b>solde au {%= frappe.datetime.str_to_user(data[i].date) %}</b></small>
             </div>
             <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
                 <small class="right_center_align margin_left_right"><b></b></small>
             </div>
-            <div class="col-sm-2 nopadding minh-30 d-inline-block d-flex align-items-center justify-content-center text-center align-middle">
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex border-left overflow">
+                <small class="right_center_align margin_left_right">{%= data[i].recette %}</small>
+            </div>
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex border-left overflow">
+                <small class="right_center_align margin_left_right">{%= data[i].depense %}</small>
+            </div>
+            <div class="col-sm-1 nopadding minh-30 d-inline-block d-flex border-left align-items-center justify-content-center text-center align-middle">
                 <small class="right_center_align margin_left_right"><b>{%= data[i].solde %}</b></small>
             </div>
         {% } else { %}
