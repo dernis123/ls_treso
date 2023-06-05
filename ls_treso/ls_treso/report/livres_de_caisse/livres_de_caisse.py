@@ -41,8 +41,8 @@ def get_data(filters):
 		NULL AS remettant,
 		'OPENING' AS designation,
 		NULL AS reference,
-		SUM(w.recette) as 'recette',
-		SUM(w.depense) as 'depense', 
+		0 as 'recette',
+		0 as 'depense', 
 		SUM(w.solde) as 'solde',
 		CASE WHEN MIN(w.devise) IS NULL THEN (SELECT devise FROM tabCaisse WHERE name = 'CA00') ELSE MIN(w.devise) END AS devise,
 		'' as creation, 'i' AS line, MAX(w.caisse) as caisse
@@ -97,8 +97,8 @@ def get_data(filters):
     )
 	data = sorted(data, key=itemgetter('date', 'creation'))
 	montant = 0
-	recette = 0
-	depense = 0
+	#recette = 0
+	#depense = 0
 	recette_jour = 0
 	depense_jour = 0
 	date = ''
@@ -119,7 +119,7 @@ def get_data(filters):
 				if(date != d['date']):
 					#creation lines
 					data2.append({'date' : date,'name' : 'Solde Final', 'recette': recette_jour, 'depense' : depense_jour, 'solde' : montant, 'line': 'f', 'devise' : devise, 'caisse' : caisse })
-					data2.append({'date' : d['date'],'name' : 'Report', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'i', 'devise' : devise, 'caisse' : caisse })
+					data2.append({'date' : d['date'],'name' : 'Report', 'recette': recette_jour, 'depense' : depense_jour, 'solde' : montant, 'line': 'i', 'devise' : devise, 'caisse' : caisse })
 					data2.append(d)
 					recette_jour = 0
 					depense_jour = 0
@@ -128,8 +128,8 @@ def get_data(filters):
 			date = d['date']
 			last_line = 'd'
 
-		recette += d.recette if d.recette else 0
-		depense += d.depense if d.depense else 0
+		#recette += d.recette if d.recette else 0
+		#depense += d.depense if d.depense else 0
 		recette_jour += d.recette if d.recette else 0
 		depense_jour += d.depense if d.depense else 0
 		montant += d.solde if d.solde else 0
