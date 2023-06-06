@@ -4,7 +4,7 @@
 import frappe
 from frappe import _
 from operator import itemgetter
-from frappe.utils import getdate
+from frappe.utils import getdate, flt
 
 def execute(filters=None):
 	filters = frappe._dict(filters or {})
@@ -118,8 +118,8 @@ def get_data(filters):
 			else:
 				if(date != d['date']):
 					#creation lines
-					data2.append({'date' : date,'name' : 'Solde Final', 'recette': recette_jour, 'depense' : depense_jour, 'solde' : montant, 'line': 'f', 'devise' : devise, 'caisse' : caisse })
-					data2.append({'date' : d['date'],'name' : 'Report', 'recette': recette_jour, 'depense' : depense_jour, 'solde' : montant, 'line': 'i', 'devise' : devise, 'caisse' : caisse })
+					data2.append({'date' : date,'name' : 'Solde Final', 'recette': flt(recette_jour,2), 'depense' : depense_jour, 'solde' : montant, 'line': 'f', 'devise' : devise, 'caisse' : caisse })
+					data2.append({'date' : d['date'],'name' : 'Report', 'recette': flt(recette_jour,2), 'depense' : depense_jour, 'solde' : montant, 'line': 'i', 'devise' : devise, 'caisse' : caisse })
 					data2.append(d)
 					recette_jour = 0
 					depense_jour = 0
@@ -133,14 +133,14 @@ def get_data(filters):
 		recette_jour += d.recette if d.recette else 0
 		depense_jour += d.depense if d.depense else 0
 		montant += d.solde if d.solde else 0
-		d.solde = montant
+		d.solde = flt(montant,2)
 		date_final = d.date
 		devise = d.devise
 		caisse = d.caisse
 		
 
 	#data.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise})
-	data2.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette_jour, 'depense' : depense_jour, 'solde' : montant, 'line': 'f', 'devise' : devise, 'caisse' : caisse})	
+	data2.append({'date' : date_final,'name' : 'Solde Final', 'recette': flt(recette_jour,2), 'depense' : flt(depense_jour,2), 'solde' : montant, 'line': 'f', 'devise' : devise, 'caisse' : caisse})	
 
 	
 
