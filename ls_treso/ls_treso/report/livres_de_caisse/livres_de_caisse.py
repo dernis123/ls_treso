@@ -43,7 +43,7 @@ def get_data(filters):
 		NULL AS reference,
 		0 as 'recette',
 		0 as 'depense', 
-		SUM(w.solde) as 'solde',
+		CAST(SUM(w.solde)as DECIMAL(20,2)) as 'solde',
 		CASE WHEN MIN(w.devise) IS NULL THEN (SELECT devise FROM tabCaisse WHERE name = 'CA00') ELSE MIN(w.devise) END AS devise,
 		'' as creation, 'i' AS line, MAX(w.caisse) as caisse
 		from (
@@ -76,9 +76,9 @@ def get_data(filters):
 		o.remettant,
 		o.designation,
 		o.reference,
-		case when n.type_operation = 'Encaissement' THEN o.montant ELSE 0 END as 'recette',
-		case when n.type_operation <> 'Encaissement' THEN o.montant ELSE 0 END as 'depense', 
-		case when n.type_operation = 'Encaissement' THEN o.montant ELSE -o.montant END as 'solde',
+		CAST(case when n.type_operation = 'Encaissement' THEN o.montant ELSE 0 END as DECIMAL(20,2)) as 'recette',
+		CAST(case when n.type_operation <> 'Encaissement' THEN o.montant ELSE 0 END as DECIMAL(20,2)) as 'depense', 
+		CAST(case when n.type_operation = 'Encaissement' THEN o.montant ELSE -o.montant END as DECIMAL(20,2)) as 'solde',
 		o.devise,
 		o.creation, 'd' AS line, o.caisse
 		from (
