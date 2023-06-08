@@ -118,8 +118,8 @@ def get_data(filters):
 			else:
 				if(date != d['date']):
 					#creation lines
-					data2.append({'date' : date,'name' : 'Solde Final', 'recette': flt(recette_jour,2), 'depense' : depense_jour, 'solde' : montant, 'line': 'f', 'devise' : devise, 'caisse' : caisse })
-					data2.append({'date' : d['date'],'name' : 'Report', 'recette': flt(recette_jour,2), 'depense' : depense_jour, 'solde' : montant, 'line': 'i', 'devise' : devise, 'caisse' : caisse })
+					data2.append({'date' : date,'name' : 'Solde Final', 'recette': flt(recette_jour,2), 'depense' : depense_jour, 'solde' : flt(montant,2), 'line': 'f', 'devise' : devise, 'caisse' : caisse })
+					data2.append({'date' : d['date'],'name' : 'Report', 'recette': flt(recette_jour,2), 'depense' : depense_jour, 'solde' : flt(montant,2), 'line': 'i', 'devise' : devise, 'caisse' : caisse })
 					data2.append(d)
 					recette_jour = 0
 					depense_jour = 0
@@ -140,7 +140,7 @@ def get_data(filters):
 		
 
 	#data.append({'date' : date_final,'name' : 'Solde Final', 'recette': recette, 'depense' : depense, 'solde' : montant, 'line': 'f', 'devise' : devise})
-	data2.append({'date' : date_final,'name' : 'Solde Final', 'recette': flt(recette_jour,2), 'depense' : flt(depense_jour,2), 'solde' : montant, 'line': 'f', 'devise' : devise, 'caisse' : caisse})	
+	data2.append({'date' : date_final,'name' : 'Solde Final', 'recette': flt(recette_jour,2), 'depense' : flt(depense_jour,2), 'solde' : flt(montant,2), 'line': 'f', 'devise' : devise, 'caisse' : caisse})	
 
 	
 
