@@ -59,6 +59,77 @@ frappe.ui.form.on('Decaissement', {
 		frm.set_value('type_operation', 'Decaissement');
 	},
 	refresh(frm) {
+		frm.add_custom_button('Demandes de Paiment',() =>{ 
+			let query_args = {
+				//query:"ls_treso.ls_treso.doctype.decaissement.decaissement.get_demande_paiement",
+				filters: { 
+					site: cur_frm.doc.site, 
+					positione : 0,
+				}
+			} 
+            new frappe.ui.form.MultiSelectDialog({
+                doctype: "Demande Paiement",
+                target: cur_frm,
+                setters: {
+					designation: "",
+					remettant: "",
+					montant: "",
+					devise: "",
+                },
+                add_filters_group: 1,
+				date_field: "date",
+                columns: ["name","designation", "remettant","montant","devise"],
+                get_query() {
+                    return query_args;
+                },
+                action(selections, args) { //details_operation_de_caisse
+                    console.log("params");
+					if(selections.length == 1){
+						frappe.db.get_doc("Demande Paiement",selections[0]).then(d =>{
+							cur_frm.doc.designation = d.designation;
+							cur_frm.doc.montant = d.montant;
+							cur_frm.doc.entite = d.entite;
+							cur_frm.doc.reference = d.reference;
+							cur_frm.doc.remettant = d.remettant;
+
+							d.details_operation_de_caisse.forEach(e => {
+								var row = cur_frm.add_child('details_operation_de_caisse');
+								row.nature_operations = e.nature_operations;
+								row.montant_devise = e.montant_devise;
+								row.demande_paiement = d.name;
+							});
+							cur_frm.dirty();
+							cur_frm.refresh();
+						});
+					}
+					else if(selections.length > 1) {
+						selections.forEach(s => {
+							console.log(selections);
+							cur_frm.doc.commentaire = "";
+							cur_frm.doc.montant = 0;
+							frappe.db.get_doc("Demande Paiement",s).then(d =>{
+								cur_frm.doc.commentaire += d.designation + " " + d.montant + " " + d.devise + " " + d.reference + " " + d.remettant + "\n";
+								d.details_operation_de_caisse.forEach(e => {
+									var row = cur_frm.add_child('details_operation_de_caisse');
+									row.nature_operations = e.nature_operations;
+									row.montant_devise = e.montant_devise;
+									cur_frm.doc.montant += e.montant_devise;
+									row.demande_paiement = d.name;
+								});
+								cur_frm.dirty();
+								cur_frm.refresh();
+							});
+						});
+
+					}
+                    
+					
+                },
+                //allow_child_item_selection: true,
+                //child_fieldname: "availability_details",
+                //child_columns: ["description","day","start_time","end_time"] // retorune name dans args.filtered_children   
+            });
+        },);
 		/*if(frm.doc.docstatus === 1){
 			frm.page.btn_primary.hide();
 			frm.page.btn_secondary.hide();

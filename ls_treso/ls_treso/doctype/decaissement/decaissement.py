@@ -18,6 +18,16 @@ class Decaissement(Document):
 	def before_save(self):
 		if len(self.details_operation_de_caisse) == 0:
 			frappe.throw("Veuillez saisir au moins une ligne détail")
+		
+		for d in self.details_operation_de_caisse:
+			if d.demande_paiement :
+				frappe.db.sql(
+					"""
+						UPDATE `tabDemande Paiement` 
+						SET positione = 1
+						WHERE name = %(name)s
+					""",{ "name": d.demande_paiement }, as_dict = 1
+				)
 
 		exist = frappe.db.exists({
 			"doctype": "Caisse Initialisation", 
@@ -51,20 +61,22 @@ class Decaissement(Document):
 		init_doc = frappe.get_doc("Caisse Initialisation", self.initialisation)
 		init_doc.solde_final -= float(self.montant_reference)
 		init_doc.save()
-		#frappe.db.sql(
-		#	"""
-		#		UPDATE tabCaisse c 
-		#		INNER JOIN tabDecaissement e ON c.name = e.caisse
-		#		SET c.solde = c.solde - e.montant, c.date_solde = e.date
-		#		WHERE c.name = %(caisse)s AND e.name = %(name)s
-		#	""",{"caisse": self.caisse, "name": self.name}, as_dict = 1
-		#)
+		
 
 	def on_cancel(self):
 		init_doc = frappe.get_doc("Caisse Initialisation", self.initialisation)
 		#if init_doc.docstatus == 0:
 		init_doc.solde_final += float(self.montant_reference)
 		init_doc.save()
+		for d in self.details_operation_de_caisse:
+			if d.demande_paiement :
+				frappe.db.sql(
+					"""
+						UPDATE `tabDemande Paiement` 
+						SET positione = 0
+						WHERE name = %(name)s
+					""",{ "name": d.demande_paiement }, as_dict = 1
+				)
 		
 		self.comptabilisation.clear()
 
@@ -282,3 +294,25 @@ class Decaissement(Document):
 			if tiers == "Oui":
 				if not (d.tiers):
 					frappe.throw(_("Ligne {0}: Veuillez renseigner le tiers").format(d.idx))
+
+@frappe.whitelist()
+def get_demande_paiement(name = None, designation = None, remettant = None, montant = None, devise = None, filters = None):
+	frappe.msgprint(montant)
+	return frappe.db.sql(
+			"""
+			SELECT name, site,designation, remettant,montant,devise
+			FROM `tabDemande Paiement`
+			WHERE docstatus = 1 AND site = %(site)s AND name  LIKE %(name)s AND designation LIKE %(designation)s AND remettant  LIKE %(remettant)s AND montant = %(montant)s AND devise LIKE %(devise)s
+			""", {
+					"site": filters.get("site"),
+					"name": f"%{name}%",
+					"designation": f"%{designation}%",
+					"remettant": f"%{remettant}%",
+					"montant": montant if montant !=  None else "%",
+					"devise": f"%{devise}%",
+				}
+			, as_dict = 1
+		)
+
+
+#if filters.caisse !=  None else "%"

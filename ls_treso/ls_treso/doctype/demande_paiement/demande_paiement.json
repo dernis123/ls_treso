@@ -1,0 +1,257 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{YY}DEP{MM}{#####}",
+ "creation": "2023-06-09 09:39:22.571153",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "societe",
+  "date",
+  "designation",
+  "montant",
+  "entite",
+  "reference",
+  "positione",
+  "caisse",
+  "column_break_10",
+  "site",
+  "site_sup\u00e9rieur",
+  "type_operation",
+  "devise",
+  "remettant",
+  "commentaire",
+  "section_break_20",
+  "details_operation_de_caisse",
+  "compte",
+  "journal",
+  "type_caisse",
+  "cours_societe",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fetch_from": "initialisation.societe",
+   "fieldname": "societe",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Societe",
+   "options": "Societe",
+   "reqd": 1
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Designation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "montant",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Montant",
+   "options": "devise",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entite",
+   "fieldtype": "Data",
+   "label": "Entite"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Data",
+   "label": "Reference"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "initialisation.site",
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Branch",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "initialisation.date_initialisation",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "default": "Decaissement",
+   "fieldname": "type_operation",
+   "fieldtype": "Data",
+   "label": "Type Operation",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "initialisation.devise",
+   "fieldname": "devise",
+   "fieldtype": "Link",
+   "label": "Devise",
+   "options": "Devise",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remettant",
+   "fieldtype": "Data",
+   "label": "Beneficiaire",
+   "reqd": 1
+  },
+  {
+   "fieldname": "commentaire",
+   "fieldtype": "Text",
+   "label": "Commentaire",
+   "max_height": "100px"
+  },
+  {
+   "fieldname": "section_break_20",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "details_operation_de_caisse",
+   "fieldtype": "Table",
+   "label": "Details Operation de Caisse",
+   "options": "Details Operation de Caisse"
+  },
+  {
+   "fetch_from": "initialisation.compte",
+   "fieldname": "compte",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Compte"
+  },
+  {
+   "fetch_from": "initialisation.journal",
+   "fieldname": "journal",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Journal"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Demande Paiement",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "initialisation.type_caisse",
+   "fieldname": "type_caisse",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Type Caisse"
+  },
+  {
+   "fieldname": "cours_societe",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Cours Societe"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Demande Paiement",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "positione",
+   "fieldtype": "Check",
+   "label": "Position\u00e9",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "site.parent_branch",
+   "fieldname": "site_sup\u00e9rieur",
+   "fieldtype": "Data",
+   "label": "Site Sup\u00e9rieur",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.positione== 1",
+   "fieldname": "caisse",
+   "fieldtype": "Link",
+   "label": "Caisse",
+   "options": "Caisse",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-06-09 17:41:07.563876",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Demande Paiement",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Treso  Admin",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Caissier",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Caisse Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
