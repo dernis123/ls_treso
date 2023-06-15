@@ -1,7 +1,8 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">LS Treso</span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Param\u00e9trages G\u00e9n\u00e9raux\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Structures\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Comptabilit\u00e9\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Caisse &amp; Op\u00e9rations\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Rapports\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Utilitaires\",\"col\":4}}]",
+ "content": "[{\"id\":\"WizeuIfFLl\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">LS Treso</span>\",\"col\":12}},{\"id\":\"g8LTtiRuiy\",\"type\":\"card\",\"data\":{\"card_name\":\"Param\u00e9trages G\u00e9n\u00e9raux\",\"col\":4}},{\"id\":\"IIfH_P8Bim\",\"type\":\"card\",\"data\":{\"card_name\":\"Structures\",\"col\":4}},{\"id\":\"dAtloUXFzv\",\"type\":\"card\",\"data\":{\"card_name\":\"Comptabilit\u00e9\",\"col\":4}},{\"id\":\"ZFFHUBdrai\",\"type\":\"card\",\"data\":{\"card_name\":\"Caisse &amp; Op\u00e9rations\",\"col\":4}},{\"id\":\"JsYJfjDuG9\",\"type\":\"card\",\"data\":{\"card_name\":\"Rapports\",\"col\":4}},{\"id\":\"K70KYomlfz\",\"type\":\"card\",\"data\":{\"card_name\":\"Utilitaires\",\"col\":4}}]",
  "creation": "2022-12-26 17:21:43.851064",
+ "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
@@ -73,34 +74,6 @@
    "label": "Famille",
    "link_count": 0,
    "link_to": "Famille",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Caisse &amp; Op\u00e9rations",
-   "link_count": 2,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Op\u00e9rations",
-   "link_count": 0,
-   "link_to": "Caisse Initialisation",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Justification",
-   "link_count": 0,
-   "link_to": "Justification",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -238,12 +211,51 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Caisse &amp; Op\u00e9rations",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Demande de Paiement",
+   "link_count": 0,
+   "link_to": "Demande Paiement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Op\u00e9rations",
+   "link_count": 0,
+   "link_to": "Caisse Initialisation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Justification",
+   "link_count": 0,
+   "link_to": "Justification",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-05-21 12:03:14.033673",
+ "modified": "2023-06-15 09:16:33.096325",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "LS Treso",
+ "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,

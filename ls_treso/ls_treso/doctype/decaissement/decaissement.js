@@ -97,6 +97,12 @@ frappe.ui.form.on('Decaissement', {
 								row.nature_operations = e.nature_operations;
 								row.montant_devise = e.montant_devise;
 								row.demande_paiement = d.name;
+								if(e.tiers) row.tiers = e.tiers;
+								if(e.imputation_analytique) row.imputation_analytique = e.imputation_analytique;
+								if(e.imputation_analytique_2) row.imputation_analytique_2 = e.imputation_analytique_2;
+								if(e.imputation_analytique_3) row.imputation_analytique_3 = e.imputation_analytique_3;
+								if(e.imputation_analytique_4) row.imputation_analytique_4 = e.imputation_analytique_4;
+								if(e.imputation_analytique_5) row.imputation_analytique_5 = e.imputation_analytique_5;
 							});
 							cur_frm.dirty();
 							cur_frm.refresh();
@@ -115,6 +121,12 @@ frappe.ui.form.on('Decaissement', {
 									row.montant_devise = e.montant_devise;
 									cur_frm.doc.montant += e.montant_devise;
 									row.demande_paiement = d.name;
+									if(e.tiers) row.tiers = e.tiers;
+									if(e.imputation_analytique) row.imputation_analytique = e.imputation_analytique;
+									if(e.imputation_analytique_2) row.imputation_analytique_2 = e.imputation_analytique_2;
+									if(e.imputation_analytique_3) row.imputation_analytique_3 = e.imputation_analytique_3;
+									if(e.imputation_analytique_4) row.imputation_analytique_4 = e.imputation_analytique_4;
+									if(e.imputation_analytique_5) row.imputation_analytique_5 = e.imputation_analytique_5;
 								});
 								cur_frm.dirty();
 								cur_frm.refresh();
