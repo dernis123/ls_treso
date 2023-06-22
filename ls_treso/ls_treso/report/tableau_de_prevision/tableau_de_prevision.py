@@ -17,7 +17,7 @@ def get_columns(filters):
 		{ "label": _("Date"), "fieldtype": "Date", "fieldname": "date", "width": 100, },
 		{ "label": _("N° Compte"), "fieldtype": "Link", "fieldname": "compte", "options": "Compte General", "width": 100, },
 		{ "label": _("Service"), "fieldtype": "Data",	"fieldname": "department", "width": 100, },
-		{ "label": _("Bénéficiaire"), "fieldtype": "Data", "fieldname": "remettant", "width": 100, },
+		{ "label": _("Bénéficiaire"), "fieldtype": "Data", "fieldname": "beneficiaire", "width": 100, },
 		{ "label": _("Intitulé du Compte"), "fieldtype": "Data", "fieldname": "designation", "width": 100, },
 		{ "label": _("Libellé"), "fieldtype": "Data", "fieldname": "commentaire", "width": 100, },
 		{ "label": _("USD"), "fieldtype": "Currency", "fieldname": "usd", "width": 100, },
