@@ -81,44 +81,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Rapports",
-   "link_count": 3,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Mouvement par Nature Op",
-   "link_count": 0,
-   "link_to": "Mouvement par Nature des OP",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Mouvement par Caissier",
-   "link_count": 0,
-   "link_to": "Mouvements par Caissier",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Livre de Caisse",
-   "link_count": 0,
-   "link_to": "Livres de Caisse",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Utilitaires",
    "link_count": 3,
    "onboard": 0,
@@ -249,9 +211,57 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Rapports",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Mouvement par Nature Op",
+   "link_count": 0,
+   "link_to": "Mouvement par Nature des OP",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Mouvement par Caissier",
+   "link_count": 0,
+   "link_to": "Mouvements par Caissier",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Livre de Caisse",
+   "link_count": 0,
+   "link_to": "Livres de Caisse",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Tableau de Pr\u00e9vision",
+   "link_count": 0,
+   "link_to": "Tableau de Prevision",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2023-06-15 09:16:33.096325",
+ "modified": "2023-06-22 12:48:37.053253",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "LS Treso",
