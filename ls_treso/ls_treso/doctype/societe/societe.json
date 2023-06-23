@@ -23,6 +23,7 @@
   "billetage",
   "billetage_operation",
   "billetage_encaissement",
+  "comptabilite_erpnext",
   "comptabilite_tab",
   "compte__arrondi"
  ],
@@ -127,12 +128,18 @@
    "fieldtype": "Link",
    "label": "Compte  Arrondi",
    "options": "Compte General"
+  },
+  {
+   "default": "0",
+   "fieldname": "comptabilite_erpnext",
+   "fieldtype": "Check",
+   "label": "Comptabilit\u00e9 ErpNext"
   }
  ],
  "image_field": "logo",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-04-18 09:13:08.462532",
+ "modified": "2023-06-23 16:32:38.725826",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Societe",

@@ -26,9 +26,9 @@ def get_columns(filters):
 		{ "label": _("Statut"), "fieldtype": "Data",	"fieldname": "statut", "width": 100, },
 		{ "label": _("N° de ligne pour les documents associés"), "fieldtype": "Data",	"fieldname": "line_doc", "width": 100, },
 		{ "label": _("N° de ligne pour les ventilations analytiques"), "fieldtype": "Data",	"fieldname": "line_ana", "width": 100, },
-		{ "label": _("Plan analytique"), "fieldtype": "Data",	"fieldname": "axe", "width": 100, },
-		{ "label": _("Poste analytique"), "fieldtype": "Data",	"fieldname": "compte_analytique", "width": 100, },	
-		{ "label": _("Montant de la ventilation analytique"), "fieldtype": "Currency", "fieldname": "montant", "options": "company_currency", "width": 100, },	
+		{ "label": _("Plan analytique"), "fieldtype": "Data",	"fieldname": "plan", "width": 100, },
+		{ "label": _("Poste analytique"), "fieldtype": "Data",	"fieldname": "poste", "width": 100, },	
+		{ "label": _("Montant de la ventilation analytique"), "fieldtype": "Currency", "fieldname": "montant_ana", "options": "company_currency", "width": 100, },	
 
 		
 	]
@@ -64,7 +64,7 @@ def get_data(filters):
 		s4.section AS axe_4,
 		d.compte_analytique_5,
 		s5.section AS axe_5,
-		%(currency)s as company_currency, 1 AS statut, NULL AS line_doc, NULL AS line_ana, NULL AS plan, NULL AS poste
+		%(currency)s as company_currency, 1 AS statut, NULL AS line_doc, NULL AS line_ana, NULL AS plan, NULL AS poste, NULL AS montant_ana
 		FROM (
 			SELECT *
 			FROM tabEncaissement
@@ -85,28 +85,52 @@ def get_data(filters):
 
 	#data = sorted(data, key=itemgetter('name', 'sens_2'))
 	data2 = []
+	i = 0
 
 	for d in data:
+		i += 1
+		d['line_doc'] = i
+		d['line_ana'] = i
 		data2.append(d)
+		if d['compte_analytique']:
+			new_d = dict(d)
+			new_d['plan'] = new_d['axe']
+			new_d['poste'] = new_d['compte_analytique']
+			new_d['montant_ana'] = d['montant']
+			new_d['line_doc'] = i
+			new_d['line_ana'] = i
+			data2.append(new_d)
 		if d['compte_analytique_2']:
 			new_d = dict(d)
-			new_d['axe'] = new_d['axe_2']
-			new_d['compte_analytique'] = new_d['compte_analytique_2']
+			new_d['plan'] = new_d['axe_2']
+			new_d['poste'] = new_d['compte_analytique_2']
+			new_d['montant_ana'] = d['montant']
+			new_d['line_doc'] = i
+			new_d['line_ana'] = i
 			data2.append(new_d)
 		if d['compte_analytique_3']:
 			new_d = dict(d)
-			new_d['axe'] = new_d['axe_3']
-			new_d['compte_analytique'] = new_d['compte_analytique_3']
+			new_d['plan'] = new_d['axe_3']
+			new_d['poste'] = new_d['compte_analytique_3']
+			new_d['montant_ana'] = d['montant']
+			new_d['line_doc'] = i
+			new_d['line_ana'] = i
 			data2.append(new_d)
 		if d['compte_analytique_4']:
 			new_d = dict(d)
-			new_d['axe'] = new_d['axe_4']
-			new_d['compte_analytique'] = new_d['compte_analytique_4']
+			new_d['plan'] = new_d['axe_4']
+			new_d['poste'] = new_d['compte_analytique_4']
+			new_d['montant_ana'] = d['montant']
+			new_d['line_doc'] = i
+			new_d['line_ana'] = i
 			data2.append(new_d)
 		if d['compte_analytique_5']:
 			new_d = dict(d)
-			new_d['axe'] = new_d['axe_5']
-			new_d['compte_analytique'] = new_d['compte_analytique_5']
+			new_d['plan'] = new_d['axe_5']
+			new_d['poste'] = new_d['compte_analytique_5']
+			new_d['montant_ana'] = d['montant']
+			new_d['line_doc'] = i
+			new_d['line_ana'] = i
 			data2.append(new_d)
 
 	return data2

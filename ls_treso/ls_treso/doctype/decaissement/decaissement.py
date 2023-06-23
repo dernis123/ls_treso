@@ -56,6 +56,9 @@ class Decaissement(Document):
 					frappe.throw("Le montant actuellement en caisse ne permet pas de faire cette opération.\n Il faut augmenter le solde!!!")
 
 		self.generate_journal_entry()
+		if(self.comptabilite_erpnext):
+			self.make_accrual_jv_entry()
+
 
 	def on_submit(self):
 		init_doc = frappe.get_doc("Caisse Initialisation", self.initialisation)
