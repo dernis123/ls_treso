@@ -3,6 +3,7 @@
 
 import frappe
 from frappe import _
+from operator import itemgetter
 
 def execute(filters=None):
 	filters = frappe._dict(filters or {})
@@ -20,27 +21,15 @@ def get_columns(filters):
 		{ "label": _("N° Pièce"), "fieldtype": "Data",	"fieldname": "name", "width": 100, },
 		{ "label": _("Date Pièce"), "fieldtype": "Date",	"fieldname": "date", "width": 100, },
 		{ "label": _("Libellé"), "fieldtype": "Data", "fieldname": "designation", "width": 100, },
-		{ "label": _("Débit"), "fieldtype": "Currency", "fieldname": "debit_2", "options": "company_currency", "width": 100, },
-		{ "label": _("Crédit"), "fieldtype": "Currency", "fieldname": "credit_2", "options": "company_currency", "width": 100, },
-		{ "label": _("Montant seul (+/-)"), "fieldtype": "Currency", "fieldname": "montant_seul_2", "options": "company_currency", "width": 100, },
-		{ "label": _("Montant (associé au sens)"), "fieldtype": "Currency", "fieldname": "montant_2", "options": "company_currency", "width": 100, },
+		{ "label": _("Montant"), "fieldtype": "Currency", "fieldname": "montant", "options": "company_currency", "width": 100, },
 		{ "label": _("Sens"), "fieldtype": "Data", "fieldname": "sens_2", "width": 100, },
-		{ "label": _("Status"), "fieldtype": "Data", "fieldname": "status", "width": 100, },
-		{ "label": _("Devise Societe"), "fieldtype": "Link", "fieldname": "company_currency", "options": "Devise", "width": 100, "hidden": 1, },
+		{ "label": _("Statut"), "fieldtype": "Data",	"fieldname": "statut", "width": 100, },
+		{ "label": _("N° de ligne pour les documents associés"), "fieldtype": "Data",	"fieldname": "line_doc", "width": 100, },
+		{ "label": _("N° de ligne pour les ventilations analytiques"), "fieldtype": "Data",	"fieldname": "line_ana", "width": 100, },
+		{ "label": _("Plan analytique"), "fieldtype": "Data",	"fieldname": "axe", "width": 100, },
+		{ "label": _("Poste analytique"), "fieldtype": "Data",	"fieldname": "compte_analytique", "width": 100, },	
+		{ "label": _("Montant de la ventilation analytique"), "fieldtype": "Currency", "fieldname": "montant", "options": "company_currency", "width": 100, },	
 
-		{ "label": _("Devise"), "fieldtype": "Link", "fieldname": "devise", "options": "Devise", "width": 100, "hidden": 0, },
-		{ "label": _("Débit devise"), "fieldtype": "Currency", "fieldname": "debit", "options": "devise", "width": 100, },
-		{ "label": _("Crédit devise"), "fieldtype": "Currency", "fieldname": "credit", "options": "devise", "width": 100, },
-		{ "label": _("Montant devise seul (+/-)"), "fieldtype": "Currency", "fieldname": "montant_seul", "options": "devise", "width": 100, },
-		{ "label": _("Montant Devise (associé au sens)"), "fieldtype": "Currency", "fieldname": "montant", "options": "devise", "width": 100, },
-		{ "label": _("Sens"), "fieldtype": "Data", "fieldname": "sens_2", "width": 100, },
-		{ "label": _("Status"), "fieldtype": "Data", "fieldname": "status", "width": 100, },
-		
-		{ "label": _("Imputation Analytique"), "fieldtype": "Link", "fieldname": "compte_analytique", "options": "Compte Analytique", "width": 100, "hidden": 0, },
-		{ "label": _("Imputation Analytique 2"), "fieldtype": "Link", "fieldname": "compte_analytique_2", "options": "Compte Analytique 2", "width": 100, "hidden": 0, },
-		{ "label": _("Imputation Analytique 3"), "fieldtype": "Link", "fieldname": "compte_analytique_3", "options": "Compte Analytique 3", "width": 100, "hidden": 0, },
-		{ "label": _("Imputation Analytique 4"), "fieldtype": "Link", "fieldname": "compte_analytique_4", "options": "Compte Analytique 4", "width": 100, "hidden": 0, },
-		{ "label": _("Imputation Analytique 5"), "fieldtype": "Link", "fieldname": "compte_analytique_5", "options": "Compte Analytique 5", "width": 100, "hidden": 0, },
 		
 	]
 	return columns
@@ -61,22 +50,21 @@ def get_data(filters):
 		o.cours,
 		d.montant,
 		d.montant * o.cours AS montant_2,
+		CASE WHEN d.sens = 'Debit' THEN 'D' else 'C' END AS sens_2,
 		o.journal,
 		o.devise,
 		o.devise_caisse,
 		d.compte_analytique,
+		s1.section AS axe,
 		d.compte_analytique_2,
+		s2.section AS axe_2,
 		d.compte_analytique_3,
+		s3.section AS axe_3,
 		d.compte_analytique_4,
+		s4.section AS axe_4,
 		d.compte_analytique_5,
-		CASE WHEN d.sens = 'Debit' THEN d.montant else NULL END AS debit,
-		CASE WHEN d.sens = 'Credit' THEN d.montant else NULL END AS credit,
-		CASE WHEN d.sens = 'Debit' THEN d.montant else -d.montant END AS montant_seul,
-		CASE WHEN d.sens = 'Debit' THEN 'D' else 'C' END AS sens_2,
-		CASE WHEN d.sens = 'Debit' THEN d.montant / o.cours else NULL END AS debit_2,
-		CASE WHEN d.sens = 'Credit' THEN d.montant / o.cours else NULL END AS credit_2,
-		CASE WHEN d.sens = 'Debit' THEN d.montant / o.cours else -d.montant / o.cours END AS montant_seul_2,
-		%(currency)s as company_currency 
+		s5.section AS axe_5,
+		%(currency)s as company_currency, 1 AS statut, NULL AS line_doc, NULL AS line_ana, NULL AS plan, NULL AS poste
 		FROM (
 			SELECT *
 			FROM tabEncaissement
@@ -85,9 +73,41 @@ def get_data(filters):
 			FROM tabDecaissement
 			) o 
 		INNER JOIN `tabComptabilisation` d on o.name = d.parent
+		LEFT JOIN `tabSection Analytique` s1 ON s1.name = d.compte_analytique
+		LEFT JOIN `tabSection Analytique` s2 ON s2.name = d.compte_analytique_2
+		LEFT JOIN `tabSection Analytique` s3 ON s3.name = d.compte_analytique_3
+		LEFT JOIN `tabSection Analytique` s4 ON s4.name = d.compte_analytique_4
+		LEFT JOIN `tabSection Analytique` s5 ON s5.name = d.compte_analytique_5
 		WHERE o.date >= %(date_debut)s AND o.date <= %(date_fin)s AND o.caisse LIKE %(caisse)s
+		ORDER BY name, CASE WHEN d.sens = 'Debit' THEN 'D' else 'C' END DESC
         """,{"date_debut": filters.date_debut, "date_fin": filters.date_fin, "currency":company_currency,"caisse": filters.caisse if filters.caisse else '%' }, as_dict = 1
     )
 
-	return data
+	#data = sorted(data, key=itemgetter('name', 'sens_2'))
+	data2 = []
+
+	for d in data:
+		data2.append(d)
+		if d['compte_analytique_2']:
+			new_d = dict(d)
+			new_d['axe'] = new_d['axe_2']
+			new_d['compte_analytique'] = new_d['compte_analytique_2']
+			data2.append(new_d)
+		if d['compte_analytique_3']:
+			new_d = dict(d)
+			new_d['axe'] = new_d['axe_3']
+			new_d['compte_analytique'] = new_d['compte_analytique_3']
+			data2.append(new_d)
+		if d['compte_analytique_4']:
+			new_d = dict(d)
+			new_d['axe'] = new_d['axe_4']
+			new_d['compte_analytique'] = new_d['compte_analytique_4']
+			data2.append(new_d)
+		if d['compte_analytique_5']:
+			new_d = dict(d)
+			new_d['axe'] = new_d['axe_5']
+			new_d['compte_analytique'] = new_d['compte_analytique_5']
+			data2.append(new_d)
+
+	return data2
 
