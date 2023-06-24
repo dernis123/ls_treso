@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": "Livre de caisse",
- "modified": "2023-06-22 12:31:50.543988",
+ "modified": "2023-06-24 11:48:43.586249",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Tableau de Prevision",
@@ -27,7 +27,7 @@
    "role": "Treso  Admin"
   },
   {
-   "role": "Demandeur"
+   "role": "Tableau Prevision"
   }
  ]
 }
