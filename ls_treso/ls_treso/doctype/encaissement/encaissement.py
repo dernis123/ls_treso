@@ -45,7 +45,7 @@ class Encaissement(Document):
 		#			frappe.throw("Le montant actuellement en caisse ne permet pas de faire cette opération.\n Il faut augmenter le solde!!!")
 
 		self.generate_journal_entry()
-		if(self.comptabilite_erpnext):
+		if(self.comptabilite_erpnext == 1):
 			self.make_accrual_jv_entry()
 
 	def on_submit(self):

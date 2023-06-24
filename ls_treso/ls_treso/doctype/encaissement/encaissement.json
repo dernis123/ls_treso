@@ -37,7 +37,8 @@
   "amended_from",
   "type_caisse",
   "cours_societe",
-  "state"
+  "state",
+  "comptabilite_erpnext"
  ],
  "fields": [
   {
@@ -243,12 +244,20 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "State"
+  },
+  {
+   "default": "0",
+   "fetch_from": "societe.comptabilite_erpnext",
+   "fieldname": "comptabilite_erpnext",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Comptabilite ErpNext"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-05-14 21:11:12.509170",
+ "modified": "2023-06-24 11:18:12.167995",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Encaissement",
