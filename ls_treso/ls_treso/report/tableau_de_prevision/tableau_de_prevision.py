@@ -37,8 +37,8 @@ def get_data(filters):
 			INNER JOIN `tabNature Operations` n ON o.nature_operations = n.name
 			INNER JOIN `tabCompte General` c ON c.name = n.compte_comptable
 			LEFT JOIN tabEmployee e ON d.owner = e.user_id
-		WHERE o.parenttype = 'Demande Paiement' AND d.date >= %(date)s
-        """,{"date": filters.date }, as_dict = 1
+		WHERE o.parenttype = 'Demande Paiement' AND d.date = %(date)s and (d.site LIKE %(site)s )
+        """,{"date": filters.date, "site": filters.site if filters.site !=  None else "%", }, as_dict = 1
     )
 
 	return data

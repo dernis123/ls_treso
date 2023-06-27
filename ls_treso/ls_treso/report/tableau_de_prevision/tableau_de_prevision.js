@@ -11,6 +11,13 @@ frappe.query_reports["Tableau de Prevision"] = {
 			default: frappe.datetime.get_today(),
 			reqd: 1
 		},
+		{
+			fieldname: "site",
+			label: __("Site"),
+			fieldtype: "Link",
+			options: "Branch",
+			reqd: 1,
+		},
 
 	]
 };
