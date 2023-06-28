@@ -65,6 +65,7 @@ frappe.ui.form.on('Decaissement', {
 				filters: { 
 					site: cur_frm.doc.site, 
 					positione : 0,
+					docstatus : 1,
 				}
 			} 
             new frappe.ui.form.MultiSelectDialog({
