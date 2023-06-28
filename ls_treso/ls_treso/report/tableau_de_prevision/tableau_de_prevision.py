@@ -20,8 +20,8 @@ def get_columns(filters):
 		{ "label": _("Bénéficiaire"), "fieldtype": "Data", "fieldname": "beneficiaire", "width": 100, },
 		{ "label": _("Intitulé du Compte"), "fieldtype": "Data", "fieldname": "designation", "width": 100, },
 		{ "label": _("Libellé"), "fieldtype": "Data", "fieldname": "commentaire", "width": 100, },
-		{ "label": _("USD"), "fieldtype": "Currency", "fieldname": "usd", "width": 100, },
-		{ "label": _("CDF"), "fieldtype": "Currency", "fieldname": "cdf", "width": 100, },
+		{ "label": _("USD"), "fieldtype": "Currency", "fieldname": "usd", "options": "devise_usd", "width": 100, },
+		{ "label": _("CDF"), "fieldtype": "Currency", "fieldname": "cdf", "options": "devise_cdf", "width": 100, },
 	]
 	return columns
 
@@ -32,7 +32,9 @@ def get_data(filters):
         SELECT d.name AS numero,d.date,n.compte_comptable AS compte,d.remettant as beneficiaire,c.designation,e.department,d.commentaire, 
 			CASE WHEN d.devise = 'USD' THEN o.montant_devise ELSE 0 END usd,
 			CASE WHEN d.devise = 'CDF' THEN o.montant_devise ELSE 0 END cdf,
-			'' AS Observation
+			'' AS Observation, 
+			(SELECT symbole FROM tabDevise WHERE name = 'USD') AS devise_usd,
+			(SELECT symbole FROM tabDevise WHERE name = 'CDF') AS devise_cdf
 		FROM `tabDemande Paiement` d INNER JOIN `tabDetails Operation de Caisse` o ON d.name = o.parent
 			INNER JOIN `tabNature Operations` n ON o.nature_operations = n.name
 			INNER JOIN `tabCompte General` c ON c.name = n.compte_comptable

@@ -58,11 +58,11 @@ def get_data(filters):
 			o.devise,
 			o.creation, 'd' AS line, o.caisse
 			from (
-				SELECT c.*
+				SELECT c.name,c.remettant,c.designation,c.reference,c.devise,c.creation,c.caisse,c.montant,c.date
 				FROM tabEncaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
 				WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END AND  c.docstatus = 1
 				UNION
-				SELECT c.*
+				SELECT c.name,c.remettant,c.designation,c.reference,c.devise,c.creation,c.caisse,c.montant,c.date
 				FROM tabDecaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
 				WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END AND  c.docstatus = 1
 				) o 
@@ -82,11 +82,11 @@ def get_data(filters):
 		o.devise,
 		o.creation, 'd' AS line, o.caisse
 		from (
-			SELECT c.*
+			SELECT c.name,c.remettant,c.designation,c.reference,c.devise,c.creation,c.caisse,c.montant,c.date
 			FROM tabEncaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
 			WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END AND  c.docstatus = 1
 			UNION
-			SELECT c.*
+			SELECT c.name,c.remettant,c.designation,c.reference,c.devise,c.creation,c.caisse,c.montant,c.date
 			FROM tabDecaissement c INNER JOIN `tabCaisse Initialisation` i ON i.name = c.initialisation
 			WHERE CASE WHEN %(valide)s= 1 THEN  i.docstatus =1 ELSE i.docstatus <> 2 END AND  c.docstatus = 1
 			) o 

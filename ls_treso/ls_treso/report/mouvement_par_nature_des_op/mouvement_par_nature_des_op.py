@@ -35,11 +35,11 @@ def get_data(filters):
 		o.montant,
 		o.devise, o.caisse
 		FROM (
-			SELECT *
-			FROM tabEncaissement
+			SELECT c.name,c.remettant,c.designation,c.reference,c.devise,c.creation,c.caisse,c.montant,c.date
+			FROM tabEncaissement c
 			UNION
-			SELECT *
-			FROM tabDecaissement
+			SELECT c.name,c.remettant,c.designation,c.reference,c.devise,c.creation,c.caisse,c.montant,c.date
+			FROM tabDecaissement c
 			) o 
 		INNER JOIN `tabDetails Operation de Caisse` d on o.name = d.parent
 		WHERE o.date >= %(date_debut)s AND o.date <= %(date_fin)s AND d.nature_operations LIKE %(nature)s

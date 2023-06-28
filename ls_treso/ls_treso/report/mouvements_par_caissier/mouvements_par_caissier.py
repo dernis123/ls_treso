@@ -37,11 +37,11 @@ def get_data(filters):
 		case when n.type_operation <> 'Encaissement' THEN o.montant ELSE 0 END as 'depense', 
 		o.devise, o.caisse
 		from (
-			SELECT *
-			FROM tabEncaissement
+			SELECT c.name,c.remettant,c.designation,c.reference,c.devise,c.creation,c.caisse,c.montant,c.date, c.owner
+			FROM tabEncaissement c
 			UNION
-			SELECT *
-			FROM tabDecaissement
+			SELECT c.name,c.remettant,c.designation,c.reference,c.devise,c.creation,c.caisse,c.montant,c.date, c.owner
+			FROM tabDecaissement c
 			) o 
 		INNER JOIN `tabDetails Operation de Caisse` d on o.name = d.parent
 		INNER JOIN `tabNature Operations` n on d.nature_operations = n.name
