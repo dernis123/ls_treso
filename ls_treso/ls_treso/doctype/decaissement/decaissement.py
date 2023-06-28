@@ -43,6 +43,17 @@ class Decaissement(Document):
 					""",{ "name": d.demande_paiement }, as_dict = 1
 				)
 
+	def after_insert(self):
+		for d in self.details_operation_de_caisse:
+			if d.demande_paiement :
+				frappe.db.sql(
+					"""
+						UPDATE `tabDemande Paiement` 
+						SET positione = 1
+						WHERE name = %(name)s
+					""",{ "name": d.demande_paiement }, as_dict = 1
+				)
+
 	
 	def before_submit(self):
 		total = 0.00

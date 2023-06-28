@@ -99,6 +99,7 @@ frappe.ui.form.on('Decaissement', {
 								var row = cur_frm.add_child('details_operation_de_caisse');
 								row.nature_operations = e.nature_operations;
 								row.montant_devise = e.montant_devise;
+								row.montant_devise_ref = e.montant_devise;
 								row.demande_paiement = d.name;
 								if(e.tiers) row.tiers = e.tiers;
 								if(e.imputation_analytique) row.imputation_analytique = e.imputation_analytique;
