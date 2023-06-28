@@ -90,6 +90,7 @@ frappe.ui.form.on('Decaissement', {
 						frappe.db.get_doc("Demande Paiement",selections[0]).then(d =>{
 							cur_frm.doc.designation = d.designation;
 							cur_frm.doc.montant = d.montant;
+							cur_frm.doc.montant_reference = d.montant;
 							cur_frm.doc.entite = d.entite;
 							cur_frm.doc.reference = d.reference;
 							cur_frm.doc.remettant = d.remettant;

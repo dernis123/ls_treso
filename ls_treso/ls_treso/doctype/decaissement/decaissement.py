@@ -18,16 +18,6 @@ class Decaissement(Document):
 	def before_save(self):
 		if len(self.details_operation_de_caisse) == 0:
 			frappe.throw("Veuillez saisir au moins une ligne détail")
-		
-		for d in self.details_operation_de_caisse:
-			if d.demande_paiement :
-				frappe.db.sql(
-					"""
-						UPDATE `tabDemande Paiement` 
-						SET positione = 1
-						WHERE name = %(name)s
-					""",{ "name": d.demande_paiement }, as_dict = 1
-				)
 
 		exist = frappe.db.exists({
 			"doctype": "Caisse Initialisation", 
@@ -42,6 +32,18 @@ class Decaissement(Document):
 		if date_split != str(self.date):
 			frappe.throw("La date de saisie " + str(self.date) + " doit être conforme à la date d'initialisation " + date_split)
 
+	def after_save(self):
+		for d in self.details_operation_de_caisse:
+			if d.demande_paiement :
+				frappe.db.sql(
+					"""
+						UPDATE `tabDemande Paiement` 
+						SET positione = 1
+						WHERE name = %(name)s
+					""",{ "name": d.demande_paiement }, as_dict = 1
+				)
+
+	
 	def before_submit(self):
 		total = 0.00
 		for details in self.details_operation_de_caisse :
@@ -82,6 +84,17 @@ class Decaissement(Document):
 				)
 		
 		self.comptabilisation.clear()
+
+	def after_delete(self):
+		for d in self.details_operation_de_caisse:
+			if d.demande_paiement :
+				frappe.db.sql(
+					"""
+						UPDATE `tabDemande Paiement` 
+						SET positione = 0
+						WHERE name = %(name)s
+					""",{ "name": d.demande_paiement }, as_dict = 1
+				)
 
 	def create_row(self, type, account, cours, amount, type_tiers=None, tiers=None, cc1=None, cc2=None, cc3=None, cc4=None, cc5=None):
 		row = {}
