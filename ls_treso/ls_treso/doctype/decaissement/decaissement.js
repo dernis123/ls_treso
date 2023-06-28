@@ -66,6 +66,7 @@ frappe.ui.form.on('Decaissement', {
 					site: cur_frm.doc.site, 
 					positione : 0,
 					docstatus : 1,
+					devise: cur_frm.doc.devise,
 				}
 			} 
             new frappe.ui.form.MultiSelectDialog({
@@ -75,7 +76,7 @@ frappe.ui.form.on('Decaissement', {
 					designation: "",
 					remettant: "",
 					montant: "",
-					devise: "",
+					devise: cur_frm.doc.devise,
                 },
                 add_filters_group: 1,
 				date_field: "date",
