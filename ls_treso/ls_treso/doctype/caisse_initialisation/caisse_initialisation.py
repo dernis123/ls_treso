@@ -69,6 +69,11 @@ class CaisseInitialisation(Document):
 			operation = frappe.get_doc("Encaissement", o.name)
 			operation.submit()
 
+		operations = frappe.db.get_list("Decaissement", fields = ["name"], filters = {"docstatus": 0})
+		for o in operations:
+			operation = frappe.get_doc("Decaissement", o.name)
+			operation.submit()
+
 		self.recalcul2()
 
 		billetage = frappe.db.get_value('Societe', self.societe , 'billetage')
