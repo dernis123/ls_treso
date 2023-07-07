@@ -47,9 +47,9 @@ frappe.ui.form.on('Caisse', {
                         row.valeur_finale = 0;
                     });
 
+					frm.dirty();
                     frm.refresh_field('billetage');
-                    frm.dirty();
-                    //frm.refresh();
+                    //frm.save();
                 }
 			}
 		});

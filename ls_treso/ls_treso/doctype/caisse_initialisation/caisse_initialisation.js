@@ -359,8 +359,8 @@ frappe.ui.form.on('Caisse Initialisation', {
 									});
 								}
 							}
-							frm.refresh_field('billetage');
 							frm.dirty();
+							frm.refresh_field('billetage');
 							frm.save();
 						}
 					});
