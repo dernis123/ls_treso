@@ -4,6 +4,7 @@
 import frappe
 from frappe.model.document import Document
 from frappe.utils import getdate
+from ls_treso.ls_treso.doctype.devise.devise import get_billetage
 
 class Caisse(Document):
 
@@ -105,6 +106,38 @@ class Caisse(Document):
 		operation.submit()
 		caisse_init = frappe.get_doc("Caisse Initialisation",ci_name)
 		caisse_init.submit()
+
+
+	@frappe.whitelist()
+	def fill_billetage(self):
+		
+		for c in self.billetage :
+			frappe.delete_doc("Billetage", c.name)
+
+		billetage = get_billetage(self.devise)
+		caisse_sub = []
+		for b in billetage :
+			billet = frappe._dict({
+				"doctype": "Billetage",
+				#"image": b.image,
+				"nom": b.nom,
+				"unite":b.unite,
+				"nombre_initial": 0,
+				"valeur_initiale": 0,
+				"nombre_final": 0,
+				"valeur_finale": 0,
+				"parrenttype": "Caisse",
+				"parentfield": "billetage",
+				"parent": self.name,
+			})
+			caisse_sub.append(billet)
+
+		#frappe.msgprint(str(self.billetage))
+		doc = frappe.get_doc("Caisse", self.name)
+		doc.billetage.append(caisse_sub)
+		doc.save()
+
+
 
 		
 
