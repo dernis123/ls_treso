@@ -64,17 +64,17 @@ class CaisseInitialisation(Document):
 		#	frappe.throw(msg)
 	
 	def before_submit(self):
-		operations = frappe.db.get_list("Encaissement", fields = ["name"], filters = {"docstatus": 0})
+		operations = frappe.db.get_list("Encaissement", fields = ["name"], filters = {"docstatus": 0, 'initialisation': self.name})
 		for o in operations:
 			operation = frappe.get_doc("Encaissement", o.name)
-			if operation.docstatus == 0:
-				operation.submit()
+			operation.submit()
+				
 
-		operations = frappe.db.get_list("Decaissement", fields = ["name"], filters = {"docstatus": 0})
+		operations = frappe.db.get_list("Decaissement", fields = ["name"], filters = {"docstatus": 0, 'initialisation': self.name})
 		for o in operations:
 			operation = frappe.get_doc("Decaissement", o.name)
-			if operation.docstatus == 0:
-				operation.submit()
+			operation.submit()
+				
 
 		self.recalcul2()
 
