@@ -55,6 +55,42 @@ frappe.ui.form.on('Encaissement', {
 			};
 		});
 
+		frm.set_query("imputation_analytique_6","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Axe 6',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_7","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Axe 7',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_8","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Axe 8',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_9","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Axe 9',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_10","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Axe 10',
+				}
+			};
+		});
+
 		frm.set_value('type_operation', 'Encaissement');
 	},
 	refresh: function(frm){

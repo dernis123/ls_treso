@@ -5,4 +5,7 @@
 from frappe.model.document import Document
 
 class AxeAnalytique(Document):
-	pass
+	
+	def before_save(self):
+		if not self.correspondance :
+			self.correspondance = self.libelle

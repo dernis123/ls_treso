@@ -56,6 +56,42 @@ frappe.ui.form.on('Decaissement', {
 			};
 		});
 
+		frm.set_query("imputation_analytique_6","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Axe 6',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_7","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Axe 7',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_8","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Axe 8',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_9","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Axe 9',
+				}
+			};
+		});
+		frm.set_query("imputation_analytique_10","details_operation_de_caisse", function() {
+			return {
+				"filters": {
+					"type": 'Axe 10',
+				}
+			};
+		});
+
 		frm.set_value('type_operation', 'Decaissement');
 	},
 	refresh(frm) {
@@ -107,6 +143,12 @@ frappe.ui.form.on('Decaissement', {
 								if(e.imputation_analytique_3) row.imputation_analytique_3 = e.imputation_analytique_3;
 								if(e.imputation_analytique_4) row.imputation_analytique_4 = e.imputation_analytique_4;
 								if(e.imputation_analytique_5) row.imputation_analytique_5 = e.imputation_analytique_5;
+
+								if(e.imputation_analytique_6) row.imputation_analytique_6 = e.imputation_analytique_6;
+								if(e.imputation_analytique_7) row.imputation_analytique_7 = e.imputation_analytique_7;
+								if(e.imputation_analytique_8) row.imputation_analytique_8 = e.imputation_analytique_8;
+								if(e.imputation_analytique_9) row.imputation_analytique_9 = e.imputation_analytique_9;
+								if(e.imputation_analytique_10) row.imputation_analytique_10 = e.imputation_analytique_10;
 							});
 							cur_frm.dirty();
 							cur_frm.refresh();
@@ -131,6 +173,12 @@ frappe.ui.form.on('Decaissement', {
 									if(e.imputation_analytique_3) row.imputation_analytique_3 = e.imputation_analytique_3;
 									if(e.imputation_analytique_4) row.imputation_analytique_4 = e.imputation_analytique_4;
 									if(e.imputation_analytique_5) row.imputation_analytique_5 = e.imputation_analytique_5;
+
+									if(e.imputation_analytique_6) row.imputation_analytique_6 = e.imputation_analytique_6;
+									if(e.imputation_analytique_7) row.imputation_analytique_7 = e.imputation_analytique_7;
+									if(e.imputation_analytique_8) row.imputation_analytique_8 = e.imputation_analytique_8;
+									if(e.imputation_analytique_9) row.imputation_analytique_9 = e.imputation_analytique_9;
+									if(e.imputation_analytique_10) row.imputation_analytique_10 = e.imputation_analytique_10;
 								});
 								cur_frm.dirty();
 								cur_frm.refresh();

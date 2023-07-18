@@ -9,7 +9,8 @@
  "engine": "InnoDB",
  "field_order": [
   "libelle",
-  "type"
+  "type",
+  "correspondance"
  ],
  "fields": [
   {
@@ -22,12 +23,17 @@
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "Axe 1\nAxe 2\nAxe 3\nAxe 4\nAxe 5"
+   "options": "Axe 1\nAxe 2\nAxe 3\nAxe 4\nAxe 5\nAxe 6\nAxe 7\nAxe 8\nAxe 9\nAxe 10"
+  },
+  {
+   "fieldname": "correspondance",
+   "fieldtype": "Data",
+   "label": "Correspondance"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-05-09 14:13:22.318824",
+ "modified": "2023-07-18 09:36:45.876041",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Axe Analytique",

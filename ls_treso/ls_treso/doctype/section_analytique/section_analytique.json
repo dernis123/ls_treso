@@ -12,7 +12,8 @@
   "categorie",
   "section",
   "type",
-  "societe"
+  "societe",
+  "correspondance"
  ],
  "fields": [
   {
@@ -50,11 +51,18 @@
    "fieldtype": "Link",
    "label": "Societe",
    "options": "Societe"
+  },
+  {
+   "fetch_from": "section.correspondance",
+   "fieldname": "correspondance",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Correspondance"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-05-11 15:02:26.641176",
+ "modified": "2023-07-18 12:02:02.508255",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Section Analytique",

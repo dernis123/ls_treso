@@ -32,14 +32,18 @@
   {
    "fieldname": "nature",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Nature",
+   "reqd": 1,
    "unique": 1
   },
   {
    "fieldname": "compte_comptable",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Compte Comptable",
-   "options": "Compte General"
+   "options": "Compte General",
+   "reqd": 1
   },
   {
    "fieldname": "tiers",
@@ -102,7 +106,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-05-03 09:29:21.973995",
+ "modified": "2023-07-17 09:50:35.758786",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Nature Operations",

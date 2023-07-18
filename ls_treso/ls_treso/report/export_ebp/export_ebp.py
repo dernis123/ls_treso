@@ -55,15 +55,15 @@ def get_data(filters):
 		o.devise,
 		o.devise_caisse,
 		d.compte_analytique,
-		s1.section AS axe,
+		s1.correspondance AS axe,
 		d.compte_analytique_2,
-		s2.section AS axe_2,
+		s2.correspondance AS axe_2,
 		d.compte_analytique_3,
-		s3.section AS axe_3,
+		s3.correspondance AS axe_3,
 		d.compte_analytique_4,
-		s4.section AS axe_4,
+		s4.correspondance AS axe_4,
 		d.compte_analytique_5,
-		s5.section AS axe_5,
+		s5.correspondance AS axe_5,
 		%(currency)s as company_currency, 1 AS statut, NULL AS line_doc, NULL AS line_ana, NULL AS plan, NULL AS poste, NULL AS montant_ana
 		FROM (
 			SELECT *

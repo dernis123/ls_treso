@@ -69,7 +69,7 @@ class Encaissement(Document):
 
 		self.comptabilisation.clear()
 
-	def create_row(self, type, account, cours, amount, type_tiers=None, tiers=None, cc1=None, cc2=None, cc3=None, cc4=None, cc5=None):
+	def create_row(self, type, account, cours, amount, type_tiers=None, tiers=None, cc1=None, cc2=None, cc3=None, cc4=None, cc5=None, cc6=None, cc7=None, cc8=None, cc9=None, cc10=None):
 		row = {}
 		if type == 'Encaissement':
 			row = {
@@ -125,12 +125,43 @@ class Encaissement(Document):
 				{
 					"imputation_analytique_5": cc5,
 				}
+			)
+
+		if cc6:
+			row.update(
+				{
+					"compte_analytique_6": cc6,
+				}
+			)
+		if cc7:
+			row.update(
+				{
+					"compte_analytique_7": cc7,
+				}
+			)
+		if cc8:
+			row.update(
+				{
+					"compte_analytique_8": cc8,
+				}
+			)
+		if cc9:
+			row.update(
+				{
+					"compte_analytique_9": cc9,
+				}
+			)
+		if cc10:
+			row.update(
+				{
+					"compte_analytique_10": cc10,
+				}
 			)				
 
 		return row
 	
 
-	def create_row2(self, type, compte, cours, montant, tiers=None, cc1=None, cc2=None, cc3=None, cc4=None, cc5=None):
+	def create_row2(self, type, compte, cours, montant, tiers=None, cc1=None, cc2=None, cc3=None, cc4=None, cc5=None, cc6=None, cc7=None, cc8=None, cc9=None, cc10=None):
 		row = {
 				"compte": compte,
 				"cours": cours,
@@ -180,6 +211,37 @@ class Encaissement(Document):
 				}
 			)
 
+		if cc6:
+			row.update(
+				{
+					"compte_analytique_6": cc6,
+				}
+			)
+		if cc7:
+			row.update(
+				{
+					"compte_analytique_7": cc7,
+				}
+			)
+		if cc8:
+			row.update(
+				{
+					"compte_analytique_8": cc8,
+				}
+			)
+		if cc9:
+			row.update(
+				{
+					"compte_analytique_9": cc9,
+				}
+			)
+		if cc10:
+			row.update(
+				{
+					"compte_analytique_10": cc10,
+				}
+			)
+
 		#frappe.msgprint(str(row))				
 
 		return frappe._dict(row)
@@ -224,7 +286,14 @@ class Encaissement(Document):
 			cc3 = e.imputation_analytique_3
 			cc4 = e.imputation_analytique_4
 			cc5 = e.imputation_analytique_5
-			accounting_entry = self.create_row('Decaissement',account,cours,amount,tiers,cc1,cc2,cc3,cc4,cc5)
+
+			cc6 = e.imputation_analytique_6
+			cc7 = e.imputation_analytique_7
+			cc8 = e.imputation_analytique_8
+			cc9 = e.imputation_analytique_9
+			cc10 = e.imputation_analytique_10
+			accounting_entry = self.create_row('Decaissement',account,cours,amount,tiers,cc1,cc2,cc3,cc4,cc5,cc6,cc7,cc8,cc9,cc10)
+			#accounting_entry = self.create_row('Decaissement',account,cours,amount,tiers,cc1,cc2,cc3,cc4,cc5)
 			accounts.append(accounting_entry)
 
 		if flt(payable_amount, precision) != 0 :
@@ -261,7 +330,14 @@ class Encaissement(Document):
 			cc3 = e.imputation_analytique_3
 			cc4 = e.imputation_analytique_4
 			cc5 = e.imputation_analytique_5
-			accounting_entry = self.create_row2('Decaissement',account,cours,amount,tiers,cc1,cc2,cc3,cc4,cc5)
+
+			cc6 = e.imputation_analytique_6
+			cc7 = e.imputation_analytique_7
+			cc8 = e.imputation_analytique_8
+			cc9 = e.imputation_analytique_9
+			cc10 = e.imputation_analytique_10
+			accounting_entry = self.create_row2('Decaissement',account,cours,amount,tiers,cc1,cc2,cc3,cc4,cc5,cc6,cc7,cc8,cc9,cc10)
+			#accounting_entry = self.create_row2('Decaissement',account,cours,amount,tiers,cc1,cc2,cc3,cc4,cc5)
 			self.append('comptabilisation', accounting_entry)
 		
 		#frappe.msgprint(str(self.comptabilisation))

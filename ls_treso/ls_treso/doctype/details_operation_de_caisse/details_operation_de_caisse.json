@@ -9,13 +9,22 @@
   "nature_operations",
   "type_tiers",
   "tiers",
+  "column_break_uwofm",
+  "demande_paiement",
   "montant_devise",
   "montant_devise_ref",
+  "section_analytique_section",
   "imputation_analytique",
   "imputation_analytique_2",
   "imputation_analytique_3",
   "imputation_analytique_4",
   "imputation_analytique_5",
+  "column_break_pe7c2",
+  "imputation_analytique_6",
+  "imputation_analytique_7",
+  "imputation_analytique_8",
+  "imputation_analytique_9",
+  "imputation_analytique_10",
   "is_justifiable",
   "is_tiers",
   "label",
@@ -23,7 +32,11 @@
   "label_3",
   "label_4",
   "label_5",
-  "demande_paiement"
+  "label_6",
+  "label_7",
+  "label_8",
+  "label_9",
+  "label_10"
  ],
  "fields": [
   {
@@ -146,13 +159,92 @@
    "fieldname": "demande_paiement",
    "fieldtype": "Link",
    "label": "Demande Paiement",
-   "options": "Demande Paiement"
+   "options": "Demande Paiement",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_pe7c2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_uwofm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_analytique_section",
+   "fieldtype": "Section Break",
+   "label": "Section Analytique"
+  },
+  {
+   "fieldname": "imputation_analytique_6",
+   "fieldtype": "Link",
+   "label": "Imputation Analytique 6",
+   "options": "Section Analytique"
+  },
+  {
+   "fieldname": "imputation_analytique_7",
+   "fieldtype": "Link",
+   "label": "Imputation Analytique 7",
+   "options": "Section Analytique"
+  },
+  {
+   "fieldname": "imputation_analytique_8",
+   "fieldtype": "Link",
+   "label": "Imputation Analytique 8",
+   "options": "Section Analytique"
+  },
+  {
+   "fieldname": "imputation_analytique_9",
+   "fieldtype": "Link",
+   "label": "Imputation Analytique 9",
+   "options": "Section Analytique"
+  },
+  {
+   "fieldname": "imputation_analytique_10",
+   "fieldtype": "Link",
+   "label": "Imputation Analytique 10",
+   "options": "Section Analytique"
+  },
+  {
+   "fetch_from": "imputation_analytique_6.designation",
+   "fieldname": "label_6",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Label 6"
+  },
+  {
+   "fetch_from": "imputation_analytique_7.designation",
+   "fieldname": "label_7",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Label 7"
+  },
+  {
+   "fetch_from": "imputation_analytique_8.designation",
+   "fieldname": "label_8",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Label 8"
+  },
+  {
+   "fetch_from": "imputation_analytique_9.designation",
+   "fieldname": "label_9",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Label 9"
+  },
+  {
+   "fetch_from": "imputation_analytique_10.designation",
+   "fieldname": "label_10",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Label 10"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-15 12:04:32.318999",
+ "modified": "2023-07-18 10:00:42.622577",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Details Operation de Caisse",
