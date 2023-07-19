@@ -89,6 +89,9 @@ class Encaissement(Document):
 			}
 
 		if tiers:
+			if not type_tiers :
+				frappe.throw(_("Veuillez renseigner le type tiers du tiers {}").format(tiers))
+
 			row.update(
 				{
 					"party_type": "Employee" if type_tiers == "Employe" else ("Customer"if type_tiers == "Client" else "Supplier"),
@@ -96,67 +99,216 @@ class Encaissement(Document):
 				}
 			)
 
-		if cc1:
+		main = frappe.db.get_value('Cost Center',  {'name': ['like', '%Main%'],'company': self.societe}, 'name')
+		if main :
 			row.update(
 				{
-					"imputation_analytique": cc1,
+					'cost_center': main,
+				}
+			)
+
+		if cc1:
+			correspondance = frappe.db.get_value('Axe Analytique',  {'type': 'Axe 1'}, 'correspondance')
+			analytique = frappe.db.sql(
+				'''
+					SELECT fieldname
+					FROM tabDocField
+					WHERE parent = 'Journal Entry Account' and label = %(correspondance)s
+					UNION
+					SELECT fieldname
+					FROM `tabCustom Field`
+					WHERE dt = 'Journal Entry Account' and label = %(correspondance)s
+				''', {'correspondance': correspondance}, as_dict = 1
+			)
+			if len(analytique) == 0 :
+				frappe.throw(_("La nature analytique {} n'a pas de correspondance dans les dimensions comptables").format(analytique))
+			row.update(
+				{
+					analytique[0].fieldname: cc1,
 				}
 			)
 		if cc2:
+			correspondance = frappe.db.get_value('Axe Analytique',  {'type': 'Axe 2'}, 'correspondance')
+			analytique = frappe.db.sql(
+				'''
+					SELECT fieldname
+					FROM tabDocField
+					WHERE parent = 'Journal Entry Account' and label = %(correspondance)s
+					UNION
+					SELECT fieldname
+					FROM `tabCustom Field`
+					WHERE dt = 'Journal Entry Account' and label = %(correspondance)s
+				''', {'correspondance': correspondance}, as_dict = 1
+			)
+			if len(analytique) == 0 :
+				frappe.throw(_("La nature analytique {} n'a pas de correspondance dans les dimensions comptables").format(analytique))
 			row.update(
 				{
-					"imputation_analytique_2": cc2,
+					analytique[0].fieldname: cc2,
 				}
 			)
 		if cc3:
+			correspondance = frappe.db.get_value('Axe Analytique',  {'type': 'Axe 3'}, 'correspondance')
+			analytique = frappe.db.sql(
+				'''
+					SELECT fieldname
+					FROM tabDocField
+					WHERE parent = 'Journal Entry Account' and label = %(correspondance)s
+					UNION
+					SELECT fieldname
+					FROM `tabCustom Field`
+					WHERE dt = 'Journal Entry Account' and label = %(correspondance)s
+				''', {'correspondance': correspondance}, as_dict = 1
+			)
+			if len(analytique) == 0 :
+				frappe.throw(_("La nature analytique {} n'a pas de correspondance dans les dimensions comptables").format(analytique))
 			row.update(
 				{
-					"imputation_analytique_3": cc3,
+					analytique[0].fieldname: cc3,
 				}
 			)
 		if cc4:
+			correspondance = frappe.db.get_value('Axe Analytique',  {'type': 'Axe 4'}, 'correspondance')
+			analytique = frappe.db.sql(
+				'''
+					SELECT fieldname
+					FROM tabDocField
+					WHERE parent = 'Journal Entry Account' and label = %(correspondance)s
+					UNION
+					SELECT fieldname
+					FROM `tabCustom Field`
+					WHERE dt = 'Journal Entry Account' and label = %(correspondance)s
+				''', {'correspondance': correspondance}, as_dict = 1
+			)
+			if len(analytique) == 0 :
+				frappe.throw(_("La nature analytique {} n'a pas de correspondance dans les dimensions comptables").format(analytique))
 			row.update(
 				{
-					"imputation_analytique_4": cc4,
+					analytique[0].fieldname: cc4,
 				}
 			)
 		if cc5:
+			correspondance = frappe.db.get_value('Axe Analytique',  {'type': 'Axe 5'}, 'correspondance')
+			analytique = frappe.db.sql(
+				'''
+					SELECT fieldname
+					FROM tabDocField
+					WHERE parent = 'Journal Entry Account' and label = %(correspondance)s
+					UNION
+					SELECT fieldname
+					FROM `tabCustom Field`
+					WHERE dt = 'Journal Entry Account' and label = %(correspondance)s
+				''', {'correspondance': correspondance}, as_dict = 1
+			)
+			if len(analytique) == 0 :
+				frappe.throw(_("La nature analytique {} n'a pas de correspondance dans les dimensions comptables").format(analytique))
 			row.update(
 				{
-					"imputation_analytique_5": cc5,
+					analytique[0].fieldname: cc5,
 				}
 			)
 
 		if cc6:
+			correspondance = frappe.db.get_value('Axe Analytique',  {'type': 'Axe 6'}, 'correspondance')
+			analytique = frappe.db.sql(
+				'''
+					SELECT fieldname
+					FROM tabDocField
+					WHERE parent = 'Journal Entry Account' and label = %(correspondance)s
+					UNION
+					SELECT fieldname
+					FROM `tabCustom Field`
+					WHERE dt = 'Journal Entry Account' and label = %(correspondance)s
+				''', {'correspondance': correspondance}, as_dict = 1
+			)
+			if len(analytique) == 0 :
+				frappe.throw(_("La nature analytique {} n'a pas de correspondance dans les dimensions comptables").format(analytique))
 			row.update(
 				{
-					"compte_analytique_6": cc6,
+					analytique[0].fieldname: cc6,
 				}
 			)
 		if cc7:
+			correspondance = frappe.db.get_value('Axe Analytique',  {'type': 'Axe 7'}, 'correspondance')
+			analytique = frappe.db.sql(
+				'''
+					SELECT fieldname
+					FROM tabDocField
+					WHERE parent = 'Journal Entry Account' and label = %(correspondance)s
+					UNION
+					SELECT fieldname
+					FROM `tabCustom Field`
+					WHERE dt = 'Journal Entry Account' and label = %(correspondance)s
+				''', {'correspondance': correspondance}, as_dict = 1
+			)
+			if len(analytique) == 0 :
+				frappe.throw(_("La nature analytique {} n'a pas de correspondance dans les dimensions comptables").format(analytique))
 			row.update(
 				{
-					"compte_analytique_7": cc7,
+					analytique[0].fieldname: cc7,
 				}
 			)
+
 		if cc8:
+			correspondance = frappe.db.get_value('Axe Analytique',  {'type': 'Axe 8'}, 'correspondance')
+			analytique = frappe.db.sql(
+				'''
+					SELECT fieldname
+					FROM tabDocField
+					WHERE parent = 'Journal Entry Account' and label = %(correspondance)s
+					UNION
+					SELECT fieldname
+					FROM `tabCustom Field`
+					WHERE dt = 'Journal Entry Account' and label = %(correspondance)s
+				''', {'correspondance': correspondance}, as_dict = 1
+			)
+			if len(analytique) == 0 :
+				frappe.throw(_("La nature analytique {} n'a pas de correspondance dans les dimensions comptables").format(analytique))
 			row.update(
 				{
-					"compte_analytique_8": cc8,
+					analytique[0].fieldname: cc8,
 				}
 			)
 		if cc9:
+			correspondance = frappe.db.get_value('Axe Analytique',  {'type': 'Axe 9'}, 'correspondance')
+			analytique = frappe.db.sql(
+				'''
+					SELECT fieldname
+					FROM tabDocField
+					WHERE parent = 'Journal Entry Account' and label = %(correspondance)s
+					UNION
+					SELECT fieldname
+					FROM `tabCustom Field`
+					WHERE dt = 'Journal Entry Account' and label = %(correspondance)s
+				''', {'correspondance': correspondance}, as_dict = 1
+			)
+			if len(analytique) == 0 :
+				frappe.throw(_("La nature analytique {} n'a pas de correspondance dans les dimensions comptables").format(analytique))
 			row.update(
 				{
-					"compte_analytique_9": cc9,
+					analytique[0].fieldname: cc9,
 				}
 			)
 		if cc10:
+			correspondance = frappe.db.get_value('Axe Analytique',  {'type': 'Axe 10'}, 'correspondance')
+			analytique = frappe.db.sql(
+				'''
+					SELECT fieldname
+					FROM tabDocField
+					WHERE parent = 'Journal Entry Account' and label = %(correspondance)s
+					UNION
+					SELECT fieldname
+					FROM `tabCustom Field`
+					WHERE dt = 'Journal Entry Account' and label = %(correspondance)s
+				''', {'correspondance': correspondance}, as_dict = 1
+			)
+			if len(analytique) == 0 :
+				frappe.throw(_("La nature analytique {} n'a pas de correspondance dans les dimensions comptables").format(analytique))
 			row.update(
 				{
-					"compte_analytique_10": cc10,
+					analytique[0].fieldname: cc10,
 				}
-			)				
+			)			
 
 		return row
 	
@@ -248,8 +400,8 @@ class Encaissement(Document):
 	
 	def get_account(self, doctype, docname, champ):
 		code = frappe.db.get_value(doctype,docname,champ)
-		id = frappe.db.get_list("Account",fields=['name'],filters={"account_number": code}) 
-		return id[0].name
+		#id = frappe.db.get_list("Account",fields=['name'],filters={"account_number": code}) 
+		return code
 	
 	def make_accrual_jv_entry(self):
 		precision = frappe.get_precision("Journal Entry Account", "debit_in_account_currency")
@@ -259,11 +411,10 @@ class Encaissement(Document):
 		journal_entry.company = self.societe #todo
 		journal_entry.posting_date = getdate()
 		journal_entry.cheque_no = self.name
-		journal_entry.cheque_no = self.date
+		journal_entry.cheque_date = self.date
 		accounts = []
 		currencies = []
 		payable_amount = 0
-		payable_amt2 = 0
 		multi_currency = 0
 		company_currency = frappe.db.get_value("Societe",self.societe,"devise_de_base") 
 		#acc = self.get_account("Caisse",self.caisse,"compte_comptable")
@@ -292,7 +443,7 @@ class Encaissement(Document):
 			cc8 = e.imputation_analytique_8
 			cc9 = e.imputation_analytique_9
 			cc10 = e.imputation_analytique_10
-			accounting_entry = self.create_row('Decaissement',account,cours,amount,tiers,cc1,cc2,cc3,cc4,cc5,cc6,cc7,cc8,cc9,cc10)
+			accounting_entry = self.create_row('Decaissement',account,cours,amount,e.type_tiers,tiers,cc1,cc2,cc3,cc4,cc5,cc6,cc7,cc8,cc9,cc10)
 			#accounting_entry = self.create_row('Decaissement',account,cours,amount,tiers,cc1,cc2,cc3,cc4,cc5)
 			accounts.append(accounting_entry)
 
