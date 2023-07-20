@@ -97,6 +97,9 @@ class Decaissement(Document):
 		
 		self.comptabilisation.clear()
 
+		jv = frappe.get_doc("Journal Entry", {"cheque_no" : self.name})
+		jv.cancel()
+
 	def after_delete(self):
 		for d in self.details_operation_de_caisse:
 			if d.demande_paiement :
