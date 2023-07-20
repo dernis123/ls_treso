@@ -52,12 +52,13 @@
    "fieldname": "societe",
    "fieldtype": "Link",
    "label": "Societe",
-   "options": "Societe"
+   "options": "Societe",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-05-03 09:24:01.463334",
+ "modified": "2023-07-20 09:29:07.407407",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Compte General",

@@ -256,8 +256,13 @@
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2023-06-24 11:18:12.167995",
+ "links": [
+  {
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "cheque_no"
+  }
+ ],
+ "modified": "2023-07-20 09:06:24.488470",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Encaissement",
