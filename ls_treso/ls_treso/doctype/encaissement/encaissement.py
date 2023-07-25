@@ -70,8 +70,10 @@ class Encaissement(Document):
 
 		self.comptabilisation.clear()
 
-		jv = frappe.get_doc("Journal Entry", {"cheque_no" : self.name})
-		jv.cancel()
+		nb = frappe.db.count("Journal Entry",  {"cheque_no" : self.name})
+		if nb > 0:
+			jv = frappe.get_doc("Journal Entry", {"cheque_no" : self.name})
+			jv.cancel()
 
 	def create_row(self, type, account, amount, type_tiers=None, tiers=None, cc1=None, cc2=None, cc3=None, cc4=None, cc5=None, cc6=None, cc7=None, cc8=None, cc9=None, cc10=None):
 		row = {}
