@@ -64,9 +64,11 @@ def get_data(filters):
 		FROM (
 			SELECT *
 			FROM tabEncaissement
+			WHERE docstatus = 1
 			UNION
 			SELECT *
 			FROM tabDecaissement
+			WHERE docstatus = 1
 			) o 
 		INNER JOIN `tabComptabilisation` d on o.name = d.parent
 		WHERE o.date >= %(date_debut)s AND o.date <= %(date_fin)s AND o.caisse LIKE %(caisse)s

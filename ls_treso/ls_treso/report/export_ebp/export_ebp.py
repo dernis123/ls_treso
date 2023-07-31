@@ -68,9 +68,11 @@ def get_data(filters):
 		FROM (
 			SELECT *
 			FROM tabEncaissement
+			WHERE docstatus = 1
 			UNION
 			SELECT *
 			FROM tabDecaissement
+			WHERE docstatus = 1
 			) o 
 		INNER JOIN `tabComptabilisation` d on o.name = d.parent
 		LEFT JOIN `tabSection Analytique` s1 ON s1.name = d.compte_analytique
