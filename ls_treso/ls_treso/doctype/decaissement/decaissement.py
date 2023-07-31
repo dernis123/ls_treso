@@ -97,10 +97,11 @@ class Decaissement(Document):
 		
 		self.comptabilisation.clear()
 
-		nb = frappe.db.count("Journal Entry",  {"cheque_no" : self.name})
-		if nb > 0:
-			jv = frappe.get_doc("Journal Entry", {"cheque_no" : self.name})
-			jv.cancel()
+		if(self.comptabilite_erpnext == 1):
+			nb = frappe.db.count("Journal Entry",  {"cheque_no" : self.name})
+			if nb > 0:
+				jv = frappe.get_doc("Journal Entry", {"cheque_no" : self.name})
+				jv.cancel()
 
 	def after_delete(self):
 		for d in self.details_operation_de_caisse:
