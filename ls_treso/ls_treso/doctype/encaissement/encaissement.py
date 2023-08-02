@@ -423,7 +423,7 @@ class Encaissement(Document):
 		else :
 			journal_entry.user_remark = _("Journal de la caisse {0} pour la journée de {1}").format(self.caisse, self.date)
 		journal_entry.company = self.societe #todo
-		journal_entry.posting_date = getdate()
+		journal_entry.posting_date = self.date
 		journal_entry.cheque_no = self.name
 		journal_entry.cheque_date = self.date
 		accounts = []
