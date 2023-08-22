@@ -503,7 +503,7 @@ class Decaissement(Document):
 			accounts.append(accounting_entry)
 
 		if flt(payable_amount, precision) != 0 :
-			round_off_account = self.get_account("Company", self.company,"round_off_account")
+			round_off_account = self.get_account("Company", self.societe,"round_off_account")
 			accounting_entry = self.create_row('Decaissement',round_off_account,payable_amount)
 			accounts.append(journal_entry)
 		
