@@ -15,6 +15,7 @@ frappe.ui.form.on('Encaissement', {
 			return {
 				"filters": {
 					"type_operation": frm.doc.type_operation || 'N/A',
+					"account_currency": frm.doc.devise_caisse,
 				}
 			};
 		});

@@ -12,14 +12,16 @@
   "ventilable",
   "collectif",
   "controle",
-  "societe"
+  "societe",
+  "account_currency"
  ],
  "fields": [
   {
    "fieldname": "compte",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Compte",
+   "options": "Account",
    "reqd": 1,
    "unique": 1
   },
@@ -54,11 +56,17 @@
    "label": "Societe",
    "options": "Societe",
    "reqd": 1
+  },
+  {
+   "fetch_from": "compte.account_currency",
+   "fieldname": "account_currency",
+   "fieldtype": "Data",
+   "label": "Account Currency"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-20 09:29:07.407407",
+ "modified": "2023-08-24 16:09:30.746306",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Compte General",

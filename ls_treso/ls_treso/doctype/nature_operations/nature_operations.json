@@ -11,6 +11,7 @@
   "type_operation",
   "nature",
   "compte_comptable",
+  "account_currency",
   "column_break_4",
   "tiers",
   "justifiable",
@@ -102,11 +103,17 @@
    "fieldtype": "Link",
    "label": "Societe",
    "options": "Societe"
+  },
+  {
+   "fetch_from": "compte_comptable.account_currency",
+   "fieldname": "account_currency",
+   "fieldtype": "Data",
+   "label": "Account Currency"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-17 09:50:35.758786",
+ "modified": "2023-08-24 16:13:59.350228",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Nature Operations",

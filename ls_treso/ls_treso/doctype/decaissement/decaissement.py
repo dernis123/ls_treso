@@ -481,7 +481,7 @@ class Decaissement(Document):
 		accounts.append(accounting_entry)
 
 		for e in self.details_operation_de_caisse:
-			amount = flt(self.montant_reference, precision)
+			amount = flt(e.montant_devise, precision)
 			payable_amount += amount
 			account = self.get_account("Nature Operations",e.nature_operations,"compte_comptable")
 			devise = self.get_account("Account",account,"account_currency")
