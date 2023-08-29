@@ -569,7 +569,7 @@ class Decaissement(Document):
 
 @frappe.whitelist()
 def get_demande_paiement(name = None, designation = None, remettant = None, montant = None, devise = None, filters = None):
-	frappe.msgprint(montant)
+	#frappe.msgprint(montant)
 	return frappe.db.sql(
 			"""
 			SELECT name, site,designation, remettant,montant,devise
