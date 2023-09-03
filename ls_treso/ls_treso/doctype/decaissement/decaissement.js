@@ -16,7 +16,7 @@ frappe.ui.form.on('Decaissement', {
 			return {
 				"filters": {
 					"type_operation": frm.doc.type_operation || 'N/A',
-					"account_currency": frm.doc.devise_caisse,
+					//"account_currency": frm.doc.devise_caisse,
 				}
 			};
 		});

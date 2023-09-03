@@ -116,25 +116,31 @@ class Decaissement(Document):
 
 	def create_row(self, type, account, cours, amount, type_tiers=None, tiers=None, cc1=None, cc2=None, cc3=None, cc4=None, cc5=None, cc6=None, cc7=None, cc8=None, cc9=None, cc10=None):
 		row = {}
-		#company_currency = frappe.db.get_value("Societe",self.societe,"devise_de_base") 
-		devise_compte = self.get_account("Account",account,"account_currency")
-		#devise_caisse = self.devise_caisse
+		company_currency = frappe.db.get_value("Societe",self.societe,"devise_de_base") 
+		#devise_compte = self.get_account("Account",account,"account_currency")
+		ex_rate = flt(get_cours(self.devise, company_currency)[0].cours)
 		
 		if type == 'Encaissement':
 			row = {
 				"account": account,
-				"exchange_rate": cours,
+				"exchange_rate": ex_rate,
 				#"reference_type": self.doctype,
 				#"reference_name": self.name,
-				"debit_in_account_currency": amount if devise_compte == self.devise_caisse else amount * get_cours(self.devise_caisse, devise_compte)[0].cours,
+				"debit_in_account_currency": amount * cours,
+				"reference_currency": self.devise,
+				"reference_rate": cours,
+				"reference_amount": amount,
 			}
 		else:
 			row = {
 				"account": account,
-				"exchange_rate": cours,
+				"exchange_rate": ex_rate,
 				#"reference_type": self.doctype,
 				#"reference_name": self.name,
-				"credit_in_account_currency": amount if devise_compte == self.devise_caisse else amount * get_cours(self.devise_caisse, devise_compte)[0].cours,
+				"credit_in_account_currency": amount * cours,
+				"reference_currency": self.devise,
+				"reference_rate": cours,
+				"reference_amount": amount,
 			}
 
 		if tiers:
@@ -469,10 +475,9 @@ class Decaissement(Document):
 		multi_currency = 0
 		company_currency = frappe.db.get_value("Societe",self.societe,"devise_de_base") 
 		currencies.add(company_currency)
-		#acc = self.get_account("Caisse",self.caisse,"compte_comptable")
-		#frappe.msgprint(acc)
 		caisse_account = self.get_account("Caisse",self.caisse,"compte_comptable")
-		cours = flt(get_cours(self.devise, company_currency)[0].cours)
+		account_currency = self.get_account("Account",caisse_account,"account_currency")
+		cours = flt(get_cours(self.devise, account_currency)[0].cours)
 		currencies.add(self.devise)
 
 		amount = flt(self.montant_reference, precision)
@@ -485,6 +490,7 @@ class Decaissement(Document):
 			payable_amount += amount
 			account = self.get_account("Nature Operations",e.nature_operations,"compte_comptable")
 			devise = self.get_account("Account",account,"account_currency")
+			cours = flt(get_cours(self.devise, devise)[0].cours)
 			currencies.add(devise)
 
 			tiers = e.tiers
@@ -504,6 +510,8 @@ class Decaissement(Document):
 
 		if flt(payable_amount, precision) != 0 :
 			round_off_account = self.get_account("Company", self.societe,"round_off_account")
+			devise = self.get_account("Account",account,"round_off_account")
+			cours = flt(get_cours(self.devise, devise)[0].cours)
 			accounting_entry = self.create_row('Decaissement',round_off_account,cours,payable_amount)
 			accounts.append(journal_entry)
 		

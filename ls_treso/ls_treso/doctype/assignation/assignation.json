@@ -1,0 +1,84 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-08-31 18:58:21.819143",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "state",
+  "branch",
+  "categorie",
+  "type_document",
+  "document",
+  "cle",
+  "valeur"
+ ],
+ "fields": [
+  {
+   "fieldname": "state",
+   "fieldtype": "Int",
+   "label": "State"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "categorie",
+   "fieldtype": "Link",
+   "label": "Categorie",
+   "options": "Categorie"
+  },
+  {
+   "fieldname": "type_document",
+   "fieldtype": "Link",
+   "label": "Type Document",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "document",
+   "fieldtype": "Dynamic Link",
+   "label": "Document",
+   "options": "type_document"
+  },
+  {
+   "fieldname": "cle",
+   "fieldtype": "Data",
+   "label": "Cle"
+  },
+  {
+   "fieldname": "valeur",
+   "fieldtype": "Data",
+   "label": "Valeur"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-08-31 18:58:44.127910",
+ "modified_by": "Administrator",
+ "module": "Ls Treso",
+ "name": "Assignation",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
