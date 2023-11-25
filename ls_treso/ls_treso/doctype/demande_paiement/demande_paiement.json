@@ -9,6 +9,11 @@
  "engine": "InnoDB",
  "field_order": [
   "societe",
+  "column_break_nbfkn",
+  "site",
+  "column_break_yvc0b",
+  "department",
+  "section_break_dkhyr",
   "date",
   "designation",
   "montant",
@@ -17,7 +22,6 @@
   "positione",
   "caisse",
   "column_break_10",
-  "site",
   "site_sup\u00e9rieur",
   "type_operation",
   "devise",
@@ -188,12 +192,30 @@
    "label": "Caisse",
    "options": "Caisse",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_nbfkn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_yvc0b",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "section_break_dkhyr",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-19 10:27:15.593132",
+ "modified": "2023-11-25 11:50:21.630303",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Demande Paiement",
