@@ -187,10 +187,11 @@ app_license = "MIT"
 # ]
 
 fixtures = [
-    "Custom Field",
-    "Client Script",
-    {"dt": "Server Script", "filters": [["disabled", "=", 0]]},
-    "Print Format", "Workflow",
+    {"dt": "Custom Field", "filters": [["module", "=", "Ls Treso"]]},
+    {"dt": "Client Script", "filters": [["enabled", "=", 1],["module", "=", "Ls Treso"]]},
+    {"dt": "Server Script", "filters": [["disabled", "=", 0],["module", "=", "Ls Treso"]]},
+    {"dt": "Print Format", "filters": [["disabled", "=", 0],["module", "=", "Ls Treso"]]},
+    {"dt": "Workflow", "filters": [["is_active", "=", 1],["module", "=", "Ls Treso"]]},
 ]
 
 website_route_rules = [
