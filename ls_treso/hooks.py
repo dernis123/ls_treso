@@ -191,7 +191,7 @@ fixtures = [
     {"dt": "Client Script", "filters": [["enabled", "=", 1],["module", "=", "Ls Treso"]]},
     {"dt": "Server Script", "filters": [["disabled", "=", 0],["module", "=", "Ls Treso"]]},
     {"dt": "Print Format", "filters": [["disabled", "=", 0],["module", "=", "Ls Treso"]]},
-    {"dt": "Workflow", "filters": [["is_active", "=", 1],["module", "=", "Ls Treso"]]},
+    {"dt": "Workflow", "filters": [["is_active", "=", 1]]},
 ]
 
 website_route_rules = [
