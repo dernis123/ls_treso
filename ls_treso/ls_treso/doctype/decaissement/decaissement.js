@@ -356,6 +356,12 @@ frappe.ui.form.on('Details Operation de Caisse', {
 			frm.refresh_field('montant_devise_ref');
 			frm.refresh_field('details_operation_de_caisse');
 		}
+
+		if (row.demande_paiement) frm.call("update_demande", row.demande_paiement, "add");
+	},
+	details_operation_de_caisse_remove:(frm, cdt, cdn) =>{
+		var row = locals[cdt][cdn];
+		if (row.demande_paiement) frm.call("update_demande", row.demande_paiement, "remove");
 	},
 });
 

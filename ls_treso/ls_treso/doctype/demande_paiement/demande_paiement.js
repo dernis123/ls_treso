@@ -7,6 +7,7 @@ frappe.ui.form.on('Demande Paiement', {
 			return {
 				"filters": {
 					"type_operation": frm.doc.type_operation || 'N/A',
+					"est_valide": 1,
 				}
 			};
 		});

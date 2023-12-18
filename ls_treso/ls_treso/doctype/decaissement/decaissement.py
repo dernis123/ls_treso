@@ -55,6 +55,11 @@ class Decaissement(Document):
 					""",{ "name": d.demande_paiement }, as_dict = 1
 				)
 
+	@frappe.whitelist()
+	def update_demande(self, demande_paiement, type):
+		frappe.db.update("Demande Paiement", demande_paiement, "positione", 0 if type == "remove" else 1)
+				
+
 	
 	def before_submit(self):
 		total = 0.00
