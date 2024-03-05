@@ -26,10 +26,10 @@ def get_columns(filters):
 		{ "label": _("Devise Societe"), "fieldtype": "Link", "fieldname": "company_currency", "options": "Devise", "width": 100, "hidden": 1, },
 
 		{ "label": _("Imputation Analytique"), "fieldtype": "Link", "fieldname": "compte_analytique", "options": "Compte Analytique", "width": 100, "hidden": 0, },
-		{ "label": _("Imputation Analytique 2"), "fieldtype": "Link", "fieldname": "compte_analytique_2", "options": "Compte Analytique 2", "width": 100, "hidden": 0, },
-		{ "label": _("Imputation Analytique 3"), "fieldtype": "Link", "fieldname": "compte_analytique_3", "options": "Compte Analytique 3", "width": 100, "hidden": 0, },
-		{ "label": _("Imputation Analytique 4"), "fieldtype": "Link", "fieldname": "compte_analytique_4", "options": "Compte Analytique 4", "width": 100, "hidden": 0, },
-		{ "label": _("Imputation Analytique 5"), "fieldtype": "Link", "fieldname": "compte_analytique_5", "options": "Compte Analytique 5", "width": 100, "hidden": 0, },
+		{ "label": _("Imputation Analytique 2"), "fieldtype": "Link", "fieldname": "compte_analytique_2", "options": "Compte Analytique", "width": 100, "hidden": 0, },
+		{ "label": _("Imputation Analytique 3"), "fieldtype": "Link", "fieldname": "compte_analytique_3", "options": "Compte Analytique", "width": 100, "hidden": 0, },
+		{ "label": _("Imputation Analytique 4"), "fieldtype": "Link", "fieldname": "compte_analytique_4", "options": "Compte Analytique", "width": 100, "hidden": 0, },
+		{ "label": _("Imputation Analytique 5"), "fieldtype": "Link", "fieldname": "compte_analytique_5", "options": "Compte Analytique", "width": 100, "hidden": 0, },
 	]
 	return columns
 
@@ -62,11 +62,11 @@ def get_data(filters):
 		CASE WHEN d.sens = 'Credit' THEN d.montant * o.cours else NULL END AS credit,
 		%(currency)s as company_currency 
 		FROM (
-			SELECT *
+			SELECT site, societe, journal, date, devise, name, caisse, docstatus, designation, cours
 			FROM tabEncaissement
 			WHERE docstatus = 1
 			UNION
-			SELECT *
+			SELECT site, societe, journal, date, devise, name, caisse, docstatus, designation, cours
 			FROM tabDecaissement
 			WHERE docstatus = 1
 			) o 

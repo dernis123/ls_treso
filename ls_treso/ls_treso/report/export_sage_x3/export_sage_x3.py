@@ -50,11 +50,11 @@ def get_data(filters):
         """
         SELECT name
 		FROM (
-			SELECT *
+			SELECT name, date, caisse, docstatus
 			FROM tabEncaissement
 			WHERE docstatus = 1
 			UNION
-			SELECT *
+			SELECT name, date, caisse, docstatus
 			FROM tabDecaissement
 			WHERE docstatus = 1
 			) o 
@@ -68,11 +68,11 @@ def get_data(filters):
 			"""
 			SELECT *,%(currency)s as company_currency 
 			FROM (
-				SELECT *
+				SELECT site, societe, journal, date, devise, name, caisse, docstatus
 				FROM tabEncaissement
 				WHERE docstatus = 1
 				UNION
-				SELECT *
+				SELECT site, societe, journal, date, devise, name, caisse, docstatus
 				FROM tabDecaissement
 				WHERE docstatus = 1
 				) o 
