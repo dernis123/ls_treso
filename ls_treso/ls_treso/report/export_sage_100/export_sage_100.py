@@ -3,6 +3,7 @@
 
 import frappe
 from frappe import _
+from erpnext.setup.utils import get_exchange_rate
 
 def execute(filters=None):
 	filters = frappe._dict(filters or {})
@@ -19,7 +20,7 @@ def get_columns(filters):
 		{ "label": _("Tiers"), "fieldtype": "Link", "fieldname": "tiers", "options": "Tiers", "width": 100, },
 		{ "label": _("Libellé"), "fieldtype": "Data", "fieldname": "designation", "width": 100, },
 		{ "label": _("Parité|cours"), "fieldtype": "Float", "fieldname": "cours", "width": 100, },
-		{ "label": _("Montant devise"), "fieldtype": "Currency", "fieldname": "montant", "options": "company_currency", "width": 100, },
+		{ "label": _("Montant devise"), "fieldtype": "Currency", "fieldname": "montant", "options": "devise", "width": 100, },
 		{ "label": _("Code Journal"), "fieldtype": "Data", "fieldname": "journal", "width": 100, },
 		{ "label": _("Débit"), "fieldtype": "Currency", "fieldname": "debit", "options": "company_currency", "width": 100, },
 		{ "label": _("Crédit"), "fieldtype": "Currency", "fieldname": "credit", "options": "company_currency", "width": 100, },
@@ -50,7 +51,7 @@ def get_data(filters):
 		d.tiers,
 		o.designation,
 		o.cours,
-		d.montant * o.cours AS montant,
+		d.montant,
 		o.journal,
 		o.devise,
 		d.compte_analytique,
@@ -58,8 +59,8 @@ def get_data(filters):
 		d.compte_analytique_3,
 		d.compte_analytique_4,
 		d.compte_analytique_5,
-		CASE WHEN d.sens = 'Debit' THEN d.montant * o.cours else NULL END AS debit,
-		CASE WHEN d.sens = 'Credit' THEN d.montant * o.cours else NULL END AS credit,
+		CASE WHEN d.sens = 'Debit' THEN d.montant * d.cours else NULL END AS debit,
+		CASE WHEN d.sens = 'Credit' THEN d.montant * d.cours else NULL END AS credit,
 		%(currency)s as company_currency 
 		FROM (
 			SELECT site, societe, journal, date, devise, name, caisse, docstatus, designation, cours
@@ -74,6 +75,10 @@ def get_data(filters):
 		WHERE o.date >= %(date_debut)s AND o.date <= %(date_fin)s AND o.caisse LIKE %(caisse)s
         """,{"date_debut": filters.date_debut, "date_fin": filters.date_fin, "currency":company_currency,"caisse": filters.caisse if filters.caisse else '%' }, as_dict = 1
     )
+
+	#for entry in data:
+	#	exchange_rate = get_exchange_rate(entry['devise'], company_currency, entry['date'])
+	#	entry['exchange_rate'] = exchange_rate
 
 	return data
 

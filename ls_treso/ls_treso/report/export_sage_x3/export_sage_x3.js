@@ -32,5 +32,12 @@ frappe.query_reports["Export Sage X3"] = {
 			default: frappe.datetime.month_end(),
 			reqd: 1
 		},
+		/*{
+			fieldname:"currency",
+			label: __("Devise"),
+			fieldtype: "Link",
+			options: "Currency",
+			reqd: 1
+		},*/
 	]
 };

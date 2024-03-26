@@ -44,7 +44,7 @@ def get_data(filters):
 		0 as 'recette',
 		0 as 'depense', 
 		CAST(SUM(w.solde)as DECIMAL(20,2)) as 'solde',
-		CASE WHEN MIN(w.devise) IS NULL THEN (SELECT devise FROM tabCaisse WHERE name = 'CA00') ELSE MIN(w.devise) END AS devise,
+		CASE WHEN MIN(w.devise) IS NULL THEN (SELECT devise FROM tabCaisse WHERE name = %(caisse)s) ELSE MIN(w.devise) END AS devise,
 		'' as creation, 'i' AS line, MAX(w.caisse) as caisse
 		from (
 			select DISTINCT o.date, 
