@@ -50,7 +50,7 @@ def get_data(filters):
 		d.compte,
 		d.tiers,
 		o.designation,
-		o.cours,
+		d.cours,
 		d.montant,
 		o.journal,
 		o.devise,
