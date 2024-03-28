@@ -45,9 +45,9 @@ def get_data(filters):
 
 	data = frappe.db.sql(
         """
-        SELECT o.date, 
+        SELECT DATE_FORMAT(o.date, "%%d/%%m/%%Y") AS date, 
 		o.name, 
-		d.compte,
+		SUBSTRING_INDEX(d.compte,' - ',1) AS compte,
 		d.tiers,
 		o.designation,
 		d.cours,
