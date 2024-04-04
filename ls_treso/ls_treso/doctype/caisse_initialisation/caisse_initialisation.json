@@ -98,6 +98,8 @@
   {
    "fieldname": "date_fermeture",
    "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Date Fermeture",
    "read_only": 1
   },
@@ -197,7 +199,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-05-11 17:22:29.572103",
+ "modified": "2024-03-28 06:29:17.568931",
  "modified_by": "Administrator",
  "module": "Ls Treso",
  "name": "Caisse Initialisation",
@@ -257,7 +259,7 @@
    "write": 1
   }
  ],
- "search_fields": "caisse,date_initialisation,libelle",
+ "search_fields": "caisse",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [

@@ -64,6 +64,7 @@ class CaisseInitialisation(Document):
 		#	frappe.throw(msg)
 	
 	def before_submit(self):
+		self.date_fermeture = getdate()
 		operations = frappe.db.get_list("Encaissement", fields = ["name"], filters = {"docstatus": 0, 'initialisation': self.name})
 		for o in operations:
 			operation = frappe.get_doc("Encaissement", o.name)
