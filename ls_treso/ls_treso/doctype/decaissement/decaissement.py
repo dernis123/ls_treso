@@ -486,13 +486,13 @@ class Decaissement(Document):
 		currencies.add(self.devise)
 
 		amount = flt(self.montant_reference, precision)
-		payable_amount -= amount
+		payable_amount -= amount * cours
 		accounting_entry = self.create_row('Decaissement',caisse_account,cours,amount)
 		accounts.append(accounting_entry)
 
 		for e in self.details_operation_de_caisse:
 			amount = flt(e.montant_devise, precision)
-			payable_amount += amount
+			payable_amount += amount * cours
 			account = self.get_account("Nature Operations",e.nature_operations,"compte_comptable")
 			devise = self.get_account("Account",account,"account_currency")
 			cours = flt(get_cours(self.devise, devise)[0].cours)
