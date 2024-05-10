@@ -515,7 +515,7 @@ class Decaissement(Document):
 
 		if flt(payable_amount, precision) != 0 :
 			round_off_account = self.get_account("Company", self.societe,"round_off_account")
-			devise = self.get_account("Account",account,"round_off_account")
+			devise = self.get_account("Account",round_off_account,"account_currency")
 			cours = flt(get_cours(self.devise, devise)[0].cours)
 			accounting_entry = self.create_row('Decaissement',round_off_account,cours,payable_amount)
 			accounts.append(journal_entry)
