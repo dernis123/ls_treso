@@ -49,7 +49,7 @@ class CaisseInitialisation(Document):
 				}
 			)
 		if nb > 0 :
-			frappe.throw("Une date ultérieure à la date choisie existe déjà. Veuillez choisir une date plus récente")
+			frappe.throw("Une date ultérieure à la date choisie existe déjà. Veuillez donc choisir une date plus récente")
 
 		#nb = frappe.db.sql(
 		#	"""
