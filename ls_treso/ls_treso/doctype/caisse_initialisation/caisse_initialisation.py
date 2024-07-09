@@ -40,7 +40,7 @@ class CaisseInitialisation(Document):
 		#test = frappe.db.get_list('Caisse Initialisation', filters = {"docstatus": 0, "caisse": self.caisse}, fields=["name"])
 		if nb > 0 :
 			#frappe.msgprint(str(test))
-			frappe.throw("Veuillez cloturer la journée précédente")
+			frappe.throw("Veuillez cloturer la journée précédente, et revenez")
 
 		nb = frappe.db.count('Caisse Initialisation', 
 				{
